@@ -8,13 +8,13 @@ define_tile_code("moving_totem")
 define_tile_code("totem_switch")
 define_tile_code("dialog_block")
 
-local dwelling = {
-    identifier = "dwelling",
-    title = "Dwelling",
+local dwelling1 = {
+    identifier = "dwelling1",
+    title = "Dwelling 1",
     theme = THEME.DWELLING,
     width = 6,
     height = 5,
-    file_name = "dwell.lvl",
+    file_name = "dwell-1.lvl",
 }
 
 local level_state = {
@@ -28,27 +28,47 @@ local overall_state = {
 
 local function update_file_name()
     if overall_state.difficulty == DIFFICULTY.HARD then
-        dwelling.file_name = "dwell-hard.lvl"
+        dwelling1.file_name = "dwell-hard.lvl"
     elseif overall_state.difficulty == DIFFICULTY.EASY then
-        dwelling.file_name = "dwell-easy.lvl"
+        dwelling1.file_name = "dwell-easy.lvl"
     else
-        dwelling.file_name = "dwell.lvl"
+        dwelling1.file_name = "dwell-1.lvl"
     end
 end
 
-dwelling.set_difficulty = function(difficulty)
+dwelling1.set_difficulty = function(difficulty)
     overall_state.difficulty = difficulty
     update_file_name()
 end
 
-dwelling.load_level = function()
+dwelling1.load_level = function()
     if level_state.loaded then return end
     level_state.loaded = true
 
-    level_state.callbacks[#level_state.callbacks+1] = set_post_entity_spawn(function (entity)
-        --Set all bats HP to 10
-        entity.health = 10
+    level_state.callbacks[#level_state.callbacks+1] = set_post_entity_spawn(function (snake)
+
+        snake.health = 100
+        snake.color = Color:red()
+        snake.type.max_speed = 0.05
+        snake.flags = set_flag(snake.flags, ENT_FLAG.TAKE_NO_DAMAGE)
+
+    end, SPAWN_TYPE.ANY, 0, ENT_TYPE.MONS_SNAKE)
+
+    level_state.callbacks[#level_state.callbacks+1] = set_post_entity_spawn(function (bat)
+
+        bat.health = 10
+        bat.type.max_speed = 0.07
+        bat.color = Color:red()
     end, SPAWN_TYPE.ANY, 0, ENT_TYPE.MONS_BAT)
+
+    level_state.callbacks[#level_state.callbacks+1] = set_post_entity_spawn(function (mole)
+        --Set moles - no stun, walk on thorns
+        mole.health = 100
+        mole.color = Color:red()
+        mole.flags = clr_flag(mole.flags, ENT_FLAG.STUNNABLE)
+
+        mole:give_powerup(ENT_TYPE.ITEM_POWERUP_SPIKE_SHOES)
+    end, SPAWN_TYPE.ANY, 0, ENT_TYPE.MONS_MOLE)
 
     -- Creates walls that will be destroyed when the totem_switch is switched. Don't ask why these are called totems, they're just walls.
     local moving_totems = {}
@@ -81,7 +101,7 @@ dwelling.load_level = function()
 
 end
 
-dwelling.unload_level = function()
+dwelling1.unload_level = function()
     if not level_state.loaded then return end
 
     local callbacks_to_clear = level_state.callbacks
@@ -92,4 +112,4 @@ dwelling.unload_level = function()
     end
 end
 
-return dwelling
+return dwelling1

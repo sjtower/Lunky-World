@@ -1,7 +1,7 @@
-meta.name = 'Jumplunky'
-meta.version = '2.4'
-meta.description = 'Challenging platforming puzzles'
-meta.author = 'JayTheBusinessGoose'
+meta.name = 'Twigglunky'
+meta.version = '0'
+meta.description = 'Romping Kaizo fun!'
+meta.author = 'GetimOliver'
 
 local level_sequence = require("LevelSequence/level_sequence")
 local SIGN_TYPE = level_sequence.SIGN_TYPE
@@ -17,13 +17,13 @@ local clear_embeds = require('clear_embeds')
 local save_state = require('save_state')
 local DIFFICULTY = require('difficulty')
 
-local dwelling = require("dwelling")
+local dwelling2 = require("dwelling2")
 local volcana = require("volcana")
 local temple = require("temple")
 local ice_caves = require("ice_caves")
 local sunken_city = require("sunken_city")
 
-level_sequence.set_levels({dwelling, volcana, temple, ice_caves, sunken_city})
+level_sequence.set_levels({dwelling2, volcana, temple, ice_caves, sunken_city})
 telescopes.set_hud_button_insets(0, 0, .1, 0)
 
 -- Forward declare local function

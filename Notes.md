@@ -23,3 +23,20 @@ level_state.callbacks[#level_state.callbacks+1] = set_post_entity_spawn(function
         pick_up(entity.uid, torch_uid)
     end, SPAWN_TYPE.ANY, 0, ENT_TYPE.MONS_CAVEMAN)`
 ```
+
+# Custom tilecodes
+```lua
+    local skull;
+    level_state.callbacks[#level_state.callbacks+1] = set_pre_tile_code_callback(function(x, y, layer)
+        local skull_id = spawn_entity(ENT_TYPE.ITEM_SKULL, x, y, layer, 0, 0)
+        skull = get_entity(skull_id)
+        return true
+    end, "skull")
+
+    local torch;
+    level_state.callbacks[#level_state.callbacks+1] = set_pre_tile_code_callback(function(x, y, layer)
+        local torch_id = spawn_entity(ENT_TYPE.ITEM_TORCH, x, y, layer, 0, 0)
+        torch = get_entity(torch_id)
+        return true
+    end, "torch")
+```
