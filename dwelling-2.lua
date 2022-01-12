@@ -2,7 +2,11 @@ local sound = require('play_sound')
 local clear_embeds = require('clear_embeds')
 local DIFFICULTY = require('difficulty')
 
-define_tile_code("skull")
+define_tile_code("bat_generator")
+define_tile_code("bat_switch")
+define_tile_code("moving_totem")
+define_tile_code("totem_switch")
+define_tile_code("dialog_block")
 
 local dwelling = {
     identifier = "dwelling",
@@ -41,21 +45,10 @@ dwelling.load_level = function()
     if level_state.loaded then return end
     level_state.loaded = true
 
-    local skull;
-    level_state.callbacks[#level_state.callbacks+1] = set_pre_tile_code_callback(function(x, y, layer)
-        local skull_id = spawn_entity(ENT_TYPE.ITEM_SKULL, x, y, layer, 0, 0)
-        skull = get_entity(skull_id)
-        return true
-    end, "skull")
-
     level_state.callbacks[#level_state.callbacks+1] = set_post_entity_spawn(function (entity)
+        --Set all bats HP to 10
         entity.health = 10
-        --Caveman carries torch
-        local torch_uid = spawn_entity(ENT_TYPE.ITEM_TORCH, entity.x, entity.y, entity.layer, 0, 0)
-        spawn_entity(ENT_TYPE.ITEM_TORCHFLAME, entity.x, entity.y, entity.layer, 0, 0)
-        --get_entity(torch_uid).is_lit = true
-        pick_up(entity.uid, torch_uid)
-    end, SPAWN_TYPE.ANY, 0, ENT_TYPE.MONS_CAVEMAN)
+    end, SPAWN_TYPE.ANY, 0, ENT_TYPE.MONS_BAT)
 
     -- Creates walls that will be destroyed when the totem_switch is switched. Don't ask why these are called totems, they're just walls.
     local moving_totems = {}

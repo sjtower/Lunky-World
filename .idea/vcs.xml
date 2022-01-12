@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="VcsDirectoryMappings">
+    <mapping directory="$PROJECT_DIR$" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/ButtonPrompts" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/LevelSequence" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/LevelSequence/ButtonPrompts" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/LevelSequence/CustomLevels" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/Telescopes" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/Telescopes/ButtonPrompts" vcs="Git" />
+  </component>
+</project>
