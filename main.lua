@@ -187,23 +187,11 @@ function update_continue_door_enabledness()
 	continue_door.update_door(saved_run.saved_run_level, saved_run.saved_run_attempts, saved_run.saved_run_time)
 end
 
--- Spawn an idol that is not interactible in any way. Only spawns the idol if it has been collected
--- from the level it is being spawned for.
-local function spawn_camp_idol_for_level(level, x, y, layer)
-	if not game_state.idols_collected[level.identifier] then return end
-	
-	local idol_uid = spawn_entity(ENT_TYPE.ITEM_IDOL, x, y, layer, 0, 0)
-	local idol = get_entity(idol_uid)
-	idol.flags = clr_flag(idol.flags, ENT_FLAG.THROWABLE_OR_KNOCKBACKABLE)
-	idol.flags = clr_flag(idol.flags, ENT_FLAG.PICKUPABLE)
-end
-
 -- Creates a "room" for the Volcana shortcut, with a door, a sign, and an idol if it has been collected.
 define_tile_code("volcana_shortcut")
 local function volcano_shortcut_callback()
 	return set_pre_tile_code_callback(function(x, y, layer)
 		level_sequence.spawn_shortcut(x, y, layer, volcana, SIGN_TYPE.LEFT)
-		spawn_camp_idol_for_level(volcana, x - 1, y, layer)
 		return true
 	end, "volcana_shortcut")
 end
@@ -213,7 +201,6 @@ define_tile_code("temple_shortcut")
 local function temple_shortcut_callback()
 	return set_pre_tile_code_callback(function(x, y, layer)
 		level_sequence.spawn_shortcut(x, y, layer, temple, SIGN_TYPE.LEFT)
-		spawn_camp_idol_for_level(temple, x - 1, y, layer)
 		return true
 	end, "temple_shortcut")
 end
@@ -223,7 +210,6 @@ define_tile_code("ice_shortcut")
 local function ice_shortcut_callback()
 	return set_pre_tile_code_callback(function(x, y, layer)
 		level_sequence.spawn_shortcut(x, y, layer, ice_caves, SIGN_TYPE.LEFT)
-		spawn_camp_idol_for_level(ice_caves, x - 1, y, layer)
 		return true
 	end, "ice_shortcut")
 end
@@ -233,7 +219,6 @@ define_tile_code("sunken_shortcut")
 local function sunken_shortcut_callback()
 	return set_pre_tile_code_callback(function(x, y, layer)
 		level_sequence.spawn_shortcut(x, y, layer, sunken_city, SIGN_TYPE.LEFT)
-		spawn_camp_idol_for_level(sunken_city, x - 1, y, layer)
 		return true
 	end, "sunken_shortcut")
 end
@@ -258,7 +243,7 @@ end
 define_tile_code("dwelling_idol")
 local function dwelling_idol_callback()
 	return set_pre_tile_code_callback(function(x, y, layer)
-		spawn_camp_idol_for_level(dwelling, x, y, layer)
+		--spawn_camp_idol_for_level(dwelling, x, y, layer)
 		return true
 	end, "dwelling_idol")
 end
