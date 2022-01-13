@@ -17,13 +17,15 @@ local clear_embeds = require('clear_embeds')
 local save_state = require('save_state')
 local DIFFICULTY = require('difficulty')
 
+local dwelling1 = require("dwelling1")
 local dwelling2 = require("dwelling2")
+local dwelling3 = require("dwelling3")
 local volcana = require("volcana")
 local temple = require("temple")
 local ice_caves = require("ice_caves")
 local sunken_city = require("sunken_city")
 
-level_sequence.set_levels({dwelling2, volcana, temple, ice_caves, sunken_city})
+level_sequence.set_levels({dwelling3, volcana, temple, ice_caves, sunken_city})
 telescopes.set_hud_button_insets(0, 0, .1, 0)
 
 -- Forward declare local function

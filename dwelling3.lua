@@ -2,17 +2,14 @@ local sound = require('play_sound')
 local clear_embeds = require('clear_embeds')
 local DIFFICULTY = require('difficulty')
 
-define_tile_code("skull")
-define_tile_code("torch")
-define_tile_code("arrow")
-
+define_tile_code("sleeping_bat")
 
 local dwelling3 = {
-    identifier = "dwelling2",
-    title = "Dwelling 2",
+    identifier = "dwelling3",
+    title = "Dwelling 3",
     theme = THEME.DWELLING,
-    width = 6,
-    height = 6,
+    width = 8,
+    height = 4,
     file_name = "dwell-3.lvl",
 }
 
@@ -40,27 +37,6 @@ dwelling3.load_level = function()
     if level_state.loaded then return end
     level_state.loaded = true
 
-    local skull;
-    level_state.callbacks[#level_state.callbacks+1] = set_pre_tile_code_callback(function(x, y, layer)
-        local skull_id = spawn_entity(ENT_TYPE.ITEM_SKULL, x, y, layer, 0, 0)
-        skull = get_entity(skull_id)
-        return true
-    end, "skull")
-
-    local torch;
-    level_state.callbacks[#level_state.callbacks+1] = set_pre_tile_code_callback(function(x, y, layer)
-        local torch_id = spawn_entity(ENT_TYPE.ITEM_TORCH, x, y, layer, 0, 0)
-        torch = get_entity(torch_id)
-        return true
-    end, "torch")
-
-    local arrow;
-    level_state.callbacks[#level_state.callbacks+1] = set_pre_tile_code_callback(function(x, y, layer)
-        local arrow_id = spawn_entity(ENT_TYPE.ITEM_WOODEN_ARROW, x, y, layer, 0, 0)
-        arrow = get_entity(arrow_id)
-        return true
-    end, "arrow")
-
     level_state.callbacks[#level_state.callbacks+1] = set_post_entity_spawn(function (snake)
 
         snake.health = 100
@@ -70,43 +46,35 @@ dwelling3.load_level = function()
 
     end, SPAWN_TYPE.ANY, 0, ENT_TYPE.MONS_SNAKE)
 
-    level_state.callbacks[#level_state.callbacks+1] = set_post_entity_spawn(function (entity)
-        entity.health = 10
-        --Caveman carries torch
-        local torch_uid = spawn_entity(ENT_TYPE.ITEM_TORCH, entity.x, entity.y, entity.layer, 0, 0)
-        spawn_entity(ENT_TYPE.ITEM_TORCHFLAME, entity.x, entity.y, entity.layer, 0, 0)
-        --get_entity(torch_uid).is_lit = true
-        pick_up(entity.uid, torch_uid)
-    end, SPAWN_TYPE.ANY, 0, ENT_TYPE.MONS_CAVEMAN)
+    level_state.callbacks[#level_state.callbacks+1] = set_post_entity_spawn(function (horned_lizard)
+        horned_lizard.flags = clr_flag(horned_lizard.flags, ENT_FLAG.STUNNABLE)
+        horned_lizard.flags = clr_flag(horned_lizard.flags, ENT_FLAG.FACING_LEFT)
+        horned_lizard.flags = set_flag(horned_lizard.flags, ENT_FLAG.TAKE_NO_DAMAGE)
+        -- horned_lizard.flags = set_flag(horned_lizard.flags, ENT_FLAG.PASSES_THROUGH_PLAYER)
+        horned_lizard.color = Color:red()
+        horned_lizard.type.max_speed = 0.00
 
-    -- Creates walls that will be destroyed when the totem_switch is switched. Don't ask why these are called totems, they're just walls.
-    local moving_totems = {}
-    level_state.callbacks[#level_state.callbacks+1] = set_pre_tile_code_callback(function(x, y, layer)
-        clear_embeds.perform_block_without_embeds(function()
-            local totem_uid = spawn_entity(ENT_TYPE.FLOOR_GENERIC, x, y, layer, 0, 0)
-            moving_totems[#moving_totems + 1] = get_entity(totem_uid)
-        end)
-        return true
-    end, "moving_totem")
+    end, SPAWN_TYPE.ANY, 0, ENT_TYPE.MONS_HORNEDLIZARD)
 
-    local totem_switch;
-    level_state.callbacks[#level_state.callbacks+1] = set_pre_tile_code_callback(function(x, y, layer)
-        local switch_id = spawn_entity(ENT_TYPE.ITEM_SLIDINGWALL_SWITCH, x, y, layer, 0, 0)
-        totem_switch = get_entity(switch_id)
-        return true
-    end, "totem_switch")
-
-    local has_activated_totem = false
-    level_state.callbacks[#level_state.callbacks+1] = set_callback(function()
-        if not totem_switch then return end
-        if totem_switch.timer > 0 and not has_activated_totem then
-            has_activated_totem = true
-            for _, moving_totem in ipairs(moving_totems) do
-                kill_entity(moving_totem.uid)
+    level_state.callbacks[#level_state.callbacks+1] = set_post_entity_spawn(function (spring_trap)
+        
+        spring_trap.color = Color:red()
+        
+        set_pre_collision2(spring_trap.uid, function(self, collision_entity)
+            if collision_entity.uid == players[1].uid then
+                -- players[1].health = 0
+                players[1]:damage(spring_trap.uid, 2, 0, 0, 0, 0)
             end
-            moving_totems = {}
-        end
-    end, ON.FRAME)
+        end)
+
+    end, SPAWN_TYPE.ANY, 0, ENT_TYPE.FLOOR_SPRING_TRAP)
+
+    local sleeping_bat;
+    level_state.callbacks[#level_state.callbacks+1] = set_pre_tile_code_callback(function(x, y, layer)
+        local bat_id = spawn_entity(ENT_TYPE.MONS_BAT, x, y, layer, 0, 0)
+        sleeping_bat = get_entity(bat_id)
+        return true
+    end, "sleeping_bat")
 
 end
 
