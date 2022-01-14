@@ -60,3 +60,14 @@ level_state.callbacks[#level_state.callbacks+1] = set_post_entity_spawn(function
         return true
     end, "quillback_spring")
 ```
+
+```lua
+set_callback(function() --NOT WORKING
+    set_interval(function()
+        local quillbacks = get_entities_by_type(ENT_TYPE.MONS_CAVEMAN_BOSS)
+        for _, quilliam in ipairs(quillbacks) do
+            quilliam:damage(quilliam.uid, 1, 0, 0, 100, 0)
+        end
+    end, 10)
+  end, ON.LEVEL)
+```

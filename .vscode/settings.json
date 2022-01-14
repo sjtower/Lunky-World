@@ -1,5 +1,7 @@
 {
     "Lua.diagnostics.globals": [
-        "set_pre_tile_code_callback"
+        "set_pre_tile_code_callback",
+        "define_tile_code",
+        "spawn_entity"
     ]
 }

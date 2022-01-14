@@ -27,7 +27,9 @@ dwelling4.load_level = function()
     level_state.callbacks[#level_state.callbacks+1] = set_pre_tile_code_callback(function(x, y, layer)
         clear_embeds.perform_block_without_embeds(function()        
             local quilliam = spawn_entity(ENT_TYPE.MONS_CAVEMAN_BOSS, x, y, layer, 0, 0)
-            quilliams[#quilliams + 1] = get_entity(quilliam)
+            quilliam = get_entity(quilliam)
+            quilliams[#quilliams + 1] = quilliam
+            quilliam.color = Color:red()
         end)
         return true
     end, "switchable_quillback")
@@ -42,20 +44,29 @@ dwelling4.load_level = function()
     local has_stopped_quilliam = false
     level_state.callbacks[#level_state.callbacks+1] = set_callback(function()
         if not quillback_switch then return end
+        if quillback_switch.timer > 10 and has_stopped_quilliam then
+            has_stopped_quilliam = false
+            quillback_switch.timer = 0
+        end
         if quillback_switch.timer > 0 and not has_stopped_quilliam then
             has_stopped_quilliam = true
             for _, quilliam in ipairs(quilliams) do
-                --kill_entity(quilliam.uid)	
                 
-                quilliam.flags = set_flag(quilliam.flags, ENT_FLAG.STUNNABLE)
-                quilliam.flags = clr_flag(quilliam.flags, ENT_FLAG.TAKE_NO_DAMAGE)
-                quilliam:damage(quillback_switch.uid, 0, 120, 0, 0, 0)
-                has_stopped_quilliam = false
+                -- quilliam.flags = set_flag(quilliam.flags, ENT_FLAG.STUNNABLE)
+                -- quilliam.flags = clr_flag(quilliam.flags, ENT_FLAG.TAKE_NO_DAMAGE)
+                -- kill_entity(quilliam.uid)	
+                quilliam:damage(quillback_switch.uid, 0, 0, 0, .2, 0)
+                -- has_stopped_quilliam = false
             end
             -- quilliams = {}
         end
     end, ON.FRAME)
 
+    level_state.callbacks[#level_state.callbacks+1] = set_callback(function()
+            for _, quilliam in ipairs(quilliams) do
+                quilliam.move_state = 10
+            end
+    end, ON.FRAME)
 end
 
 dwelling4.unload_level = function()
