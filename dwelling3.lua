@@ -1,6 +1,5 @@
 local sound = require('play_sound')
 local clear_embeds = require('clear_embeds')
-local DIFFICULTY = require('difficulty')
 
 define_tile_code("sleeping_bat")
 
@@ -17,21 +16,6 @@ local level_state = {
     loaded = false,
     callbacks = {},
 }
-
-local overall_state = {
-    difficulty = DIFFICULTY.NORMAL,
-}
-
-local function update_file_name()
-    
-    dwelling3.file_name = "dwell-3.lvl"
-    
-end
-
-dwelling3.set_difficulty = function(difficulty)
-    overall_state.difficulty = difficulty
-    update_file_name()
-end
 
 dwelling3.load_level = function()
     if level_state.loaded then return end

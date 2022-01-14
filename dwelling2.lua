@@ -1,6 +1,5 @@
 local sound = require('play_sound')
 local clear_embeds = require('clear_embeds')
-local DIFFICULTY = require('difficulty')
 
 define_tile_code("skull")
 define_tile_code("torch")
@@ -20,25 +19,6 @@ local level_state = {
     loaded = false,
     callbacks = {},
 }
-
-local overall_state = {
-    difficulty = DIFFICULTY.NORMAL,
-}
-
-local function update_file_name()
-    if overall_state.difficulty == DIFFICULTY.HARD then
-        dwelling2.file_name = "dwell-hard.lvl"
-    elseif overall_state.difficulty == DIFFICULTY.EASY then
-        dwelling2.file_name = "dwell-easy.lvl"
-    else
-        dwelling2.file_name = "dwell-2.lvl"
-    end
-end
-
-dwelling2.set_difficulty = function(difficulty)
-    overall_state.difficulty = difficulty
-    update_file_name()
-end
 
 dwelling2.load_level = function()
     if level_state.loaded then return end
