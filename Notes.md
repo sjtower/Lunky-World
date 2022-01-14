@@ -40,3 +40,23 @@ level_state.callbacks[#level_state.callbacks+1] = set_post_entity_spawn(function
         return true
     end, "torch")
 ```
+
+```lua
+    local quillback_spring; --NOT WORKING
+    level_state.callbacks[#level_state.callbacks+1] = set_pre_tile_code_callback(function(x, y, layer)
+        local spring = spawn_entity(ENT_TYPE.FLOOR_SPRING_TRAP, x, y, layer, 0, 0)
+        quillback_spring = get_entity(spring)
+
+        quillback_spring.color = Color:red()
+        
+        set_pre_collision1(quillback_spring.uid, function(self, collision_entity)
+            if collision_entity.uid == players[1].uid then
+                -- players[1].health = 0
+                players[1]:damage(quillback_spring.uid, 0, 0, 0, 1, 0)
+            elseif collision_entity.uid == quilliams[1].uid then
+                collision_entity:damage(quillback_spring.uid, 0, 0, 0, 50, 0)
+            end
+        end)
+        return true
+    end, "quillback_spring")
+```
