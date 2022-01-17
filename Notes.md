@@ -71,3 +71,5 @@ set_callback(function() --NOT WORKING
     end, 10)
   end, ON.LEVEL)
 ```
+
+quilliam.flags = clr_flag(mole.flags, ENT_FLAG.STUNNABLE)

@@ -1,14 +1,16 @@
 local sound = require('play_sound')
 local clear_embeds = require('clear_embeds')
 
-define_tile_code("quillback_switch")
+define_tile_code("quillback_jump_switch")
+define_tile_code("quillback_stun_switch")
 define_tile_code("switchable_quillback")
-define_tile_code("quillback_spring")
+define_tile_code("infinite_quillback")
+
 local dwelling4 = {
     identifier = "dwelling4",
     title = "Dwelling 4",
     theme = THEME.DWELLING,
-    width = 4,
+    width = 6,
     height = 4,
     file_name = "dwell-4.lvl",
 }
@@ -22,7 +24,7 @@ dwelling4.load_level = function()
     if level_state.loaded then return end
     level_state.loaded = true
 
-    -- Creates a Quilliam that will stop when the quillback_switch is switched.
+    -- Creates a Quilliam that will stun or jump when with a "quillback switch".
     local quilliams = {}
     level_state.callbacks[#level_state.callbacks+1] = set_pre_tile_code_callback(function(x, y, layer)
         clear_embeds.perform_block_without_embeds(function()        
@@ -30,43 +32,94 @@ dwelling4.load_level = function()
             quilliam = get_entity(quilliam)
             quilliams[#quilliams + 1] = quilliam
             quilliam.color = Color:red()
+            quilliam.flags = clr_flag(quilliam.flags, ENT_FLAG.FACING_LEFT)
+            quilliam.flags = set_flag(quilliam.flags, ENT_FLAG.TAKE_NO_DAMAGE)
+            -- quilliam.health = 800
         end)
         return true
     end, "switchable_quillback")
 
-    local quillback_switch;
+    -- Creates an invincible Quilliam that always rolls
+    local invincible_quilliams = {}
+    level_state.callbacks[#level_state.callbacks+1] = set_pre_tile_code_callback(function(x, y, layer)
+        clear_embeds.perform_block_without_embeds(function()        
+            local quilliam = spawn_entity(ENT_TYPE.MONS_CAVEMAN_BOSS, x, y, layer, 0, 0)
+            quilliam = get_entity(quilliam)
+            invincible_quilliams[#invincible_quilliams + 1] = quilliam
+            quilliam.color = Color:black()
+            quilliam.flags = clr_flag(quilliam.flags, ENT_FLAG.FACING_LEFT)
+            quilliam.flags = set_flag(quilliam.flags, ENT_FLAG.TAKE_NO_DAMAGE)
+        end)
+        return true
+    end, "infinite_quillback")
+
+    local qb_jump_switches = {};
     level_state.callbacks[#level_state.callbacks+1] = set_pre_tile_code_callback(function(x, y, layer)
         local switch_id = spawn_entity(ENT_TYPE.ITEM_SLIDINGWALL_SWITCH, x, y, layer, 0, 0)
-        quillback_switch = get_entity(switch_id)
+        local switch = get_entity(switch_id)
+        switch.color = Color:white()
+        qb_jump_switches[#qb_jump_switches + 1] = switch
         return true
-    end, "quillback_switch")
+    end, "quillback_jump_switch")
 
-    local has_stopped_quilliam = false
+    local has_quilliam_jumped = false
     level_state.callbacks[#level_state.callbacks+1] = set_callback(function()
-        if not quillback_switch then return end
-        if quillback_switch.timer > 10 and has_stopped_quilliam then
-            has_stopped_quilliam = false
-            quillback_switch.timer = 0
-        end
-        if quillback_switch.timer > 0 and not has_stopped_quilliam then
-            has_stopped_quilliam = true
-            for _, quilliam in ipairs(quilliams) do
-                
-                -- quilliam.flags = set_flag(quilliam.flags, ENT_FLAG.STUNNABLE)
-                -- quilliam.flags = clr_flag(quilliam.flags, ENT_FLAG.TAKE_NO_DAMAGE)
-                -- kill_entity(quilliam.uid)	
-                quilliam:damage(quillback_switch.uid, 0, 0, 0, .2, 0)
-                -- has_stopped_quilliam = false
+        for _, qb_jump_switch in ipairs(qb_jump_switches) do
+            if not qb_jump_switch then return end
+            if qb_jump_switch.timer > 10 and has_quilliam_jumped then
+                has_quilliam_jumped = false
+                qb_jump_switch.timer = 0
             end
-            -- quilliams = {}
+            if qb_jump_switch.timer > 0 and not has_quilliam_jumped then
+                has_quilliam_jumped = true
+                for _, quilliam in ipairs(quilliams) do
+                    quilliam:damage(qb_jump_switch.uid, 0, 0, 0, .2, 0)
+                end
+            end
+        end
+    end, ON.FRAME)
+
+    
+    local qb_stun_switches = {};
+    level_state.callbacks[#level_state.callbacks+1] = set_pre_tile_code_callback(function(x, y, layer)
+        local switch_id = spawn_entity(ENT_TYPE.ITEM_SLIDINGWALL_SWITCH, x, y, layer, 0, 0)
+        local switch = get_entity(switch_id)
+        switch.color = Color:teal()
+        qb_stun_switches[#qb_stun_switches + 1] = switch
+        return true
+    end, "quillback_stun_switch")
+
+    local has_quilliam_stunned = false
+    level_state.callbacks[#level_state.callbacks+1] = set_callback(function()
+        for _, qb_stun_switch in ipairs(qb_stun_switches) do
+            if not qb_stun_switch then return end
+            if qb_stun_switch.timer > 10 and has_quilliam_stunned then
+                has_quilliam_stunned = false
+                qb_stun_switch.timer = 0
+            end
+            if qb_stun_switch.timer > 0 and not has_quilliam_stunned then
+                has_quilliam_stunned = true
+                for _, quilliam in ipairs(quilliams) do
+                    quilliam.flags = set_flag(quilliam.flags, ENT_FLAG.STUNNABLE)
+                    quilliam.flags = clr_flag(quilliam.flags, ENT_FLAG.TAKE_NO_DAMAGE)
+
+                    quilliam:damage(qb_stun_switch.uid, 0, 0, 30, 0, 0)
+                end
+            end
         end
     end, ON.FRAME)
 
     level_state.callbacks[#level_state.callbacks+1] = set_callback(function()
-            for _, quilliam in ipairs(quilliams) do
+        for _, quilliam in ipairs(quilliams) do
+            -- if quilliam.seen_player then
                 quilliam.move_state = 10
-            end
+            -- end
+        end
+        for _, quilliam in ipairs(invincible_quilliams) do
+                quilliam.move_state = 10
+        end
     end, ON.FRAME)
+
 end
 
 dwelling4.unload_level = function()
