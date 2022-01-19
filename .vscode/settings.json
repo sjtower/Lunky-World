@@ -4,6 +4,11 @@
         "define_tile_code",
         "spawn_entity",
         "THEME",
-        "meta"
+        "meta",
+        "ENT_TYPE",
+        "clr_flag",
+        "Color",
+        "get_entity",
+        "set_callback"
     ]
 }

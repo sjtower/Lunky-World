@@ -4,13 +4,13 @@ local clear_embeds = require('clear_embeds')
 define_tile_code("quillback_jump_switch")
 define_tile_code("switchable_quillback")
 
-local dwelling5 = {
-    identifier = "dwelling5",
-    title = "Dwelling 5",
+local dwelling6 = {
+    identifier = "dwelling6",
+    title = "Dwelling 6",
     theme = THEME.DWELLING,
-    width = 8,
-    height = 3,
-    file_name = "dwell-5.lvl",
+    width = 4,
+    height = 4,
+    file_name = "dwell-6.lvl",
 }
 
 local level_state = {
@@ -18,7 +18,7 @@ local level_state = {
     callbacks = {},
 }
 
-dwelling5.load_level = function()
+dwelling6.load_level = function()
     if level_state.loaded then return end
     level_state.loaded = true
 
@@ -74,7 +74,7 @@ dwelling5.load_level = function()
 
 end
 
-dwelling5.unload_level = function()
+dwelling6.unload_level = function()
     if not level_state.loaded then return end
 
     local callbacks_to_clear = level_state.callbacks
@@ -85,4 +85,4 @@ dwelling5.unload_level = function()
     end
 end
 
-return dwelling5
+return dwelling6
