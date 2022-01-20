@@ -9,6 +9,8 @@
         "clr_flag",
         "Color",
         "get_entity",
-        "set_callback"
+        "set_callback",
+        "move_entity",
+        "get_position"
     ]
 }
