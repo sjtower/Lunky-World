@@ -61,8 +61,10 @@ end
 define_tile_code("slow_falling_platform")
 set_pre_tile_code_callback(function(x, y, layer)
     local uid = spawn_critical(ENT_TYPE.ACTIVEFLOOR_FALLING_PLATFORM, x, y, layer, 0, 0)
+    local falling_platform = get_entity(uid)
+    falling_platform.color = Color:green()
     set_post_statemachine(uid, function(ent)
-        if ent.velocityy < 0.001 then ent.velocityy = 0.001 end
+        if ent.velocityy < 0.001 then ent.velocityy = -.02 end
     end)
     return true
 end, "slow_falling_platform")

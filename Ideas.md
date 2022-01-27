@@ -10,6 +10,7 @@
 - climbing gloves/spring shoes/jetpack mini metroidvania
 - cape level :)
 - jungle: claustrophopic climbing gloves / thorns lvl
+- blast items across gap with TNT
 
 # Obstacles
 

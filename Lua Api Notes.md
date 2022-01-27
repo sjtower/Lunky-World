@@ -73,3 +73,28 @@ set_callback(function() --NOT WORKING
 ```
 
 quilliam.flags = clr_flag(mole.flags, ENT_FLAG.STUNNABLE)
+
+
+
+level_state.callbacks[#level_state.callbacks+1] =set_callback(function()
+  state:force_current_theme(THEME.ICE_CAVES)
+end, ON.POST_ROOM_GENERATION)
+
+--[[Spawns a stack of n olmites
+If n is one or zero, it will spawn a single helmet olmite that does not attack because it thinks it's in a stack
+Higher values for n should work, including n>4
+See also: https://github.com/spelunky-fyi/overlunky/blob/main/docs/script-api.md#olmite]]--
+function spawn_olmite_stack(x, y, layer, n)
+    local y_offset = 0.64
+    
+    local stack_olmites = {get_entity(spawn_entity(ENT_TYPE.MONS_OLMITE_HELMET, x, y+y_offset*(n-1), layer, 0.0, 0.0))} --Spawn Olmite with helmet
+    stack_olmites[1].in_stack = true
+    
+    --Repeat n-1 times (spawn body armor olmites)
+    for i = 2, n, 1 do
+        stack_olmites[i] = get_entity(spawn_entity(ENT_TYPE.MONS_OLMITE_BODYARMORED, x, y+y_offset*(n-i), layer, 0.0, 0.0)) --Spawn Olmite with body armor
+        stack_olmites[i].in_stack = true --Disables attack and stun, makes direction dependent on stack
+        stack_olmites[i].on_top_uid = stack_olmites[i-1].uid --Set the olmite on top of this one to be the previous one spawned
+        attach_entity(stack_olmites[i].uid, stack_olmites[i-1].uid) --Attach previous olmite to this one
+    end
+end
