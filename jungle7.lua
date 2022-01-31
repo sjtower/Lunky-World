@@ -5,8 +5,8 @@ local jungle7 = {
     identifier = "jungle7",
     title = "Jungle 7",
     theme = THEME.JUNGLE,
-    width = 8,
-    height = 3,
+    width = 3,
+    height = 2,
     file_name = "jung-7.lvl",
 }
 
@@ -19,62 +19,22 @@ jungle7.load_level = function()
     if level_state.loaded then return end
     level_state.loaded = true
 
-    level_state.callbacks[#level_state.callbacks+1] = set_post_entity_spawn(function (mantrap)
-        mantrap.flags = clr_flag(mantrap.flags, ENT_FLAG.STUNNABLE)
-        mantrap.flags = clr_flag(mantrap.flags, ENT_FLAG.FACING_LEFT)
-        mantrap.flags = set_flag(mantrap.flags, ENT_FLAG.TAKE_NO_DAMAGE)
-        mantrap.color = Color:red()
-
-    end, SPAWN_TYPE.ANY, 0, ENT_TYPE.MONS_MANTRAP)
-
+    define_tile_code("witch_doctor_chief")
     level_state.callbacks[#level_state.callbacks+1] = set_pre_tile_code_callback(function(x, y, layer)
-        local mattock = spawn_entity(ENT_TYPE.ITEM_MATTOCK, x, y, layer, 0, 0)
-        mattock = get_entity(mattock)
-        return true
-    end, "mattock")
+        local uid = spawn_entity(ENT_TYPE.MONS_WITCHDOCTOR, x, y, layer, 0, 0)
+        local witch_doctor = get_entity(uid)
+        witch_doctor.health = 8
+        witch_doctor.color = Color:red()
+        witch_doctor.flags = clr_flag(witch_doctor.flags, ENT_FLAG.STUNNABLE)
+        witch_doctor:give_powerup(ENT_TYPE.ITEM_POWERUP_SPIKE_SHOES)
 
-    local key_blocks = {}
-    define_tile_code("key_block")
-    level_state.callbacks[#level_state.callbacks+1] = set_pre_tile_code_callback(function(x, y, layer)
-        local floor_uid = spawn_entity(ENT_TYPE.ACTIVEFLOOR_BUSHBLOCK, x, y, layer, 0, 0)
-        local floor = get_entity(floor_uid)
-        floor.color = Color:yellow()
-        key_blocks[#key_blocks + 1] = get_entity(floor_uid)
-        return true
-    end, "key_block")
-
-    local block_keys = {}
-    define_tile_code("block_key")
-    level_state.callbacks[#level_state.callbacks+1] = set_pre_tile_code_callback(function(x, y, layer)
-        local uid = spawn_entity(ENT_TYPE.ITEM_KEY, x, y, layer, 0, 0)
-        local key = get_entity(uid)
-        key.color = Color:yellow()
-        block_keys[#block_keys + 1] = get_entity(uid)
-        set_pre_collision2(key.uid, function(self, collision_entity)
-            for _, block in ipairs(key_blocks) do
-                if collision_entity.uid == block.uid then
-                    -- kill_entity(door_uid)
-                    kill_entity(block.uid)
-                    kill_entity(key.uid)
-                    sound.play_sound(VANILLA_SOUND.SHARED_DOOR_UNLOCK)
-                end
-            end
+        set_on_kill(uid, function(self)
+            local uid = spawn_entity(ENT_TYPE.ITEM_KEY, x, y, layer, 0, 0)
         end)
+
         return true
-    end, "block_key")
-
+    end, "witch_doctor_chief")
 end
-
-define_tile_code("slow_falling_platform")
-set_pre_tile_code_callback(function(x, y, layer)
-    local uid = spawn_critical(ENT_TYPE.ACTIVEFLOOR_FALLING_PLATFORM, x, y, layer, 0, 0)
-    local falling_platform = get_entity(uid)
-    falling_platform.color = Color:green()
-    set_post_statemachine(uid, function(ent)
-        if ent.velocityy < 0.001 then ent.velocityy = -.02 end
-    end)
-    return true
-end, "slow_falling_platform")
 
 define_tile_code("fast_right_falling_platform")
 set_pre_tile_code_callback(function(x, y, layer)
@@ -85,7 +45,7 @@ set_pre_tile_code_callback(function(x, y, layer)
         if ent.velocityy < 0.001 then
             ent.velocityy = 0.015 --keeps platform from falling
             -- ent.velocityx = 0.027
-            ent.velocityx = 0.1
+            ent.velocityx = 0.075
         end
     end)
     return true
@@ -100,7 +60,7 @@ set_pre_tile_code_callback(function(x, y, layer)
         if ent.velocityy < 0.001 then
             ent.velocityy = 0.015 --keeps platform from falling
             -- ent.velocityx = 0.027
-            ent.velocityx = -0.1
+            ent.velocityx = -0.075
         end
     end)
     return true
