@@ -1,0 +1,208 @@
+// ------------------------------
+// JumpLunky
+// ------------------------------
+
+\-back_room_chance                       0          // % chance of a second room (default = 6%)
+\-back_room_interconnection_chance       0          // % chance of a second room interconnection (default = 20%)
+\-back_room_hidden_door_chance           0          // 1/N chance of a hidden door (default = 500)
+\-back_room_hidden_door_cache_chance     0          // 1/N chance of a hidden door to a cache (default = 1000)
+\-mount_chance                           0          // 1/N chance of a mount (default = 5000)
+\-altar_room_chance                      0          // 1/N chance of an altar room (default = 14)
+\-idol_room_chance                       0          // 1/N chance of an idol room (default = 10)
+\-floor_side_spread_chance               0          // 1/N chance of a spreadable floor spreading to its side (default = 10)
+\-floor_bottom_spread_chance             0          // 1/N chance of a spreadable floor spreading to its bottom (default = 5)
+\-size                                   8 1
+
+\?empty                            0
+\?floor                            1
+\?minewood_floor                   =
+\?entrance                         E
+\?exit                             e
+\?spikes                           ^
+\?arrow_trap                       A
+\?platform                         p
+\?bat_generator                    B
+\?bat_switch                       b
+\?lizard                           h
+\?totem_trap                       t
+\?ladder                           L
+\?ladder_plat                      P
+\?moving_totem                     M
+\?totem_switch                     g
+\?idol_reward                      Q
+\?dialog_block                     R
+\?telescope_right                  j
+\?floor_hard                       X
+\?bat                              !
+\?mole                             "
+\?scorpion                         #
+\?caveman                          $
+\?caveman_asleep                   %
+\?skeleton                         &
+\?turkey                           '
+\?spring_trap                      (
+\?upsidedown_spikes                )
+\?litwalltorch                     *
+\?push_block                       +
+\?thorn_vine                       ,
+\?snake                            -
+\?door                             .
+\?cookfire                         2
+\?bush_block                       4
+\?bone_block                       5
+\?robot                            3
+\?water                            6
+\?falling_platform                 7
+\?treasure_chest                   8
+\?slidingwall_switch               ;
+\?littorch                         <
+\?rock                             >
+\?conveyorbelt_left                ?
+\?conveyorbelt_right               @
+\?forcefield                       C
+\?forcefield_horizontal            D
+\?forcefield_top                   F
+\?forcefield_horizontal_top        G
+\?timed_forcefield                 H
+\?key                              I
+\?pot                              J
+\?skull                            K
+\?fountain_drain                   N
+\?powder_keg                       S
+\?door2                            T
+\?door2_secret                     U
+\?locked_door                      V
+\?torch                            O
+\?arrow                            Z
+\?autowalltorch                    W
+\?spider_hanging                   Y
+\?sleeping_bat                     [
+\?cavemanboss                      9
+\?switchable_quillback             ]
+\?quillback_jump_switch            c
+\?camera                           d
+\?crushtrap                        f
+\?infinite_quillback               i
+\?landmine                         :
+\?lava                             _
+\?honey_upwards                    `
+\?mosquito                         a
+\?mantrap                          k
+\?stone_floor                      l
+\?spark_trap                       m
+\?vine                             n
+\?slow_falling_platform            o
+\?treasure_vaultchest              q
+\?treasure                         r
+\?crushtraplarge                   s
+\?elevator                         u
+\?right_falling_platform           v
+\?witchdoctor                      w
+\?tikiman                          x
+
+
+
+////////////////////////////////////////////////////////////////////////////////
+\.setroom0_0   // jungle
+////////////////////////////////////////////////////////////////////////////////
+
+llll111111
+l000001000
+l*0*000000
+l0E0000000
+llllv00000
+1ll1000000
+1111^^^^,,
+1111111111
+
+////////////////////////////////////////////////////////////////////////////////
+\.setroom0_1   // jungle
+////////////////////////////////////////////////////////////////////////////////
+
+1+11111+11
+1511111+11
+0500000500
+0l00000500
+0000000p00
+0000000000
+,^^,,^^^,,
+,111,111,0
+
+////////////////////////////////////////////////////////////////////////////////
+\.setroom0_2   // jungle
+////////////////////////////////////////////////////////////////////////////////
+
+\!dual
+1111111111 XXXXXXXXXX
+0000+00000 XXXXXXXXXX
+0000+00000 XXXXXXXXXX
+0000+00000 XXXXXXXXXX
+0000p00000 XXXXXXXXXX
+0000000000 XXXXXXXXXX
+,,^^^0^^^^ XXXXXXTXXX
+01111^1111 XXXXXX0XXX
+
+////////////////////////////////////////////////////////////////////////////////
+\.setroom0_3   // jungle
+////////////////////////////////////////////////////////////////////////////////
+
+1117700000
++000v00000
+5lll000*0*
+500l000000
+500l000000
+50,0000000
+^,,^^^^^,,
+1,111111,1
+
+////////////////////////////////////////////////////////////////////////////////
+\.setroom0_4   // jungle
+////////////////////////////////////////////////////////////////////////////////
+
+0001111111
+000+,,1111
+000+0,,,11
+000+000,11
+000+000000
+0v0ppppp0*
+^^^^^4^^,,
+1111141111
+
+////////////////////////////////////////////////////////////////////////////////
+\.setroom0_5   // jungle
+////////////////////////////////////////////////////////////////////////////////
+
+1111111,,0
+1111111,00
+1111111,00
+1,,,,,,,0+
+000000000l
+0000000k0+
+,,0,,0,,1l
+1,,11,,111
+
+////////////////////////////////////////////////////////////////////////////////
+\.setroom0_6   // jungle
+////////////////////////////////////////////////////////////////////////////////
+
+0000000000
+0000000000
+0*0000000*
+0000000000
+70000000v0
+00000,0000
+^^^^^,,,,,
+1111111111
+
+////////////////////////////////////////////////////////////////////////////////
+\.setroom0_7   // jungle
+////////////////////////////////////////////////////////////////////////////////
+
+0000000000
+00000000o0
+0+00000*e*
+7l00000000
+0000000000
+00000000,,
+,^^^^^^^,^
+,1111111,l
