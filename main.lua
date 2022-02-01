@@ -25,17 +25,18 @@ local jungle4 = require("jungle4")
 local jungle5 = require("jungle5")
 local jungle6 = require("jungle6")
 local jungle7 = require("jungle7")
-local volcana = require("volcana")
+local volcana1 = require("volcana1")
 local temple = require("temple")
 local ice_caves = require("ice_caves")
 local sunken_city = require("sunken_city")
 
-level_sequence.set_levels({jungle7, volcana, temple, ice_caves, sunken_city})
+level_sequence.set_levels({volcana1, jungle1, temple, ice_caves, sunken_city})
 telescopes.set_hud_button_insets(0, 0, .1, 0)
 
 -- Store the save context in a local var so we can save whenever we want.
 local save_context
 
+-- todo: implement saving
 local initial_bombs = 0
 local initial_ropes = 0
 local game_state = {
