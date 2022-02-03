@@ -5,8 +5,8 @@ local volcana6 = {
     identifier = "volcana6",
     title = "Volcana 6",
     theme = THEME.VOLCANA,
-    width = 4,
-    height = 6,
+    width = 3,
+    height = 3,
     file_name = "volc-6.lvl",
 }
 
