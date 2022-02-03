@@ -29,11 +29,13 @@ local volcana1 = require("volcana1")
 local volcana2 = require("volcana2")
 local volcana3 = require("volcana3")
 local volcana4 = require("volcana4")
+local volcana5 = require("volcana5")
+local volcana6 = require("volcana6")
 local temple = require("temple")
 local ice_caves = require("ice_caves")
 local sunken_city = require("sunken_city")
 
-level_sequence.set_levels({volcana4, jungle1, temple, ice_caves, sunken_city})
+level_sequence.set_levels({volcana6, jungle1, temple, ice_caves, sunken_city})
 telescopes.set_hud_button_insets(0, 0, .1, 0)
 
 -- Store the save context in a local var so we can save whenever we want.
