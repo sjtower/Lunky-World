@@ -36,11 +36,12 @@ local tidepool2 = require("tidepool2")
 local tidepool3 = require("tidepool3")
 local tidepool4 = require("tidepool4")
 local tidepool5 = require("tidepool5")
+local tidepool6 = require("tidepool6")
 local temple = require("temple")
 local ice_caves = require("ice_caves")
 local sunken_city = require("sunken_city")
 
-level_sequence.set_levels({tidepool5, tidepool2, tidepool3, tidepool4, temple, ice_caves, sunken_city})
+level_sequence.set_levels({tidepool6, tidepool2, tidepool3, tidepool4, temple, ice_caves, sunken_city})
 
 -- Store the save context in a local var so we can save whenever we want.
 local save_context

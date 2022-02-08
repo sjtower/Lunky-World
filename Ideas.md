@@ -13,7 +13,13 @@
 - blast items across gap with TNT
 - ropes that burn when you touch them
 - Thorny Jail
+- COllect gold while ghost chases you level (Twiggle Level)
+- Spend all your monry (shops - have to do math) w/ ghost
+
+DONE
+
 - Flying Fish
+
 
 # Obstacles
 
