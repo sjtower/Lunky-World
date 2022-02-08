@@ -12,6 +12,8 @@
 - jungle: claustrophopic climbing gloves / thorns lvl
 - blast items across gap with TNT
 - ropes that burn when you touch them
+- Thorny Jail
+- Flying Fish
 
 # Obstacles
 
