@@ -17,3 +17,10 @@
 
 # Obstacles
 
+From @Cynichill
+
+Defend against fish - tidepool 3
+
+If water makes you immune to magma men, you could do something like having pools of water as safety zones the player has to reach between magma men hell. Could use rock dogs
+
+Throw bodies at spark traps to trigger far away stuff & weird angles

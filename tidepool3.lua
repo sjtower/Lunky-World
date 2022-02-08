@@ -3,10 +3,10 @@ local clear_embeds = require('clear_embeds')
 
 local tidepool3 = {
     identifier = "tidepool3",
-    title = "Tidepool 3",
+    title = "Tidepool 3: Fish",
     theme = THEME.TIDE_POOL,
-    width = 8,
-    height = 1,
+    width = 4,
+    height = 4,
     file_name = "tide-3.lvl",
 }
 
@@ -19,6 +19,10 @@ tidepool3.load_level = function()
     if level_state.loaded then return end
     level_state.loaded = true
 
+    level_state.callbacks[#level_state.callbacks+1] = set_post_entity_spawn(function(entity, spawn_flags)
+		entity:destroy()
+	end, SPAWN_TYPE.SYSTEMIC, 0, ENT_TYPE.MONS_SKELETON)
+
     define_tile_code("spike_shoes")
     level_state.callbacks[#level_state.callbacks+1] = set_pre_tile_code_callback(function(x, y, layer)
         local shoes = spawn_entity(ENT_TYPE.ITEM_PICKUP_SPIKESHOES, x, y, layer, 0, 0)
@@ -26,14 +30,36 @@ tidepool3.load_level = function()
         return true
     end, "spike_shoes")
 
-    define_tile_code("right_facing_robot")
+    -- todo: fish with different speeds
+    level_state.callbacks[#level_state.callbacks+1] = set_post_entity_spawn(function (fish)
+        fish.color = Color:red()
+        fish.type.max_speed = 0.01
+        fish.flags = clr_flag(fish.flags, ENT_FLAG.STUNNABLE)
+        fish.flags = set_flag(fish.flags, ENT_FLAG.TAKE_NO_DAMAGE)
+		-- fish.flags = clr_flag(fish.flags, 13)
+    end, SPAWN_TYPE.ANY, 0, ENT_TYPE.MONS_FISH)
+
+    define_tile_code("fast_fish")
     level_state.callbacks[#level_state.callbacks+1] = set_pre_tile_code_callback(function(x, y, layer)
-        local uid = spawn_entity(ENT_TYPE.MONS_ROBOT, x, y, layer, 0, 0)
-        local robot = get_entity(uid)
-        robot.color = Color:yellow()
-        robot.flags = clr_flag(robot.flags, ENT_FLAG.FACING_LEFT)
+        local fish = spawn_entity(ENT_TYPE.MONS_FISH, x, y, layer, 0, 0)
+        fish = get_entity(fish)
+        fish.color = Color:yellow()
+        fish.type.max_speed = 0.05
+        fish.flags = clr_flag(fish.flags, ENT_FLAG.STUNNABLE)
+        fish.flags = set_flag(fish.flags, ENT_FLAG.TAKE_NO_DAMAGE)
         return true
-    end, "right_facing_robot")
+    end, "fast_fish")
+
+    define_tile_code("fastest_fish")
+    level_state.callbacks[#level_state.callbacks+1] = set_pre_tile_code_callback(function(x, y, layer)
+        local fish = spawn_entity(ENT_TYPE.MONS_FISH, x, y, layer, 0, 0)
+        fish = get_entity(fish)
+        fish.color = Color:green()
+        fish.type.max_speed = 0.1
+        fish.flags = clr_flag(fish.flags, ENT_FLAG.STUNNABLE)
+        fish.flags = set_flag(fish.flags, ENT_FLAG.TAKE_NO_DAMAGE)
+        return true
+    end, "fastest_fish")
 
     local key_blocks = {}
     define_tile_code("key_block")
@@ -66,6 +92,7 @@ tidepool3.load_level = function()
         return true
     end, "block_key")
 
+	toast(tidepool3.title)
 end
 
 tidepool3.unload_level = function()
@@ -80,3 +107,4 @@ tidepool3.unload_level = function()
 end
 
 return tidepool3
+
