@@ -1,13 +1,14 @@
 local sound = require('play_sound')
 local clear_embeds = require('clear_embeds')
+local checkpoints = require("Checkpoints/checkpoints")
 
-local temple2 = {
-    identifier = "temple2",
-    title = "Temple 2: Sqaure Peg",
+local temple1 = {
+    identifier = "temple1",
+    title = "Temple 1: Super Crush",
     theme = THEME.TEMPLE,
     width = 4,
     height = 4,
-    file_name = "temp-2.lvl",
+    file_name = "temp-1.lvl",
 }
 
 local level_state = {
@@ -15,26 +16,19 @@ local level_state = {
     callbacks = {},
 }
 
-temple2.load_level = function()
+temple1.load_level = function()
     if level_state.loaded then return end
     level_state.loaded = true
 
-    -- from Dregu: double bullet speed. Anything faster and you should turn it in to a hitscan weapon
-    level_state.callbacks[#level_state.callbacks+1] = set_post_entity_spawn(function(ent)
-        set_timeout(function() -- they don't have velocity when spawned, wait a frame
-          local x = ent.velocityx
-          local y = ent.velocityy
-          local vel = 0.6 -- base velocity
-          local sx = x>0 and vel or x<0 and -vel or 0 -- get sign x
-          local sy = y>0 and vel or y<0 and -vel or 0 -- get sign y
-          ent.velocityx = sx 
-          ent.velocityy = sy/100 -- remove y velocity to stop spread
-        end, 1)
-      end, SPAWN_TYPE.ANY, 0, ENT_TYPE.ITEM_BULLET)
+    checkpoints.activate()
 
 	level_state.callbacks[#level_state.callbacks+1] = set_post_entity_spawn(function(entity, spawn_flags)
 		entity:destroy()
 	end, SPAWN_TYPE.SYSTEMIC, 0, ENT_TYPE.ITEM_SKULL)
+
+    level_state.callbacks[#level_state.callbacks+1] = set_post_entity_spawn(function(entity, spawn_flags)
+		entity:destroy()
+	end, SPAWN_TYPE.SYSTEMIC, 0, ENT_TYPE.MONS_SKELETON)
 
     level_state.callbacks[#level_state.callbacks+1] = set_pre_tile_code_callback(function(x, y, layer)
         spawn_entity(ENT_TYPE.MONS_CATMUMMY, x, y, layer, 0, 0)
@@ -114,22 +108,23 @@ temple2.load_level = function()
 
     local frames = 0
 	level_state.callbacks[#level_state.callbacks+1] = set_callback(function ()
-
 		for i = 1,#death_blocks do
 			death_blocks[i].color:set_rgba(100 + math.ceil(40 * math.sin(0.05 * frames)), 0, 0, 255) --Pulse effect
 			if #players ~= 0 and players[1].standing_on_uid == death_blocks[i].uid then
 				kill_entity(players[1].uid, false)
 			end
 		end
-        
+
         frames = frames + 1
     end, ON.FRAME)
 
-	toast(temple2.title)
+	toast(temple1.title)
 end
 
-temple2.unload_level = function()
+temple1.unload_level = function()
     if not level_state.loaded then return end
+
+    checkpoints.deactivate()
 
     local callbacks_to_clear = level_state.callbacks
     level_state.loaded = false
@@ -139,5 +134,5 @@ temple2.unload_level = function()
     end
 end
 
-return temple2
+return temple1
 
