@@ -15,6 +15,7 @@
 - Thorny Jail
 - COllect gold while ghost chases you level (Twiggle Level)
 - Spend all your monry (shops - have to do math) w/ ghost
+- sorceress barrage (like fish)
 
 DONE
 
@@ -27,7 +28,7 @@ From @Cynichill
 
 shooting a bubbled enemy with another bubble pushes the bubble away
 
-Defend against fish - tidepool 3
+Defend against fish barrage - tidepool 3
 
 If water makes you immune to magma men, you could do something like having pools of water as safety zones the player has to reach between magma men hell. Could use rock dogs
 
