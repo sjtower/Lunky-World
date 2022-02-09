@@ -1,5 +1,12 @@
 define_tile_code("checkpoint")
 
+local function play_sound(vanilla_sound)
+	local sound = get_sound(vanilla_sound)
+	if sound then
+		sound:play()
+	end
+end
+
 local CHECKPOINT_STYLE = {
     DEFAULT_BORING = 0,
     EYE_OF_ANUBIS = 1,
@@ -10,7 +17,7 @@ local MAX_CHECKPOINT_STYLE = CHECKPOINT_STYLE.CUSTOM
 
 local checkpoint_params = {
     directory = "Checkpoints",
-    style = CHECKPOINT_STYLE.DEFAULT_BORING,
+    style = CHECKPOINT_STYLE.FUNKY,
     custom_active_texture = nil,
     custom_inactive_texture = nil,
 }
@@ -137,8 +144,7 @@ local function spawn_checkpoint(x, y, layer)
             if checkpoint_state.callback then
                 checkpoint_state.callback(x, y, layer, state.time_level)
             end
-            local sound = get_sound(VANILLA_SOUND.UI_GET_ITEM1)
-            sound:play()
+            play_sound(VANILLA_SOUND.UI_GET_ITEM1)
         end
     end)
     checkpoint_object.collision = collision

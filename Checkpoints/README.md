@@ -4,6 +4,10 @@
 
 This package is in Beta and can be finicky to set up.
 
+## Tile code
+
+Use the tile code "checkpoint" to add a checkpoint to a level. ONLY ADD CHECKPOINTS ON THE FRONT LAYER.
+
 ## Setup
 
 To avoid issues, activate the checkpoints when loading a level and deactivate when unloading:
