@@ -1,14 +1,13 @@
 local sound = require('play_sound')
 local clear_embeds = require('clear_embeds')
-local checkpoints = require("Checkpoints/checkpoints")
 
-local temple1 = {
-    identifier = "temple1",
-    title = "Temple 1: Super Crush",
+local temple3 = {
+    identifier = "temple3",
+    title = "Temple 3: Ride",
     theme = THEME.TEMPLE,
-    width = 4,
-    height = 4,
-    file_name = "temp-1.lvl",
+    width = 8,
+    height = 2,
+    file_name = "temp-3.lvl",
 }
 
 local level_state = {
@@ -16,13 +15,12 @@ local level_state = {
     callbacks = {},
 }
 
-temple1.load_level = function()
+temple3.load_level = function()
     if level_state.loaded then return end
     level_state.loaded = true
 
-    checkpoints.activate()
 
-	level_state.callbacks[#level_state.callbacks+1] = set_post_entity_spawn(function(entity, spawn_flags)
+    level_state.callbacks[#level_state.callbacks+1] = set_post_entity_spawn(function(entity, spawn_flags)
 		entity:destroy()
 	end, SPAWN_TYPE.SYSTEMIC, 0, ENT_TYPE.ITEM_SKULL)
 
@@ -35,19 +33,26 @@ temple1.load_level = function()
         return true
     end, "catmummy")
 
-    define_tile_code("shotgun")
-    level_state.callbacks[#level_state.callbacks+1] = set_pre_tile_code_callback(function(x, y, layer)
-        local shotgun = spawn_entity(ENT_TYPE.ITEM_SHOTGUN, x, y, layer, 0, 0)
-        shotgun = get_entity(shotgun)
-        return true
-    end, "shotgun")
+    level_state.callbacks[#level_state.callbacks+1] = set_post_entity_spawn(function (firebug)
+        firebug.type.max_speed = 0
+    end, SPAWN_TYPE.ANY, 0, ENT_TYPE.MONS_FIREBUG)
 
-    level_state.callbacks[#level_state.callbacks+1] = set_post_entity_spawn(function (boss_bones)
-        boss_bones.color = Color:red()
-        boss_bones.health = 25
-        boss_bones.flags = clr_flag(boss_bones.flags, ENT_FLAG.STUNNABLE)
-        boss_bones:give_powerup(ENT_TYPE.ITEM_POWERUP_SPIKE_SHOES)
-    end, SPAWN_TYPE.ANY, 0, ENT_TYPE.MONS_FEMALE_JIANGSHI)
+    local death_switches = {}
+    define_tile_code("death_switch")
+    level_state.callbacks[#level_state.callbacks+1] = set_pre_tile_code_callback(function(x, y, layer)
+        clear_embeds.perform_block_without_embeds(function()
+            local switch_uid = spawn_entity(ENT_TYPE.ITEM_SLIDINGWALL_SWITCH, x, y, layer, 0, 0)
+            death_switches[#death_switches + 1] = get_entity(switch_uid)
+        end)
+        return true
+    end, "death_switch")
+
+    level_state.callbacks[#level_state.callbacks+1] = set_post_entity_spawn(function (tnt)
+        tnt.flags = set_flag(tnt.flags, ENT_FLAG.PASSES_THROUGH_PLAYER)
+        tnt.flags = set_flag(tnt.flags, ENT_FLAG.NO_GRAVITY)
+        tnt.flags = clr_flag(tnt.flags, ENT_FLAG.SOLID)
+        tnt.color = Color:gray()
+    end, SPAWN_TYPE.ANY, 0, ENT_TYPE.ACTIVEFLOOR_POWDERKEG)
 
     level_state.callbacks[#level_state.callbacks+1] = set_post_entity_spawn(function (thorn)
         thorn.color = Color:red()
@@ -108,6 +113,7 @@ temple1.load_level = function()
 
     local frames = 0
 	level_state.callbacks[#level_state.callbacks+1] = set_callback(function ()
+
 		for i = 1,#death_blocks do
 			death_blocks[i].color:set_rgba(100 + math.ceil(40 * math.sin(0.05 * frames)), 0, 0, 255) --Pulse effect
 			if #players ~= 0 and players[1].standing_on_uid == death_blocks[i].uid then
@@ -115,16 +121,21 @@ temple1.load_level = function()
 			end
 		end
 
+        for i = 1,#death_switches do
+			death_switches[i].color:set_rgba(100 + math.ceil(40 * math.sin(0.05 * frames)), 0, 0, 255) --Pulse effect
+			if death_switches[i].timer > 0 then
+				kill_entity(players[1].uid, false)
+			end
+		end
+        
         frames = frames + 1
     end, ON.FRAME)
 
-	toast(temple1.title)
+	toast(temple3.title)
 end
 
-temple1.unload_level = function()
+temple3.unload_level = function()
     if not level_state.loaded then return end
-
-    checkpoints.deactivate()
 
     local callbacks_to_clear = level_state.callbacks
     level_state.loaded = false
@@ -134,5 +145,5 @@ temple1.unload_level = function()
     end
 end
 
-return temple1
+return temple3
 
