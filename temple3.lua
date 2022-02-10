@@ -3,7 +3,7 @@ local clear_embeds = require('clear_embeds')
 
 local temple3 = {
     identifier = "temple3",
-    title = "Temple 3: Ride",
+    title = "Temple 3: Crush Test Dummy",
     theme = THEME.TEMPLE,
     width = 8,
     height = 2,

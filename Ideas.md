@@ -16,6 +16,8 @@
 - COllect gold while ghost chases you level (Twiggle Level)
 - Spend all your monry (shops - have to do math) w/ ghost
 - sorceress barrage (like fish)
+- Gugubo level (Glue & bow?)
+- Guide cat to enemey who has 99999 HP in order to murder
 
 DONE
 

@@ -40,10 +40,11 @@ local tidepool6 = require("tidepool6")
 local temple1 = require("temple1")
 local temple2 = require("temple2")
 local temple3 = require("temple3")
+local temple4 = require("temple4")
 local ice_caves = require("ice_caves")
 local sunken_city = require("sunken_city")
 
-level_sequence.set_levels({temple3, tidepool6, tidepool2, tidepool3, tidepool4, ice_caves, sunken_city})
+level_sequence.set_levels({temple4, tidepool6, tidepool2, tidepool3, tidepool4, ice_caves, sunken_city})
 
 -- Store the save context in a local var so we can save whenever we want.
 local save_context
@@ -106,7 +107,7 @@ end
 ---- DO NOT SPAWN GHOST 
 --------------------------------------
 
-set_ghost_spawn_times(-1, -1)
+-- set_ghost_spawn_times(-1, -1)
 
 --------------------------------------
 ---- /DO NOT SPAWN GHOST 
