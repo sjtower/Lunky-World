@@ -1,0 +1,291 @@
+\-altar_room_chance                      0
+\-back_room_chance                       0
+\-back_room_hidden_door_cache_chance     0
+\-back_room_hidden_door_chance           0
+\-back_room_interconnection_chance       0
+\-background_chance                      0
+\-flagged_liquid_rooms                   0
+\-floor_bottom_spread_chance             0
+\-floor_side_spread_chance               0
+\-ground_background_chance               0
+\-idol_room_chance                       0
+\-machine_bigroom_chance                 0
+\-machine_rewardroom_chance              0
+\-machine_tallroom_chance                0
+\-machine_wideroom_chance                0
+\-max_liquid_particles                   0
+\-mount_chance                           0
+\-size                                   4 4
+
+\?floor                            1
+\?empty                            0
+\?floor_hard                       X
+\?water                            !
+\?powder_keg                       "
+\?spikes                           #
+\?jiangshi                         $
+\?assassin                         %
+\?octopus                          &
+\?crabman                          '
+\?hermitcrab                       (
+\?flying_fish                      )
+\?entrance                         *
+\?exit                             +
+\?locked_door                      ,
+\?push_block                       -
+\?ladder_plat                      .
+\?ladder                           2
+\?door                             3
+\?giantclam                        4
+\?fountain_drain                   5
+\?slidingwall_switch               6
+\?slidingwall_ceiling              7
+\?minewood_floor                   8
+\?littorch                         9
+\?lion_trap                        :
+\?bone_block                       ;
+\?bush_block                       <
+\?pagoda_floor                     =
+\?pagoda_platform                  >
+\?key                              ?
+\?litwalltorch                     @
+\?falling_platform                 A
+\?giantfood                        B
+\?humphead                         C
+\?spikeball                        D
+\?spring_trap                      E
+\?spike_shoes                      F
+\?thorn_vine                       G
+\?upsidedown_spikes                H
+\?conveyorbelt_right               I
+\?skeleton                         J
+\?spikeball_trap                   K
+\?jungle_spear_trap                L
+\?jungle_floor                     M
+\?landmine                         N
+\?conveyorbelt_left                O
+\?key_block                        P
+\?block_key                        Q
+\?fastest_fish                     R
+\?fast_fish                        S
+\?cooked_turkey                    T
+\?sorceress                        U
+\?temple_floor                     V
+\?death_block                      W
+\?platform                         Y
+\?quicksand                        Z
+\?boomerang                        [
+\?rock                             ]
+\?mummy                            ^
+\?anubis                           _
+\?lava                             `
+
+
+
+////////////////////////////////////////////////////////////////////////////////
+\.setroom0_0   // temple
+////////////////////////////////////////////////////////////////////////////////
+
+VVVVVVVVVV
+V000000000
+V^00000000
+VVVVVVVVVV
+VVVVVVVVVV
+VVVVVVVVVV
+VVVVVVVVVV
+V000000000
+
+////////////////////////////////////////////////////////////////////////////////
+\.setroom0_1   // temple
+////////////////////////////////////////////////////////////////////////////////
+
+VVVVVVVVVV
+0000000000
+0000000000
+VVVVVVVVVV
+VVVVVVVVVV
+VVVVVVVVVV
+VVVVVVVVVV
+0000000000
+
+////////////////////////////////////////////////////////////////////////////////
+\.setroom0_2   // temple
+////////////////////////////////////////////////////////////////////////////////
+
+VVVVVVVVVV
+0000000000
+0000000000
+VVVVVVVVVV
+VVVVVVVVVV
+VVVVVVVVVV
+VVVVVVVVVV
+0000000000
+
+////////////////////////////////////////////////////////////////////////////////
+\.setroom0_3   // temple
+////////////////////////////////////////////////////////////////////////////////
+
+VVVVVVVVVV
+000000000V
+000000000V
+VVVVVVVVVV
+VVVVVVVVVV
+VVVVVVVVVV
+VVVVVVVVVV
+000000000V
+
+////////////////////////////////////////////////////////////////////////////////
+\.setroom1_0   // temple
+////////////////////////////////////////////////////////////////////////////////
+
+V000000000
+V000000000
+V000000000
+V000000000
+VVVVVV0000
+VV]0VV0000
+--0@000000
+--^]000000
+
+////////////////////////////////////////////////////////////////////////////////
+\.setroom1_1   // temple
+////////////////////////////////////////////////////////////////////////////////
+
+0000000000
+0000000000
+0000000000
+0000000000
+0000000000
+0000000000
+0000000-0-
+000U000;0;
+
+////////////////////////////////////////////////////////////////////////////////
+\.setroom1_2   // temple
+////////////////////////////////////////////////////////////////////////////////
+
+0000000000
+0000000000
+0000000000
+0000000000
+0000000000
+0000000000
+0-0-000000
+0;0;000U00
+
+////////////////////////////////////////////////////////////////////////////////
+\.setroom1_3   // temple
+////////////////////////////////////////////////////////////////////////////////
+
+000000000V
+000000000V
+000000000V
+000000000V
+00000VVVVV
+00000V00VV
+000000@00-
+0000000]]-
+
+////////////////////////////////////////////////////////////////////////////////
+\.setroom2_0   // temple
+////////////////////////////////////////////////////////////////////////////////
+
+VVVVVV0000
+VVVVVVV000
+VVVVVVVV00
+VVVVV00000
+VVVVVWWWWW
+VVVVVVVVVV
+VVVVVVVVVV
+VVVVVVVVVV
+
+////////////////////////////////////////////////////////////////////////////////
+\.setroom2_1   // temple
+////////////////////////////////////////////////////////////////////////////////
+
+000>000000
+00000000@0
+0000000000
+000>000000
+WWWWVVV0V*
+VVVVVVVVVV
+VVVVVVVV00
+VVVVVVVVV0
+
+////////////////////////////////////////////////////////////////////////////////
+\.setroom2_2   // temple
+////////////////////////////////////////////////////////////////////////////////
+
+0000000>00
+@0@0000000
+0000000000
+0000000>00
+V0V0VVVWWW
+VVVVVVVVVV
+000VVVVVVV
+VVVVVVVVVV
+
+////////////////////////////////////////////////////////////////////////////////
+\.setroom2_3   // temple
+////////////////////////////////////////////////////////////////////////////////
+
+00000VVVVV
+0000VVVVVV
+000VVVVVVV
+00000VVVVV
+WWWWWVVVVV
+VVVVVVVVVV
+VVVVVVVVVV
+VVVVVVVVVV
+
+////////////////////////////////////////////////////////////////////////////////
+\.setroom3_0   // temple
+////////////////////////////////////////////////////////////////////////////////
+
+VVVVVVVVVV
+111111111V
+111111111V
+111111111V
+111111111V
+111111111V
+111111111V
+111111111V
+
+////////////////////////////////////////////////////////////////////////////////
+\.setroom3_1   // temple
+////////////////////////////////////////////////////////////////////////////////
+
+VVV00000V0
+VVV00000V0
+VVV00000V0
+VVV00000VV
+VVV00000VV
+VVV`````VV
+VVVWWWWWVV
+VVVVVVVVVV
+
+////////////////////////////////////////////////////////////////////////////////
+\.setroom3_2   // temple
+////////////////////////////////////////////////////////////////////////////////
+
+V00000VVV0
+V00000VVV0
+0000000000
+V00000VVV0
+V00000VVV0
+V`````VVV`
+VWWWWWVVVW
+VVVVVVVVVV
+
+////////////////////////////////////////////////////////////////////////////////
+\.setroom3_3   // temple
+////////////////////////////////////////////////////////////////////////////////
+
+000000000V
+000@000@0V
+00000+000V
+0000VVV00V
+000VVVVV0V
+`````````V
+WWWWWWWWWV
+VVVVVVVVVV

@@ -1,13 +1,13 @@
 local sound = require('play_sound')
 local clear_embeds = require('clear_embeds')
 
-local temple5 = {
-    identifier = "temple5",
-    title = "Temple 5: Super Twiggle World",
-    theme = THEME.TEMPLE,
+local neobabylon1 = {
+    identifier = "neobabylon 1",
+    title = "Neo Babylon1 1: I Want To Believe",
+    theme = THEME.NEO_BABYLON,
     width = 4,
     height = 4,
-    file_name = "temp-5.lvl",
+    file_name = "neob-1.lvl",
 }
 
 local level_state = {
@@ -15,11 +15,9 @@ local level_state = {
     callbacks = {},
 }
 
-temple5.load_level = function()
+neobabylon1.load_level = function()
     if level_state.loaded then return end
     level_state.loaded = true
-
-    
 
     level_state.callbacks[#level_state.callbacks+1] = set_post_entity_spawn(function(entity, spawn_flags)
 		entity:destroy()
@@ -30,23 +28,19 @@ temple5.load_level = function()
         ent:destroy()
     end, SPAWN_TYPE.LEVEL_GEN_GENERAL, 0, ENT_TYPE.MONS_SKELETON, ENT_TYPE.MONS_BAT, ENT_TYPE.MONS_SCARAB)
 
-    level_state.callbacks[#level_state.callbacks+1] = set_pre_tile_code_callback(function(x, y, layer)
-        spawn_entity(ENT_TYPE.MONS_CATMUMMY, x, y, layer, 0, 0)
-        return true
-    end, "catmummy")
-
-    level_state.callbacks[#level_state.callbacks+1] = set_pre_tile_code_callback(function(x, y, layer)
-        local ent = spawn_entity(ENT_TYPE.ITEM_BOOMERANG, x, y, layer, 0, 0)
-        ent = get_entity(ent)
-        return true
-    end, "boomerang")
+    level_state.callbacks[#level_state.callbacks+1] = set_post_entity_spawn(function (ent)
+        -- ent.type.max_speed = 0.2
+        ent.color:set_rgba(104, 37, 71, 255) --deep red
+        ent.flags = set_flag(ent.flags, ENT_FLAG.TAKE_NO_DAMAGE)
+        ent.flags = clr_flag(ent.flags, ENT_FLAG.FACING_LEFT)
+    end, SPAWN_TYPE.ANY, 0, ENT_TYPE.MONS_UFO)
 
     local key_blocks = {}
     define_tile_code("key_block")
     level_state.callbacks[#level_state.callbacks+1] = set_pre_tile_code_callback(function(x, y, layer)
         local floor_uid = spawn_entity(ENT_TYPE.ACTIVEFLOOR_PUSHBLOCK, x, y, layer, 0, 0)
         local floor = get_entity(floor_uid)
-        floor.color = Color:yellow()
+        floor.color = Color:purple()
         floor.flags = set_flag(floor.flags, ENT_FLAG.NO_GRAVITY)
         key_blocks[#key_blocks + 1] = get_entity(floor_uid)
         return true
@@ -57,7 +51,7 @@ temple5.load_level = function()
     level_state.callbacks[#level_state.callbacks+1] = set_pre_tile_code_callback(function(x, y, layer)
         local uid = spawn_entity(ENT_TYPE.ITEM_KEY, x, y, layer, 0, 0)
         local key = get_entity(uid)
-        key.color = Color:yellow()
+        key.color = Color:purple()
         block_keys[#block_keys + 1] = get_entity(uid)
         set_pre_collision2(key.uid, function(self, collision_entity)
             for _, block in ipairs(key_blocks) do
@@ -93,14 +87,14 @@ temple5.load_level = function()
 				kill_entity(players[1].uid, false)
 			end
 		end
-        
+
         frames = frames + 1
     end, ON.FRAME)
 
-	toast(temple5.title)
+	toast(neobabylon1.title)
 end
 
-temple5.unload_level = function()
+neobabylon1.unload_level = function()
     if not level_state.loaded then return end
 
     local callbacks_to_clear = level_state.callbacks
@@ -111,5 +105,5 @@ temple5.unload_level = function()
     end
 end
 
-return temple5
+return neobabylon1
 
