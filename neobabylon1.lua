@@ -1,12 +1,13 @@
 local sound = require('play_sound')
 local clear_embeds = require('clear_embeds')
+local checkpoints = require("Checkpoints/checkpoints")
 
 local neobabylon1 = {
     identifier = "neobabylon 1",
     title = "Neo Babylon1 1: I Want To Believe",
     theme = THEME.NEO_BABYLON,
-    width = 4,
-    height = 4,
+    width = 2,
+    height = 6,
     file_name = "neob-1.lvl",
 }
 
@@ -14,6 +15,12 @@ local level_state = {
     loaded = false,
     callbacks = {},
 }
+
+local saved_checkpoint
+
+local function save_checkpoint(checkpoint)
+    saved_checkpoint = checkpoint
+end
 
 neobabylon1.load_level = function()
     if level_state.loaded then return end
@@ -29,11 +36,44 @@ neobabylon1.load_level = function()
     end, SPAWN_TYPE.LEVEL_GEN_GENERAL, 0, ENT_TYPE.MONS_SKELETON, ENT_TYPE.MONS_BAT, ENT_TYPE.MONS_SCARAB)
 
     level_state.callbacks[#level_state.callbacks+1] = set_post_entity_spawn(function (ent)
-        -- ent.type.max_speed = 0.2
+        ent.type.max_speed = 0.05
         ent.color:set_rgba(104, 37, 71, 255) --deep red
         ent.flags = set_flag(ent.flags, ENT_FLAG.TAKE_NO_DAMAGE)
         ent.flags = clr_flag(ent.flags, ENT_FLAG.FACING_LEFT)
     end, SPAWN_TYPE.ANY, 0, ENT_TYPE.MONS_UFO)
+
+    checkpoints.activate()
+
+    checkpoints.checkpoint_activate_callback(function(x, y, layer, time)
+        save_checkpoint({
+            position = {
+                x = x,
+                y = y,
+                layer = layer,
+            },
+            time = time,
+        })
+    end)
+
+    if saved_checkpoint then
+        checkpoints.activate_checkpoint_at(
+            saved_checkpoint.position.x,
+            saved_checkpoint.position.y,
+            saved_checkpoint.position.layer,
+            saved_checkpoint.time
+        )
+    end
+
+    -- local checkpoint
+    -- level_state.callbacks[#level_state.callbacks+1] = set_pre_tile_code_callback(function(x, y, layer)
+    --     local ent_uid = spawn_entity(ENT_TYPE.ACTIVEFLOOR_PUSHBLOCK, x, y, layer, 0, 0)
+    --     local ent = get_entity(floor_uid)
+    --     ent.color = Color:purple()
+    --     ent.flags = set_flag(ent.flags, ENT_FLAG.NO_GRAVITY)
+    --     -- checkpoints[#checkpoints + 1] = get_entity(floor_uid)
+    --     return true
+    -- end, "checkpoint")
+
 
     local key_blocks = {}
     define_tile_code("key_block")
@@ -96,6 +136,8 @@ end
 
 neobabylon1.unload_level = function()
     if not level_state.loaded then return end
+
+    checkpoints.deactivate()
 
     local callbacks_to_clear = level_state.callbacks
     level_state.loaded = false
