@@ -16,11 +16,14 @@
 - Gugubo level (Glue & bow?)
 - Guide cat to enemey who has 99999 HP in order to murder
     - throw cursed pots
-- ladders & arrow traps
-- timed switch
+- ladders & sticky traps & spikeball trap & arrow traps
+- run under lava going down elevator
+- elevator jumps, lava elevators
+
 
 DONE
 
+- timed switch
 - Flying Fish
 - COllect gold while ghost chases you level (Twiggle Level)
 - jungle: claustrophopic climbing gloves / thorns lvl
