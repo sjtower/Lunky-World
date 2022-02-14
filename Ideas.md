@@ -18,6 +18,9 @@
 - sorceress barrage (like fish)
 - Gugubo level (Glue & bow?)
 - Guide cat to enemey who has 99999 HP in order to murder
+    - throw cursed pots
+- ladders & arrow traps
+- timed switch
 
 DONE
 
