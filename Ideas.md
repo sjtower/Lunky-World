@@ -9,13 +9,10 @@
 - ropes
 - climbing gloves/spring shoes/jetpack mini metroidvania
 - cape level :)
-- jungle: claustrophopic climbing gloves / thorns lvl
 - blast items across gap with TNT
 - ropes that burn when you touch them
 - Thorny Jail
-- COllect gold while ghost chases you level (Twiggle Level)
 - Spend all your monry (shops - have to do math) w/ ghost
-- sorceress barrage (like fish)
 - Gugubo level (Glue & bow?)
 - Guide cat to enemey who has 99999 HP in order to murder
     - throw cursed pots
@@ -25,6 +22,9 @@
 DONE
 
 - Flying Fish
+- COllect gold while ghost chases you level (Twiggle Level)
+- jungle: claustrophopic climbing gloves / thorns lvl
+- sorceress barrage (like fish)
 
 
 # Obstacles

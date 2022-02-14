@@ -4,6 +4,7 @@ local checkpoints = require("Checkpoints/checkpoints")
 local checkpoints2 = require("Checkpoints2/checkpoints")
 local nocrap = require("Modules.Dregu.no_crap")
 local key_blocks = require("Modules.GetimOliver.key_blocks")
+local timed_doors = require("Modules.GetimOliver.timed_door")
 local death_blocks = require("Modules.JawnGC.death_blocks")
 
 local neobabylon2 = {
@@ -32,6 +33,7 @@ neobabylon2.load_level = function()
 
     key_blocks.activate(level_state)
     death_blocks.activate(level_state)
+    timed_doors.activate(level_state)
 
     checkpoints.activate()
 
