@@ -21,13 +21,15 @@
 - blocks that appear when a switch is hit for a short timer
 - jetpack that explodes after awhile
 - colored keys/doors
-- chained ufo jumps (jump off ufo & alien)
+
+- mattock level
 
 - Spelunky Community Block Pack
 
 
 DONE
 
+- chained ufo jumps (jump off ufo & alien)
 - run under lava going down elevator
 - elevator jumps, lava elevators
 - timed switch
@@ -40,6 +42,10 @@ DONE
 # Obstacles
 
 From @Cynichill
+
+Space invaders-type UFO level - kill with forcefield
+
+Don't cook the turkey - mounts can ride death blocks
 
 shooting a bubbled enemy with another bubble pushes the bubble away
 

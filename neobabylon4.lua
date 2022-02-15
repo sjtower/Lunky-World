@@ -5,13 +5,13 @@ local nocrap = require("Modules.Dregu.no_crap")
 local death_blocks = require("Modules.JawnGC.death_blocks")
 local death_elevators = require("Modules.GetimOliver.death_elevators")
 
-local neobabylon3 = {
-    identifier = "neobabylon 3",
-    title = "Neo Babylon 3: Lava Jumps",
+local neobabylon4 = {
+    identifier = "neobabylon 4",
+    title = "Neo Babylon 4: Hold Right",
     theme = THEME.NEO_BABYLON,
     width = 6,
-    height = 4,
-    file_name = "neob-3.lvl",
+    height = 6,
+    file_name = "neob-4.lvl",
 }
 
 local level_state = {
@@ -25,7 +25,7 @@ local function save_checkpoint(checkpoint)
     saved_checkpoint = checkpoint
 end
 
-neobabylon3.load_level = function()
+neobabylon4.load_level = function()
     if level_state.loaded then return end
     level_state.loaded = true
 
@@ -53,10 +53,18 @@ neobabylon3.load_level = function()
         )
     end
 
-	toast(neobabylon3.title)
+    level_state.callbacks[#level_state.callbacks+1] = set_post_entity_spawn(function (ent)
+        ent.flags = clr_flag(ent.flags, ENT_FLAG.FACING_LEFT)
+    end, SPAWN_TYPE.ANY, 0, ENT_TYPE.MONS_UFO)
+
+    level_state.callbacks[#level_state.callbacks+1] = set_post_entity_spawn(function (entity)
+        entity:tame(true)
+    end, SPAWN_TYPE.ANY, 0, ENT_TYPE.MOUNT_TURKEY)
+
+	toast(neobabylon4.title)
 end
 
-neobabylon3.unload_level = function()
+neobabylon4.unload_level = function()
     if not level_state.loaded then return end
 
     checkpoints.deactivate()
@@ -69,5 +77,5 @@ neobabylon3.unload_level = function()
     end
 end
 
-return neobabylon3
+return neobabylon4
 
