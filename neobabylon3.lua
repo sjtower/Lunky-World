@@ -1,17 +1,17 @@
 local sound = require('play_sound')
 local clear_embeds = require('clear_embeds')
 local checkpoints = require("Checkpoints/checkpoints")
-local checkpoints2 = require("Checkpoints2/checkpoints")
 local nocrap = require("Modules.Dregu.no_crap")
-local timed_doors = require("Modules.GetimOliver.timed_door")
+local death_blocks = require("Modules.JawnGC.death_blocks")
+local death_elevators = require("Modules.GetimOliver.death_elevators")
 
-local neobabylon2 = {
-    identifier = "neobabylon 2",
-    title = "Neo Babylon1 2: Time",
+local neobabylon3 = {
+    identifier = "neobabylon 3",
+    title = "Neo Babylon1 3: Lava Jumps",
     theme = THEME.NEO_BABYLON,
-    width = 8,
-    height = 2,
-    file_name = "neob-2.lvl",
+    width = 6,
+    height = 4,
+    file_name = "neob-3.lvl",
 }
 
 local level_state = {
@@ -25,27 +25,13 @@ local function save_checkpoint(checkpoint)
     saved_checkpoint = checkpoint
 end
 
-neobabylon2.load_level = function()
+neobabylon3.load_level = function()
     if level_state.loaded then return end
     level_state.loaded = true
 
-    timed_doors.activate(level_state, 180)
-
-    modify_sparktraps(0.1, 1.1)
-
-    define_tile_code("horizontal_ufo")
-    local ufos = {}
-    level_state.callbacks[#level_state.callbacks+1] = set_pre_tile_code_callback(function(x, y, layer)
-        local ent_uid = spawn_entity(ENT_TYPE.MONS_UFO, x, y, layer, 0, 0)
-        local ent = get_entity(ent_uid)
-        ent.velocityy = 0
-        ent.color:set_rgba(104, 37, 71, 255) --deep red
-        ent.flags = set_flag(ent.flags, ENT_FLAG.TAKE_NO_DAMAGE)
-        ent.flags = clr_flag(ent.flags, ENT_FLAG.FACING_LEFT)
-        ufos[#ufos + 1] = ent
-    end, "horizontal_ufo")
-
     checkpoints.activate()
+    death_blocks.activate(level_state)
+    death_elevators.activate(level_state)
 
     checkpoints.checkpoint_activate_callback(function(x, y, layer, time)
         save_checkpoint({
@@ -67,14 +53,13 @@ neobabylon2.load_level = function()
         )
     end
 
-	toast(neobabylon2.title)
+	toast(neobabylon3.title)
 end
 
-neobabylon2.unload_level = function()
+neobabylon3.unload_level = function()
     if not level_state.loaded then return end
 
     checkpoints.deactivate()
-    timed_doors.deactivate()
 
     local callbacks_to_clear = level_state.callbacks
     level_state.loaded = false
@@ -84,5 +69,5 @@ neobabylon2.unload_level = function()
     end
 end
 
-return neobabylon2
+return neobabylon3
 

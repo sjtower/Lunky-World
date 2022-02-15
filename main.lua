@@ -4,10 +4,6 @@ meta.description = 'Romping Kaizo fun!'
 meta.author = 'GetimOliver'
 
 local level_sequence = require("LevelSequence/level_sequence")
-local SIGN_TYPE = level_sequence.SIGN_TYPE
-local telescopes = require("Telescopes/telescopes")
-local button_prompts = require("ButtonPrompts/button_prompts")
-local action_signs = require('action_signs')
 local sound = require('play_sound')
 local clear_embeds = require('clear_embeds')
 local save_state = require('save_state')
@@ -45,10 +41,11 @@ local temple5 = require("temple5")
 local temple6 = require("temple6")
 local neobabylon1 = require("neobabylon1")
 local neobabylon2 = require("neobabylon2")
+local neobabylon3 = require("neobabylon3")
 local ice_caves = require("ice_caves")
 local sunken_city = require("sunken_city")
 
-level_sequence.set_levels({neobabylon2, tidepool6, tidepool2, tidepool3, tidepool4, ice_caves, sunken_city})
+level_sequence.set_levels({neobabylon3, tidepool6, tidepool2, tidepool3, tidepool4, ice_caves, sunken_city})
 
 -- Store the save context in a local var so we can save whenever we want.
 local save_context
@@ -125,9 +122,6 @@ local function activate()
 	if active then return end
 	active = true
 	level_sequence.activate()
-	telescopes.activate()
-	button_prompts.activate()
-	action_signs.activate()
 
 	local function add_callback(callback_id)
 		callbacks[#callbacks+1] = callback_id

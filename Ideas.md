@@ -17,12 +17,19 @@
 - Guide cat to enemey who has 99999 HP in order to murder
     - throw cursed pots
 - ladders & sticky traps & spikeball trap & arrow traps
-- run under lava going down elevator
-- elevator jumps, lava elevators
+- death block elevator
+- blocks that appear when a switch is hit for a short timer
+- jetpack that explodes after awhile
+- colored keys/doors
+- chained ufo jumps (jump off ufo & alien)
+
+- Spelunky Community Block Pack
 
 
 DONE
 
+- run under lava going down elevator
+- elevator jumps, lava elevators
 - timed switch
 - Flying Fish
 - COllect gold while ghost chases you level (Twiggle Level)
