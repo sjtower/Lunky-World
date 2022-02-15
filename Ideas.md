@@ -43,6 +43,8 @@ DONE
 
 From @Cynichill
 
+Stay in the air by jumping on eggy people
+
 Lahamu but you use push blocks to cover and uncover those.. upward laser trap things to bounce ufos into her?
 
 Space invaders-type UFO level - kill with forcefield
