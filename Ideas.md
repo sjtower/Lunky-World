@@ -17,18 +17,18 @@
 - Guide cat to enemey who has 99999 HP in order to murder
     - throw cursed pots
 - ladders & sticky traps & spikeball trap & arrow traps
-- death block elevator
-- blocks that appear when a switch is hit for a short timer
 - jetpack that explodes after awhile
 - colored keys/doors
-
 - mattock level
+- arrow of Light - Light or sus Glue Bow Bow
 
-- Spelunky Community Block Pack
 
 
 DONE
 
+- death block elevator
+- blocks that appear when a switch is hit for a short timer
+- Spelunky Community Block Pack
 - chained ufo jumps (jump off ufo & alien)
 - run under lava going down elevator
 - elevator jumps, lava elevators

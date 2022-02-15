@@ -4,6 +4,7 @@ local checkpoints = require("Checkpoints/checkpoints")
 local nocrap = require("Modules.Dregu.no_crap")
 local death_blocks = require("Modules.JawnGC.death_blocks")
 local death_elevators = require("Modules.GetimOliver.death_elevators")
+local monster_generators = require("Modules.JayTheBusinessGoose.monster_generator")
 
 local neobabylon6 = {
     identifier = "neobabylon 6",
@@ -38,6 +39,7 @@ neobabylon6.load_level = function()
     checkpoints.activate()
     death_blocks.activate(level_state)
     death_elevators.activate(level_state)
+    monster_generators.activate(level_state, ENT_TYPE.MONS_UFO)
 
     checkpoints.checkpoint_activate_callback(function(x, y, layer, time)
         save_checkpoint({
@@ -60,19 +62,10 @@ neobabylon6.load_level = function()
     end
 
     level_state.callbacks[#level_state.callbacks+1] = set_post_entity_spawn(function (ent)
-        ent.flags = clr_flag(ent.flags, ENT_FLAG.FACING_LEFT)
-    end, SPAWN_TYPE.ANY, 0, ENT_TYPE.MONS_UFO)
+        ent.health = 60
+        ent.color:set_rgba(104, 37, 71, 255) --deep red
 
-    level_state.callbacks[#level_state.callbacks+1] = set_post_entity_spawn(function (ent)
-        ent.flags = set_flag(ent.flags, ENT_FLAG.INDESTRUCTIBLE_OR_SPECIAL_FLOOR)
-        ent.type.weight = 0
-        ent.type.max_speed = 1
-        ent.type.elasticity = 1
-        ent.type.acceleration = 1
-        ent.flags = set_flag(ent.flags, ENT_FLAG.TAKE_NO_DAMAGE)
-        ent.color = Color:green()
-
-    end, SPAWN_TYPE.ANY, 0, ENT_TYPE.ACTIVEFLOOR_PUSHBLOCK)
+    end, SPAWN_TYPE.ANY, 0, ENT_TYPE.MONS_ALIENQUEEN)
 
 	toast(neobabylon6.title)
 end

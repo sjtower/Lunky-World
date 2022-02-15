@@ -1,3 +1,7 @@
 [submodule "LevelSequence"]
 	path = LevelSequence
 	url = https://github.com/jaythebusinessgoose/LevelSequence
+
+[submodule "CommunityTilePack"]
+	path = Modules
+	url = https://github.com/sjtower/Community-Tile-Pack/Modules
