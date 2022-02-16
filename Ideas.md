@@ -21,6 +21,7 @@
 - mattock level
 - arrow of Light - Light or Sus Glue Bow Bow
 - bone drop trap - ammo for pitchers mitt challenge
+- timed firefrog throws
 
 
 
@@ -44,11 +45,16 @@ DONE
 
 From @Cynichill
 
+the eggplant.. tall guys. idk their name
+Place about 4 of them in a pit of spikes, so they walk along the bottom, give the player a jetpack and a timer. they have to manage fuel and landing on the eggplant guys to stall time
+
+a speedrun level using the traps could be fun, for a unique timer you could use a poisoned mount
+
 Stay in the air by jumping on eggy people
 
 Lahamu but you use push blocks to cover and uncover those.. upward laser trap things to bounce ufos into her?
 
-Space invaders-type UFO level - kill with forcefield
+Space invaders-type UFO level - kill with forcefield (DONE)
 
 Don't cook the turkey - mounts can ride death blocks
 
