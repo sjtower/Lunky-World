@@ -1,7 +1,5 @@
-local sound = require('play_sound')
-local clear_embeds = require('clear_embeds')
 local checkpoints = require("Checkpoints/checkpoints")
-local nocrap = require("Modules.Dregu.no_crap")
+-- local nocrap = require("Modules.Dregu.no_crap")
 local timed_doors = require("Modules.GetimOliver.timed_door")
 
 local neobabylon2 = {

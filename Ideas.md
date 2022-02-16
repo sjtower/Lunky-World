@@ -16,16 +16,17 @@
 - Gugubo level (Glue & bow?)
 - Guide cat to enemey who has 99999 HP in order to murder
     - throw cursed pots
-- ladders & sticky traps & spikeball trap & arrow traps
 - jetpack that explodes after awhile
 - colored keys/doors
 - mattock level
-- arrow of Light - Light or sus Glue Bow Bow
+- arrow of Light - Light or Sus Glue Bow Bow
+- bone drop trap - ammo for pitchers mitt challenge
 
 
 
 DONE
 
+- ladders & sticky traps & spikeball trap & arrow traps
 - death block elevator
 - blocks that appear when a switch is hit for a short timer
 - Spelunky Community Block Pack

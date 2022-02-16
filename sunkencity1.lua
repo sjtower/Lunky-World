@@ -8,10 +8,10 @@ local inverse_timed_doors = require("Modules.GetimOliver.inverse_timed_door")
 
 local sunkencity1 = {
     identifier = "sunkencity 1",
-    title = "Sunken City 1: Thorny Jail",
+    title = "Sunken City 1: Frog in your Throat?",
     theme = THEME.SUNKEN_CITY,
     width = 4,
-    height = 4,
+    height = 6,
     file_name = "sunk-1.lvl",
 }
 
@@ -30,60 +30,31 @@ sunkencity1.load_level = function()
     if level_state.loaded then return end
     level_state.loaded = true
 
-    define_tile_code("metal_shield")
+    define_tile_code("sunken_arrow_trap")
     level_state.callbacks[#level_state.callbacks+1] = set_pre_tile_code_callback(function(x, y, layer)
-        local ent = spawn_entity(ENT_TYPE.ITEM_METAL_SHIELD, x, y, layer, 0, 0)
+        local ent = spawn_entity(ENT_TYPE.FLOOR_POISONED_ARROW_TRAP, x, y, layer, 0, 0)
         ent = get_entity(ent)
         return true
-    end, "metal_shield")
+    end, "sunken_arrow_trap")
 
-    define_tile_code("wooden_shield")
+    define_tile_code("firefrog")
     level_state.callbacks[#level_state.callbacks+1] = set_pre_tile_code_callback(function(x, y, layer)
-        local ent = spawn_entity(ENT_TYPE.ITEM_WOODEN_SHIELD, x, y, layer, 0, 0)
+        local ent = spawn_entity(ENT_TYPE.MONS_FIREFROG, x, y, layer, 0, 0)
         ent = get_entity(ent)
         return true
-    end, "wooden_shield")
+    end, "firefrog")
 
-    define_tile_code("unpushable_push_block")
+    define_tile_code("giantfly")
     level_state.callbacks[#level_state.callbacks+1] = set_pre_tile_code_callback(function(x, y, layer)
-        local ent = spawn_entity(ENT_TYPE.ACTIVEFLOOR_PUSHBLOCK, x, y, layer, 0, 0)
-        ent = get_entity(ent)
-        ent.more_flags = set_flag(ent.more_flags, ENT_MORE_FLAG.DISABLE_INPUT) --Unpushable
-        ent.color = Color:black()
-        return true
-    end, "unpushable_push_block")
-
-    level_state.callbacks[#level_state.callbacks+1] = set_pre_tile_code_callback(function(x, y, layer)
-        local ent = spawn_entity(ENT_TYPE.ITEM_PICKUP_PITCHERSMITT, x, y, layer, 0, 0)
+        local ent = spawn_entity(ENT_TYPE.MONS_GIANTFLY, x, y, layer, 0, 0)
         ent = get_entity(ent)
         return true
-    end, "pitchers_mitt")
+    end, "giantfly")
 
-    level_state.callbacks[#level_state.callbacks+1] = set_post_entity_spawn(function (ent)
-        ent.flags = clr_flag(ent.flags, ENT_FLAG.FACING_LEFT)
-    end, SPAWN_TYPE.ANY, 0, ENT_TYPE.MONS_UFO)
-
-    level_state.callbacks[#level_state.callbacks+1] = set_post_entity_spawn(function (ent)
-        ent.flags = set_flag(ent.flags, ENT_FLAG.INDESTRUCTIBLE_OR_SPECIAL_FLOOR)
-        ent.flags = set_flag(ent.flags, ENT_FLAG.TAKE_NO_DAMAGE)
-        ent.color = Color:green()
-
-        set_post_statemachine(ent.uid, function(ent)
-            if ent.last_owner_uid ~= -1 then
-              local pusher = get_entity(ent.last_owner_uid)
-              local x, y, l = get_position(ent.uid)
-              local dx = pusher.movex*0.1 -- here's the speed
-              move_entity(ent.uid, x+dx, y, 0, 0)
-            end
-          end)
-
-    end, SPAWN_TYPE.ANY, 0, ENT_TYPE.ACTIVEFLOOR_PUSHBLOCK)
+    death_blocks.set_ent_type(ENT_TYPE.ACTIVEFLOOR_REGENERATINGBLOCK)
+    death_blocks.activate(level_state)
 
     checkpoints.activate()
-    death_blocks.activate(level_state)
-    key_blocks.activate(level_state)
-    inverse_timed_doors.activate(level_state, 1500)
-
     checkpoints.checkpoint_activate_callback(function(x, y, layer, time)
         save_checkpoint({
             position = {
@@ -111,7 +82,6 @@ sunkencity1.unload_level = function()
     if not level_state.loaded then return end
 
     checkpoints.deactivate()
-    inverse_timed_doors.deactivate()
 
     local callbacks_to_clear = level_state.callbacks
     level_state.loaded = false

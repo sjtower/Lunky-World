@@ -1,10 +1,17 @@
+
+local ent_type
+
 local function activate(level_state)
+
+    if ent_type == nil then
+        ent_type = ENT_TYPE.FLOORSTYLED_TEMPLE
+    end
 
     --Death Blocks - from JawnGC
     define_tile_code("death_block")
     local death_blocks = {}
     level_state.callbacks[#level_state.callbacks+1] = set_pre_tile_code_callback(function(x, y, layer)
-        local block_id = spawn(ENT_TYPE.FLOORSTYLED_TEMPLE, x, y, layer, 0, 0)
+        local block_id = spawn(ent_type, x, y, layer, 0, 0)
         death_blocks[#death_blocks + 1] = get_entity(block_id)
         death_blocks[#death_blocks].color:set_rgba(100, 0, 0, 255) --Dark Red
         death_blocks[#death_blocks].more_flags = set_flag(death_blocks[#death_blocks].more_flags, 17) --Unpushable
@@ -26,6 +33,11 @@ local function activate(level_state)
     end, ON.FRAME)
 end
 
+local function set_ent_type(new_ent_type)
+    ent_type = new_ent_type
+end
+
 return {
     activate = activate,
+    set_ent_type = set_ent_type
 }
