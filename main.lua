@@ -47,8 +47,9 @@ local neobabylon5 = require("neobabylon5")
 local neobabylon6 = require("neobabylon6")
 local sunkencity1 = require("sunkencity1")
 local sunkencity2 = require("sunkencity2")
+local sunkencity3 = require("sunkencity3")
 
-level_sequence.set_levels({sunkencity2})
+level_sequence.set_levels({sunkencity2, sunkencity3})
 
 -- Store the save context in a local var so we can save whenever we want.
 local save_context
@@ -111,7 +112,8 @@ end
 ---- DO NOT SPAWN GHOST 
 --------------------------------------
 
--- set_ghost_spawn_times(-1, -1)
+-- todo: verify we still get ghost from curse pot
+set_ghost_spawn_times(-1, -1)
 
 --------------------------------------
 ---- /DO NOT SPAWN GHOST 
