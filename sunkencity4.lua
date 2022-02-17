@@ -52,6 +52,20 @@ sunkencity4.load_level = function()
         return true
     end, "sunken_arrow_trap")
 
+    define_tile_code("jetpack")
+    level_state.callbacks[#level_state.callbacks+1] = set_pre_tile_code_callback(function(x, y, layer)
+        local gloves = spawn_entity(ENT_TYPE.ITEM_JETPACK, x, y, layer, 0, 0)
+        gloves = get_entity(gloves)
+        return true
+    end, "jetpack")
+
+    define_tile_code("vlads_cape")
+    level_state.callbacks[#level_state.callbacks+1] = set_pre_tile_code_callback(function(x, y, layer)
+        local gloves = spawn_entity(ENT_TYPE.ITEM_VLADS_CAPE, x, y, layer, 0, 0)
+        gloves = get_entity(gloves)
+        return true
+    end, "vlads_cape")
+
     death_blocks.activate(level_state)
     inverse_timed_doors.activate(level_state, 50)
     timed_doors.activate(level_state, 100)

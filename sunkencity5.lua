@@ -9,10 +9,10 @@ local timed_doors = require("Modules.GetimOliver.timed_door")
 
 local sunkencity5 = {
     identifier = "sunkencity 5",
-    title = "Sunken City 5: Switch Hitter",
+    title = "Sunken City 5: LightoriArrow Glue Glue Bow",
     theme = THEME.SUNKEN_CITY,
-    width = 8,
-    height = 3,
+    width = 6,
+    height = 4,
     file_name = "sunk-5.lvl",
 }
 
@@ -52,6 +52,23 @@ sunkencity5.load_level = function()
         return true
     end, "sunken_arrow_trap")
 
+    define_tile_code("paste")
+    level_state.callbacks[#level_state.callbacks+1] = set_pre_tile_code_callback(function(x, y, layer)
+        local ent = spawn_entity(ENT_TYPE.ITEM_PICKUP_PASTE, x, y, layer, 0, 0)
+        ent = get_entity(ent)
+        return true
+    end, "paste")
+
+    define_tile_code("bomb_bag")
+    level_state.callbacks[#level_state.callbacks+1] = set_pre_tile_code_callback(function(x, y, layer)
+        local ent = spawn_entity(ENT_TYPE.ITEM_PICKUP_BOMBBAG, x, y, layer, 0, 0)
+        ent = get_entity(ent)
+        return true
+    end, "bomb_bag")
+
+    replace_drop(DROP.POISONEDARROWTRAP_WOODENARROW, ENT_TYPE.ITEM_METAL_ARROW)
+
+    death_blocks.set_ent_type(ENT_TYPE.FLOOR_BORDERTILE)
     death_blocks.activate(level_state)
     inverse_timed_doors.activate(level_state, 50)
     timed_doors.activate(level_state, 100)
