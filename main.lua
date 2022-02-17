@@ -49,8 +49,9 @@ local sunkencity1 = require("sunkencity1")
 local sunkencity2 = require("sunkencity2")
 local sunkencity3 = require("sunkencity3")
 local sunkencity4 = require("sunkencity4")
+local sunkencity5 = require("sunkencity5")
 
-level_sequence.set_levels({sunkencity4, sunkencity2, sunkencity3})
+level_sequence.set_levels({sunkencity5, sunkencity2, sunkencity3, sunkencity4})
 
 -- Store the save context in a local var so we can save whenever we want.
 local save_context

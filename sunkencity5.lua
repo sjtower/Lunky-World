@@ -7,13 +7,13 @@ local key_blocks = require("Modules.GetimOliver.key_blocks")
 local inverse_timed_doors = require("Modules.GetimOliver.inverse_timed_door")
 local timed_doors = require("Modules.GetimOliver.timed_door")
 
-local sunkencity4 = {
-    identifier = "sunkencity 4",
-    title = "Sunken City 4: Switch Hitter",
+local sunkencity5 = {
+    identifier = "sunkencity 5",
+    title = "Sunken City 5: Switch Hitter",
     theme = THEME.SUNKEN_CITY,
     width = 8,
     height = 3,
-    file_name = "sunk-4.lvl",
+    file_name = "sunk-5.lvl",
 }
 
 local level_state = {
@@ -27,7 +27,7 @@ local function save_checkpoint(checkpoint)
     saved_checkpoint = checkpoint
 end
 
-sunkencity4.load_level = function()
+sunkencity5.load_level = function()
     if level_state.loaded then return end
     level_state.loaded = true
 
@@ -78,10 +78,10 @@ sunkencity4.load_level = function()
         )
     end
 
-	toast(sunkencity4.title)
+	toast(sunkencity5.title)
 end
 
-sunkencity4.unload_level = function()
+sunkencity5.unload_level = function()
     if not level_state.loaded then return end
 
     checkpoints.deactivate()
@@ -97,5 +97,5 @@ sunkencity4.unload_level = function()
     end
 end
 
-return sunkencity4
+return sunkencity5
 
