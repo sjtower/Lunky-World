@@ -52,7 +52,15 @@ local sunkencity4 = require("sunkencity4")
 local sunkencity5 = require("sunkencity5")
 local sunkencity6 = require("sunkencity6")
 
-level_sequence.set_levels({sunkencity6, sunkencity2, sunkencity3, sunkencity4, sunkencity5})
+level_sequence.set_levels({
+	dwelling1, dwelling2, dwelling3, dwelling4, dwelling5, dwelling6,
+	jungle1, jungle3, jungle4, jungle5, jungle6, jungle7,
+	volcana1, volcana2, volcana3, volcana4, volcana5, volcana6,
+	tidepool1, tidepool2, tidepool3, tidepool4, tidepool5, tidepool6,
+	temple1, temple2, temple3, temple4, temple5, temple6,
+	neobabylon1, neobabylon2, neobabylon3, neobabylon4, neobabylon5, neobabylon6,
+	sunkencity1, sunkencity2, sunkencity3, sunkencity4, sunkencity5, sunkencity6
+})
 
 -- Store the save context in a local var so we can save whenever we want.
 local save_context

@@ -11,6 +11,7 @@
 \-idol_room_chance                       0          // 1/N chance of an idol room (default = 10)
 \-floor_side_spread_chance               0          // 1/N chance of a spreadable floor spreading to its side (default = 10)
 \-floor_bottom_spread_chance             0          // 1/N chance of a spreadable floor spreading to its bottom (default = 5)
+\-size                                   6 6
 
 \?empty                            0
 \?floor                            1
@@ -20,17 +21,11 @@
 \?spikes                           ^
 \?arrow_trap                       A
 \?platform                         p
-\?bat_generator                    B
-\?bat_switch                       b
 \?lizard                           h
 \?totem_trap                       t
 \?ladder                           L
 \?ladder_plat                      P
-\?moving_totem                     M
-\?totem_switch                     g
-\?idol_reward                      Q
 \?dialog_block                     R
-\?telescope_right                  j
 \?floor_hard                       X
 \?bat                              !
 \?mole                             "
@@ -76,6 +71,8 @@
 \?torch                            O
 \?arrow                            Z
 \?autowalltorch                    W
+\?checkpoint                       Y
+\?checkpoint_torch                 ]
 
 
 
@@ -212,7 +209,7 @@ C011110040
 4000000000 X0XX40+0+0
 4000000000 XpXX444444
 0000000000 0*0XX+0+0+
-0T0000000* 0T0X444444
+0T0Y]0000* 0T0X444444
 
 ////////////////////////////////////////////////////////////////////////////////
 \.setroom1_4   // cave

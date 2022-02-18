@@ -11,6 +11,7 @@
 \-idol_room_chance                       0          // 1/N chance of an idol room (default = 10)
 \-floor_side_spread_chance               0          // 1/N chance of a spreadable floor spreading to its side (default = 10)
 \-floor_bottom_spread_chance             0          // 1/N chance of a spreadable floor spreading to its bottom (default = 5)
+\-size                                   6 5
 
 \?empty                            0
 \?floor                            1
@@ -56,6 +57,7 @@
 \?slidingwall_ceiling              9
 \?slidingwall                      :
 \?slidingwall_switch               ;
+\?checkpoint                       <
 
 
 
@@ -68,7 +70,7 @@
 11-10*050*
 1151000500
 0070000500
-0E00000500
+E000000500
 1100000500
 11^^^^^^^^
 
@@ -285,7 +287,7 @@ XXXXX==,==
 \.setroom2_5   // cave
 ////////////////////////////////////////////////////////////////////////////////
 
-000=0=0000
+000=0=<000
 000=0==060
 000=0=====
 ^^^^0=====
@@ -382,7 +384,7 @@ g==000000*
 1111000=!=
 1111000=5=
 1111000000
-1====66=00
+1====66=0<
 1====66===
 
 ////////////////////////////////////////////////////////////////////////////////

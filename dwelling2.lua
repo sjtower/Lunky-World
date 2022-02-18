@@ -1,5 +1,6 @@
 local sound = require('play_sound')
 local clear_embeds = require('clear_embeds')
+local checkpoints = require("Checkpoints/checkpoints")
 
 define_tile_code("skull")
 define_tile_code("torch")
@@ -24,6 +25,8 @@ dwelling2.load_level = function()
     if level_state.loaded then return end
     level_state.loaded = true
 
+    checkpoints.activate()
+
     local skull;
     level_state.callbacks[#level_state.callbacks+1] = set_pre_tile_code_callback(function(x, y, layer)
         local skull_id = spawn_entity(ENT_TYPE.ITEM_SKULL, x, y, layer, 0, 0)
@@ -37,6 +40,15 @@ dwelling2.load_level = function()
         torch = get_entity(torch_id)
         return true
     end, "torch")
+
+    if checkpoints.get_saved_checkpoint() then
+        define_tile_code("checkpoint_torch")
+        level_state.callbacks[#level_state.callbacks+1] = set_pre_tile_code_callback(function(x, y, layer)
+            local torch_id = spawn_entity(ENT_TYPE.ITEM_TORCH, x, y, layer, 0, 0)
+            torch = get_entity(torch_id)
+            return true
+        end, "checkpoint_torch")
+    end
 
     local arrow;
     level_state.callbacks[#level_state.callbacks+1] = set_pre_tile_code_callback(function(x, y, layer)
@@ -62,35 +74,6 @@ dwelling2.load_level = function()
         --get_entity(torch_uid).is_lit = true
         pick_up(entity.uid, torch_uid)
     end, SPAWN_TYPE.ANY, 0, ENT_TYPE.MONS_CAVEMAN)
-
-    -- Creates walls that will be destroyed when the totem_switch is switched. Don't ask why these are called totems, they're just walls.
-    local moving_totems = {}
-    level_state.callbacks[#level_state.callbacks+1] = set_pre_tile_code_callback(function(x, y, layer)
-        clear_embeds.perform_block_without_embeds(function()
-            local totem_uid = spawn_entity(ENT_TYPE.FLOOR_GENERIC, x, y, layer, 0, 0)
-            moving_totems[#moving_totems + 1] = get_entity(totem_uid)
-        end)
-        return true
-    end, "moving_totem")
-
-    local totem_switch;
-    level_state.callbacks[#level_state.callbacks+1] = set_pre_tile_code_callback(function(x, y, layer)
-        local switch_id = spawn_entity(ENT_TYPE.ITEM_SLIDINGWALL_SWITCH, x, y, layer, 0, 0)
-        totem_switch = get_entity(switch_id)
-        return true
-    end, "totem_switch")
-
-    local has_activated_totem = false
-    level_state.callbacks[#level_state.callbacks+1] = set_callback(function()
-        if not totem_switch then return end
-        if totem_switch.timer > 0 and not has_activated_totem then
-            has_activated_totem = true
-            for _, moving_totem in ipairs(moving_totems) do
-                kill_entity(moving_totem.uid)
-            end
-            moving_totems = {}
-        end
-    end, ON.FRAME)
 
 end
 

@@ -1,7 +1,8 @@
+local moving_totems = {}
+
 local function activate(level_state)
 
     -- Creates walls that will be destroyed when the totem_switch is switched. Don't ask why these are called totems, they're just walls.
-    local moving_totems = {}
     define_tile_code("moving_totem")
     level_state.callbacks[#level_state.callbacks+1] = set_pre_tile_code_callback(function(x, y, layer)
         local totem_uid = spawn_entity(ENT_TYPE.FLOOR_GENERIC, x, y, layer, 0, 0)
@@ -30,6 +31,11 @@ local function activate(level_state)
     end, ON.FRAME)
 end
 
+local function deactivate()
+    moving_totems = {}
+end
+
 return {
     activate = activate,
+    deactivate = deactivate,
 }
