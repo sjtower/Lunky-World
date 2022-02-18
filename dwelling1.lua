@@ -3,11 +3,8 @@ local clear_embeds = require('clear_embeds')
 local moving_totems = require("Modules.JayTheBusinessGoose.moving_totems")
 local checkpoints = require("Checkpoints/checkpoints")
 
-define_tile_code("bat_generator")
-define_tile_code("bat_switch")
 define_tile_code("moving_totem")
 define_tile_code("totem_switch")
-define_tile_code("dialog_block")
 
 local dwelling1 = {
     identifier = "dwelling1",
@@ -26,6 +23,8 @@ local level_state = {
 dwelling1.load_level = function()
     if level_state.loaded then return end
     level_state.loaded = true
+
+    players[1].health = 2
 
     level_state.callbacks[#level_state.callbacks+1] = set_post_entity_spawn(function (snake)
 

@@ -9,7 +9,7 @@ define_tile_code("arrow")
 
 local dwelling2 = {
     identifier = "dwelling2",
-    title = "Dwelling 2",
+    title = "Dwelling 2: Burn, Baby",
     theme = THEME.DWELLING,
     width = 6,
     height = 6,
@@ -68,10 +68,10 @@ dwelling2.load_level = function()
 
     level_state.callbacks[#level_state.callbacks+1] = set_post_entity_spawn(function (entity)
         entity.health = 10
+        entity.flags = set_flag(entity.flags, ENT_FLAG.FACING_LEFT)
         --Caveman carries torch
         local torch_uid = spawn_entity(ENT_TYPE.ITEM_TORCH, entity.x, entity.y, entity.layer, 0, 0)
-        spawn_entity(ENT_TYPE.ITEM_TORCHFLAME, entity.x, entity.y, entity.layer, 0, 0)
-        --get_entity(torch_uid).is_lit = true
+        get_entity(torch_uid):light_up(true)
         pick_up(entity.uid, torch_uid)
     end, SPAWN_TYPE.ANY, 0, ENT_TYPE.MONS_CAVEMAN)
 
@@ -79,6 +79,8 @@ end
 
 dwelling2.unload_level = function()
     if not level_state.loaded then return end
+
+    checkpoints.deactivate()
 
     local callbacks_to_clear = level_state.callbacks
     level_state.loaded = false
