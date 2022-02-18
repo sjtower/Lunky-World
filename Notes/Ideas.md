@@ -11,22 +11,25 @@
 - cape level :)
 - blast items across gap with TNT
 - ropes that burn when you touch them
-- Thorny Jail
 - Spend all your monry (shops - have to do math) w/ ghost
-- Gugubo level (Glue & bow?)
 - Guide cat to enemey who has 99999 HP in order to murder
     - throw cursed pots
 - jetpack that explodes after awhile
 - colored keys/doors
 - mattock level
-- arrow of Light - Light or Sus Glue Bow Bow
 - bone drop trap - ammo for pitchers mitt challenge
 - timed firefrog throws
-- inverse timed doors
+- timed frog jumps
+
+- Run from Quillback into Olmec. Use Olmec to kill Quillback. Olmec glows red and can't be stepped on
+- Escape from Sunken City
 
 
 DONE
 
+- Thorny Jail
+- Gugubo level (Glue & bow?) - - arrow of Light - Light or Sus Glue Bow Bow
+- inverse timed doors
 - ladders & sticky traps & spikeball trap & arrow traps
 - death block elevator
 - blocks that appear when a switch is hit for a short timer
