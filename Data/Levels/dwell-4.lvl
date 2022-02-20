@@ -11,6 +11,7 @@
 \-idol_room_chance                       0          // 1/N chance of an idol room (default = 10)
 \-floor_side_spread_chance               0          // 1/N chance of a spreadable floor spreading to its side (default = 10)
 \-floor_bottom_spread_chance             0          // 1/N chance of a spreadable floor spreading to its bottom (default = 5)
+\-size                                   6 4
 
 \?empty                            0
 \?floor                            1
@@ -83,6 +84,8 @@
 \?camera                           d
 \?crushtrap                        f
 \?infinite_quillback               i
+\?honey_upwards                    :
+\?death_block                      _
 
 
 
@@ -134,7 +137,7 @@ XXX1111XXX
 1111000011
 1110000011
 000000*c11
-00000000X1
+0000000011
 1111111111
 XXXXXXX111
 
@@ -224,9 +227,9 @@ XX*XXXXXXX
 0000000XXX
 000000*011
 *000000711
-L00>>>0011
+L00>>>0:11
 XXXXXXX100
-000000X0$0
+000000X:$:
 000000X111
 000000X011
 
@@ -238,10 +241,10 @@ XXXXXXXXXX
 1111XXXXXX
 1111XXXXXX
 1111XXXXXX
-0000XXXXXX
-0011XXXXXX
-0110XXXXXX
-0000XXXXXX
+0000000XXX
+0000000XXX
+0011111XXX
+0000000XXX
 
 ////////////////////////////////////////////////////////////////////////////////
 \.setroom2_0   // cave
@@ -296,7 +299,7 @@ XXXXXXXXXX XXXXXXXXXX
 XXXXXXXXXX TXXXX0,,,X
 X0000000XX XXXXXXXXXX
 X00*00*0XX XXXXXXXXXX
-X000d000XX XXXXXXXXXX
+X0000000XX XXXXXXXXXX
 X0001100XX XXXXXXXXXX
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -316,14 +319,14 @@ XpppppX1$0
 \.setroom2_5   // cave
 ////////////////////////////////////////////////////////////////////////////////
 
-0020XXXXXX
-0011XXXXXX
-0000XXXXXX
-0000XXXXXX
-0010XXXXXX
-0011XXXXXX
-0101XXXXXX
-0000XXXXXX
+0020110XXX
+0011011XXX
+1111100XXX
+00:::::XXX
+0010111XXX
+0111100XXX
+0101100XXX
+0000111XXX
 
 ////////////////////////////////////////////////////////////////////////////////
 \.setroom3_0   // cave
@@ -331,7 +334,7 @@ XpppppX1$0
 
 \!dual
 XXXXXX0XXX XXXXXXXX0X
-XXXXXX0XX0 XXXXXXXX(X
+XXXXXX0000 XXXXXXXX(X
 XXXXXX(000 XXXXXXXXpX
 XXXXXXXXX0 XXXXXXXX0X
 XXXXXXXXXX XXXXXXXXTX
@@ -376,30 +379,30 @@ XXXX11(011
 000X11p000
 000X110000
 0000110000
-000111(^^^
-XXXXXXX111
+000111(000
+XXXXXXX___
 
 ////////////////////////////////////////////////////////////////////////////////
 \.setroom3_4   // cave
 ////////////////////////////////////////////////////////////////////////////////
 
-X0X0X0X010
+X0X0X0X011
 X0XXXXX010
-X0X0000110
-00X0101020
+X0X0000111
+00X01010::
 0110010011
-0110000001
-^^^XXXXXXX
-111XXXXXXX
+011:::::01
+000XXXXXXX
+___XXXXXXX
 
 ////////////////////////////////////////////////////////////////////////////////
 \.setroom3_5   // cave
 ////////////////////////////////////////////////////////////////////////////////
 
-0000XXXXXX
-0110XXXXXX
-0011XXXXXX
-0001XXXXXX
+1000000XXX
+0100111XXX
+1011111XXX
+::01XXXXXX
 1111XXXXXX
 1000XXXXXX
 XXXXXXXXXX

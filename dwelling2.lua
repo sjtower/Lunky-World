@@ -9,7 +9,7 @@ define_tile_code("arrow")
 
 local dwelling2 = {
     identifier = "dwelling2",
-    title = "Dwelling 2: Burn, Baby",
+    title = "Dwelling 2: Crush & Burn",
     theme = THEME.DWELLING,
     width = 6,
     height = 6,
@@ -75,6 +75,7 @@ dwelling2.load_level = function()
         pick_up(entity.uid, torch_uid)
     end, SPAWN_TYPE.ANY, 0, ENT_TYPE.MONS_CAVEMAN)
 
+    toast(dwelling2.title)
 end
 
 dwelling2.unload_level = function()

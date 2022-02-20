@@ -1,5 +1,6 @@
 local sound = require('play_sound')
 local clear_embeds = require('clear_embeds')
+local death_blocks = require("Modules.JawnGC.death_blocks")
 
 define_tile_code("quillback_jump_switch")
 define_tile_code("quillback_stun_switch")
@@ -8,7 +9,7 @@ define_tile_code("infinite_quillback")
 
 local dwelling4 = {
     identifier = "dwelling4",
-    title = "Dwelling 4",
+    title = "Dwelling 4: Roll Up",
     theme = THEME.DWELLING,
     width = 6,
     height = 4,
@@ -20,12 +21,19 @@ local level_state = {
     callbacks = {},
 }
 
+local invincible_quilliams = {}
+local quilliams = {}
+local qb_jump_switches = {};
+local qb_stun_switches = {};
+
 dwelling4.load_level = function()
     if level_state.loaded then return end
     level_state.loaded = true
 
+    death_blocks.set_ent_type(ENT_TYPE.FLOOR_BORDERTILE)
+    death_blocks.activate(level_state)
+
     -- Creates a Quilliam that will stun or jump when with a "quillback switch".
-    local quilliams = {}
     level_state.callbacks[#level_state.callbacks+1] = set_pre_tile_code_callback(function(x, y, layer)
         clear_embeds.perform_block_without_embeds(function()        
             local quilliam = spawn_entity(ENT_TYPE.MONS_CAVEMAN_BOSS, x, y, layer, 0, 0)
@@ -40,7 +48,6 @@ dwelling4.load_level = function()
     end, "switchable_quillback")
 
     -- Creates an invincible Quilliam that always rolls
-    local invincible_quilliams = {}
     level_state.callbacks[#level_state.callbacks+1] = set_pre_tile_code_callback(function(x, y, layer)
         clear_embeds.perform_block_without_embeds(function()        
             local quilliam = spawn_entity(ENT_TYPE.MONS_CAVEMAN_BOSS, x, y, layer, 0, 0)
@@ -53,7 +60,6 @@ dwelling4.load_level = function()
         return true
     end, "infinite_quillback")
 
-    local qb_jump_switches = {};
     level_state.callbacks[#level_state.callbacks+1] = set_pre_tile_code_callback(function(x, y, layer)
         local switch_id = spawn_entity(ENT_TYPE.ITEM_SLIDINGWALL_SWITCH, x, y, layer, 0, 0)
         local switch = get_entity(switch_id)
@@ -80,7 +86,6 @@ dwelling4.load_level = function()
     end, ON.FRAME)
 
     
-    local qb_stun_switches = {};
     level_state.callbacks[#level_state.callbacks+1] = set_pre_tile_code_callback(function(x, y, layer)
         local switch_id = spawn_entity(ENT_TYPE.ITEM_SLIDINGWALL_SWITCH, x, y, layer, 0, 0)
         local switch = get_entity(switch_id)
@@ -124,6 +129,11 @@ end
 
 dwelling4.unload_level = function()
     if not level_state.loaded then return end
+
+    qb_stun_switches = {};
+    qb_jump_switches = {};
+    invincible_quilliams = {}
+    quilliams = {}
 
     local callbacks_to_clear = level_state.callbacks
     level_state.loaded = false

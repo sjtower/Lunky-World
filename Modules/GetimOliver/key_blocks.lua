@@ -42,5 +42,4 @@ end
 return {
     activate = activate,
     deactivate = deactivate
-
 }

@@ -6,7 +6,7 @@ define_tile_code("switchable_quillback")
 
 local dwelling6 = {
     identifier = "dwelling6",
-    title = "Dwelling 6",
+    title = "Dwelling 6: They see me Rollin'",
     theme = THEME.DWELLING,
     width = 4,
     height = 4,
@@ -18,12 +18,14 @@ local level_state = {
     callbacks = {},
 }
 
+local quilliams = {}
+local qb_jump_switches = {};
+
 dwelling6.load_level = function()
     if level_state.loaded then return end
     level_state.loaded = true
 
     -- Creates a Quilliam that will stun or jump when with a "quillback switch".
-    local quilliams = {}
     level_state.callbacks[#level_state.callbacks+1] = set_pre_tile_code_callback(function(x, y, layer)
         clear_embeds.perform_block_without_embeds(function()        
             local quilliam = spawn_entity(ENT_TYPE.MONS_CAVEMAN_BOSS, x, y, layer, 0, 0)
@@ -37,7 +39,6 @@ dwelling6.load_level = function()
         return true
     end, "switchable_quillback")
 
-    local qb_jump_switches = {};
     level_state.callbacks[#level_state.callbacks+1] = set_pre_tile_code_callback(function(x, y, layer)
         local switch_id = spawn_entity(ENT_TYPE.ITEM_SLIDINGWALL_SWITCH, x, y, layer, 0, 0)
         local switch = get_entity(switch_id)
@@ -76,6 +77,9 @@ end
 
 dwelling6.unload_level = function()
     if not level_state.loaded then return end
+
+    qb_jump_switches = {};
+    quilliams = {}
 
     local callbacks_to_clear = level_state.callbacks
     level_state.loaded = false

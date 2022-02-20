@@ -1,11 +1,10 @@
-local sound = require('play_sound')
-local clear_embeds = require('clear_embeds')
+local checkpoints = require("Checkpoints/checkpoints")
 
 define_tile_code("sleeping_bat")
 
 local dwelling3 = {
     identifier = "dwelling3",
-    title = "Dwelling 3",
+    title = "Dwelling 3: Meatball Train",
     theme = THEME.DWELLING,
     width = 8,
     height = 4,
@@ -21,36 +20,23 @@ dwelling3.load_level = function()
     if level_state.loaded then return end
     level_state.loaded = true
 
-    level_state.callbacks[#level_state.callbacks+1] = set_post_entity_spawn(function (snake)
+    checkpoints.activate()
 
-        snake.health = 100
-        snake.color = Color:red()
-        snake.type.max_speed = 0.05
-        snake.flags = set_flag(snake.flags, ENT_FLAG.TAKE_NO_DAMAGE)
-
-    end, SPAWN_TYPE.ANY, 0, ENT_TYPE.MONS_SNAKE)
-
-    level_state.callbacks[#level_state.callbacks+1] = set_post_entity_spawn(function (horned_lizard)
-        horned_lizard.flags = clr_flag(horned_lizard.flags, ENT_FLAG.STUNNABLE)
-        horned_lizard.flags = clr_flag(horned_lizard.flags, ENT_FLAG.FACING_LEFT)
-        horned_lizard.flags = set_flag(horned_lizard.flags, ENT_FLAG.TAKE_NO_DAMAGE)
-        -- horned_lizard.flags = set_flag(horned_lizard.flags, ENT_FLAG.PASSES_THROUGH_PLAYER)
-        horned_lizard.color = Color:red()
-        horned_lizard.type.max_speed = 0.00
-
+    level_state.callbacks[#level_state.callbacks+1] = set_post_entity_spawn(function (ent)
+        ent.flags = clr_flag(ent.flags, ENT_FLAG.STUNNABLE)
+        ent.flags = clr_flag(ent.flags, ENT_FLAG.FACING_LEFT)
+        ent.flags = set_flag(ent.flags, ENT_FLAG.TAKE_NO_DAMAGE)
+        ent.color = Color:red()
+        ent.type.max_speed = 0.00
     end, SPAWN_TYPE.ANY, 0, ENT_TYPE.MONS_HORNEDLIZARD)
 
-    level_state.callbacks[#level_state.callbacks+1] = set_post_entity_spawn(function (spring_trap)
-        
-        spring_trap.color = Color:red()
-        
-        set_pre_collision2(spring_trap.uid, function(self, collision_entity)
+    level_state.callbacks[#level_state.callbacks+1] = set_post_entity_spawn(function (ent)
+        ent.color = Color:red()
+        set_pre_collision2(ent.uid, function(self, collision_entity)
             if collision_entity.uid == players[1].uid then
-                -- players[1].health = 0
-                players[1]:damage(spring_trap.uid, 2, 0, 0, 0, 0)
+                players[1]:damage(ent.uid, 2, 0, 0, 0, 0)
             end
         end)
-
     end, SPAWN_TYPE.ANY, 0, ENT_TYPE.FLOOR_SPRING_TRAP)
 
     local sleeping_bat;
@@ -64,6 +50,8 @@ end
 
 dwelling3.unload_level = function()
     if not level_state.loaded then return end
+
+    checkpoints.deactivate()
 
     local callbacks_to_clear = level_state.callbacks
     level_state.loaded = false
