@@ -1,9 +1,8 @@
-local sound = require('play_sound')
-local clear_embeds = require('clear_embeds')
+local checkpoints = require("Checkpoints/checkpoints")
 
 local volcana1 = {
     identifier = "volcana1",
-    title = "Volcana 1",
+    title = "Volcana 1: Blast Furnace",
     theme = THEME.VOLCANA,
     width = 4,
     height = 4,
@@ -19,10 +18,15 @@ volcana1.load_level = function()
     if level_state.loaded then return end
     level_state.loaded = true
 
+    checkpoints.activate()
+
+    toast(volcana1.title)
 end
 
 volcana1.unload_level = function()
     if not level_state.loaded then return end
+
+    checkpoints.deactivate()
 
     local callbacks_to_clear = level_state.callbacks
     level_state.loaded = false

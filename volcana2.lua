@@ -3,7 +3,7 @@ local clear_embeds = require('clear_embeds')
 
 local volcana2 = {
     identifier = "volcana2",
-    title = "Volcana 2",
+    title = "Volcana 2: The Crucible",
     theme = THEME.VOLCANA,
     width = 2,
     height = 8,
@@ -19,6 +19,7 @@ volcana2.load_level = function()
     if level_state.loaded then return end
     level_state.loaded = true
 
+    toast(volcana2.title)
 end
 
 volcana2.unload_level = function()

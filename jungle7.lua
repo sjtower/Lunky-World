@@ -1,9 +1,6 @@
-local sound = require('play_sound')
-local clear_embeds = require('clear_embeds')
-
 local jungle7 = {
     identifier = "jungle7",
-    title = "Jungle 7: Jungle Chief Witch",
+    title = "Jungle 7: Chief Ooga",
     theme = THEME.JUNGLE,
     width = 3,
     height = 2,
