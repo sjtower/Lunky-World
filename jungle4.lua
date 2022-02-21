@@ -1,9 +1,7 @@
-local sound = require('play_sound')
-local clear_embeds = require('clear_embeds')
-
+local checkpoints = require("Checkpoints/checkpoints")
 local jungle4 = {
     identifier = "jungle4",
-    title = "Jungle 4",
+    title = "Jungle 4: Thorny Pit",
     theme = THEME.JUNGLE,
     width = 2,
     height = 10,
@@ -18,6 +16,8 @@ local level_state = {
 jungle4.load_level = function()
     if level_state.loaded then return end
     level_state.loaded = true
+
+    checkpoints.activate()
 
     level_state.callbacks[#level_state.callbacks+1] = set_post_entity_spawn(function (mantrap)
         mantrap.flags = clr_flag(mantrap.flags, ENT_FLAG.STUNNABLE)
@@ -63,6 +63,8 @@ end, "slow_falling_platform")
 
 jungle4.unload_level = function()
     if not level_state.loaded then return end
+
+    checkpoints.deactivate()
 
     local callbacks_to_clear = level_state.callbacks
     level_state.loaded = false

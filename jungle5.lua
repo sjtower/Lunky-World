@@ -3,7 +3,7 @@ local clear_embeds = require('clear_embeds')
 
 local jungle5 = {
     identifier = "jungle5",
-    title = "Jungle 5",
+    title = "Jungle 5: Slow & Thorny",
     theme = THEME.JUNGLE,
     width = 8,
     height = 1,

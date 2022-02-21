@@ -96,6 +96,7 @@
 \?treasure                         r
 \?crushtraplarge                   s
 \?elevator                         u
+\?checkpoint                       v
 
 
 
@@ -203,7 +204,7 @@ XXl^^^^^^^ XXXXXXXXXX
 111111llll XXXXXX000X
 1111+1lT0l XXXXXX*T*X
 111441l0Il XXXXXX0p0X
-100400+0ll 111XXXXXXX
+100400+vll 111XXXXXXX
 000400llll 111XXXXXXX
 000+0000ll 111XXXXXXX
 
@@ -217,7 +218,7 @@ XXl^^^^^^^ XXXXXXXXXX
 lll1Sn1000 000XXXXXXX
 0Tl11n1000 *T*XXXXXXX
 I0l10nS000 0P0XXXXXXX
-l0+00n4,,, XLXXXXXXXX
+lv+00n4,,, XLXXXXXXXX
 lll00nS444 XLXXXXXXXX
 l0000n1004 XLXXXXXXXX
 

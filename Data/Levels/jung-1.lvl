@@ -11,6 +11,7 @@
 \-idol_room_chance                       0          // 1/N chance of an idol room (default = 10)
 \-floor_side_spread_chance               0          // 1/N chance of a spreadable floor spreading to its side (default = 10)
 \-floor_bottom_spread_chance             0          // 1/N chance of a spreadable floor spreading to its bottom (default = 5)
+\-size                                   4 4
 
 \?empty                            0
 \?floor                            1
@@ -92,6 +93,7 @@
 \?mantrap                          n
 \?witchdoctor                      o
 \?bigspear_trap                    q
+\?checkpoint                       r
 
 
 
@@ -114,8 +116,8 @@
 ////////////////////////////////////////////////////////////////////////////////
 
 \!dual
-11k1111kk1 XXXXXXXXXX
-00000k000+ XXXXXXXXXX
+11k1111kk0 XXXXXXXXXX
+00000k000r XXXXXXXXXX
 k71k0k0kka XXXXXXXXXX
 1011k10110 0000000000
 1*1k00(110 XXXXXXXXXX
@@ -128,13 +130,13 @@ k000q00010 XXXXXXXXXX
 ////////////////////////////////////////////////////////////////////////////////
 
 \!dual
-1110011111 lXXXXXXXXX
-0+00n0010n lXXXXXXXX0
+0+10001111 lXXXXXXXXX
+0+r0n0010n lXXXXXXXX0
 0a111k011k lXXXXXXXX0
-*01T0n*1T0 lk0T0n0nT*
+*01T00*1T0 lk0T0n0nT*
 001a1111a1 lXXXXk*kXX
 00kI0T100T lXXXXT0n0T
-n01a0*n0kk lXXXXXXXXX
+n01a0*00kk lXXXXXXXXX
 5011111111 lXXXXX0kkk
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -259,7 +261,7 @@ k^^^000000 XXXXXXXXXk
 1111111111 XXXXXXXXXX
 11k00q0111 XX000qXXXX
 1k00*q0111 kk*0*qXXXX
-00+T0q1111 000T0qXXXX
+00+T0q0111 000T0qXXXX
 
 ////////////////////////////////////////////////////////////////////////////////
 \.setroom3_0   // jungle
