@@ -46,6 +46,7 @@ dwelling3.load_level = function()
         return true
     end, "sleeping_bat")
 
+    toast(dwelling3.title)
 end
 
 dwelling3.unload_level = function()

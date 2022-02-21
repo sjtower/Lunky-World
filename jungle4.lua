@@ -1,7 +1,8 @@
 local checkpoints = require("Checkpoints/checkpoints")
+local key_blocks = require("Modules.GetimOliver.key_blocks")
 local jungle4 = {
     identifier = "jungle4",
-    title = "Jungle 4: Thorny Pit",
+    title = "Jungle 4: Devil Hands",
     theme = THEME.JUNGLE,
     width = 2,
     height = 10,
@@ -18,6 +19,7 @@ jungle4.load_level = function()
     level_state.loaded = true
 
     checkpoints.activate()
+    key_blocks.activate(level_state)
 
     level_state.callbacks[#level_state.callbacks+1] = set_post_entity_spawn(function (mantrap)
         mantrap.flags = clr_flag(mantrap.flags, ENT_FLAG.STUNNABLE)
@@ -48,6 +50,7 @@ jungle4.load_level = function()
         end)
     end, SPAWN_TYPE.ANY, 0, ENT_TYPE.FLOOR_THORN_VINE)
 
+    toast(jungle4.title)
 end
 
 define_tile_code("slow_falling_platform")
@@ -65,6 +68,7 @@ jungle4.unload_level = function()
     if not level_state.loaded then return end
 
     checkpoints.deactivate()
+    key_blocks.deactivate()
 
     local callbacks_to_clear = level_state.callbacks
     level_state.loaded = false

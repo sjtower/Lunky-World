@@ -3,7 +3,7 @@ local key_blocks = require("Modules.GetimOliver.key_blocks")
 
 local jungle6 = {
     identifier = "jungle6",
-    title = "Jungle 6: Fast & Thorny",
+    title = "Jungle 6: The Fast & The Thorny",
     theme = THEME.JUNGLE,
     width = 8,
     height = 3,
@@ -35,6 +35,8 @@ jungle6.load_level = function()
         mattock = get_entity(mattock)
         return true
     end, "mattock")
+
+    toast(jungle6.title)
 end
 
 define_tile_code("slow_falling_platform")

@@ -27,6 +27,7 @@ jungle7.load_level = function()
         witch_doctor.color = Color:red()
         witch_doctor.flags = clr_flag(witch_doctor.flags, ENT_FLAG.STUNNABLE)
         witch_doctor:give_powerup(ENT_TYPE.ITEM_POWERUP_SPIKE_SHOES)
+        witch_doctor.flags = clr_flag(witch_doctor.flags, ENT_FLAG.FACING_LEFT)
 
         set_on_kill(uid, function(self)
             local uid = spawn_entity(ENT_TYPE.ITEM_KEY, x, y, layer, 0, 0)
@@ -34,6 +35,8 @@ jungle7.load_level = function()
 
         return true
     end, "witch_doctor_chief")
+
+    toast(jungle7.title)
 end
 
 define_tile_code("fast_right_falling_platform")

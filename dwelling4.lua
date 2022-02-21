@@ -125,6 +125,7 @@ dwelling4.load_level = function()
         end
     end, ON.FRAME)
 
+    toast(dwelling4.title)
 end
 
 dwelling4.unload_level = function()

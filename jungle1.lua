@@ -26,7 +26,8 @@ jungle1.load_level = function()
         mantrap.color = Color:red()
 
     end, SPAWN_TYPE.ANY, 0, ENT_TYPE.MONS_MANTRAP)
-    
+
+    toast(jungle1.title)
 end
 
 jungle1.unload_level = function()

@@ -146,10 +146,10 @@ llllllllll
 lll000llll
 000*E*00ll
 000lll00ll
-llllllllll
-llllllllll
-llllllllll
-lll000llll
+lPllllllll
+lLllllllll
+lLllllllll
+lLl000llll
 
 ////////////////////////////////////////////////////////////////////////////////
 \.setroom1_0   // jungle
@@ -158,8 +158,8 @@ lll000llll
 ,y00000000
 l000000000
 ly00000000
-l00,,,,7,,
-l,,,00,,,0
+l00,,,77,,
+l,,,0,,,,0
 l,0,00,0,0
 l,,,,,,,,,
 llllllllll
@@ -182,9 +182,9 @@ llllllllll
 ////////////////////////////////////////////////////////////////////////////////
 
 \!dual
-ll0*V*00ll XXXXTXXXXX
-000lll00ll XXXX0XXXXX
-l,,lllllll XXX000XXXX
+lL0*V*00ll XXXXTXXXXX
+000,ll00ll XXXX0XXXXX
+ll,,llllll XXX000XXXX
 llllTlllll XXX*T*XXXX
 lll000llll XXXXXXXXXX
 l00*e*00ll XXXXXXXXXX

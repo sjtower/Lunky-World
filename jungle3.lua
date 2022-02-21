@@ -33,9 +33,9 @@ jungle3.load_level = function()
         mantrap.flags = clr_flag(mantrap.flags, ENT_FLAG.FACING_LEFT)
         mantrap.flags = set_flag(mantrap.flags, ENT_FLAG.TAKE_NO_DAMAGE)
         mantrap.color = Color:red()
-
     end, SPAWN_TYPE.ANY, 0, ENT_TYPE.MONS_MANTRAP)
 
+    toast(jungle3.title)
 end
 
 define_tile_code("slow_falling_platform")

@@ -1,9 +1,8 @@
-local sound = require('play_sound')
-local clear_embeds = require('clear_embeds')
+local checkpoints = require("Checkpoints/checkpoints")
 
 local jungle5 = {
     identifier = "jungle5",
-    title = "Jungle 5: Slow & Thorny",
+    title = "Jungle 5: Rockavator",
     theme = THEME.JUNGLE,
     width = 8,
     height = 1,
@@ -18,6 +17,8 @@ local level_state = {
 jungle5.load_level = function()
     if level_state.loaded then return end
     level_state.loaded = true
+
+    checkpoints.activate()
 
     level_state.callbacks[#level_state.callbacks+1] = set_post_entity_spawn(function (mantrap)
         mantrap.flags = clr_flag(mantrap.flags, ENT_FLAG.STUNNABLE)
@@ -34,8 +35,7 @@ jungle5.load_level = function()
         return true
     end, "climbing_gloves")
 
-
-
+    toast(jungle5.title)
 end
 
 define_tile_code("slow_falling_platform")
@@ -66,6 +66,8 @@ end, "right_falling_platform")
 
 jungle5.unload_level = function()
     if not level_state.loaded then return end
+
+    checkpoints.deactivate()
 
     local callbacks_to_clear = level_state.callbacks
     level_state.loaded = false

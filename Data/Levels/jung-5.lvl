@@ -21,20 +21,10 @@
 \?spikes                           ^
 \?arrow_trap                       A
 \?platform                         p
-\?bat_generator                    B
-\?bat_switch                       b
-\?lizard                           h
-\?totem_trap                       t
 \?ladder                           L
 \?ladder_plat                      P
-\?moving_totem                     M
-\?totem_switch                     g
-\?idol_reward                      Q
-\?dialog_block                     R
-\?telescope_right                  j
 \?floor_hard                       X
 \?bat                              !
-\?mole                             "
 \?scorpion                         #
 \?caveman                          $
 \?caveman_asleep                   %
@@ -50,7 +40,6 @@
 \?cookfire                         2
 \?bush_block                       4
 \?bone_block                       5
-\?robot                            3
 \?water                            6
 \?falling_platform                 7
 \?treasure_chest                   8
@@ -77,12 +66,8 @@
 \?autowalltorch                    W
 \?spider_hanging                   Y
 \?sleeping_bat                     [
-\?cavemanboss                      9
-\?switchable_quillback             ]
-\?quillback_jump_switch            c
 \?camera                           d
 \?crushtrap                        f
-\?infinite_quillback               i
 \?landmine                         :
 \?lava                             _
 \?honey_upwards                    `
@@ -99,6 +84,7 @@
 \?right_falling_platform           v
 \?witchdoctor                      w
 \?tikiman                          x
+\?checkpoint                       y
 
 
 
@@ -122,7 +108,7 @@ llllv00000
 1+11111+11
 1511111+11
 0500000500
-0l00000500
+0l00*00500
 0000000p00
 0000000000
 ,^^,,^^^,,
@@ -136,7 +122,7 @@ llllv00000
 1111111111 XXXXXXXXXX
 0000+00000 XXXXXXXXXX
 0000+00000 XXXXXXXXXX
-0000+00000 XXXXXXXXXX
+0*00+00000 XXXXXXXXXX
 0000p00000 XXXXXXXXXX
 0000000000 XXXXXXXXXX
 ,,^^^0^^^^ XXXXXXTXXX
@@ -147,7 +133,7 @@ llllv00000
 ////////////////////////////////////////////////////////////////////////////////
 
 1117700000
-+000v00000
++0y0v00000
 5lll000*0*
 500l000000
 500l000000
@@ -163,7 +149,7 @@ llllv00000
 000+,,1111
 000+0,,,11
 000+000,11
-000+000000
+00*+000000
 0v0ppppp0*
 ^^^^^4^^,,
 1111141111
