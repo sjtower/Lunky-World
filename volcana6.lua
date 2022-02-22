@@ -1,6 +1,3 @@
-local sound = require('play_sound')
-local clear_embeds = require('clear_embeds')
-
 local volcana6 = {
     identifier = "volcana6",
     title = "Volcana 6: Hot Foot",
@@ -23,9 +20,23 @@ volcana6.load_level = function()
     level_state.callbacks[#level_state.callbacks+1] = set_post_entity_spawn(function (ent)
         lavamanders[#lavamanders + 1] = get_entity(ent.uid)
         set_on_kill(ent.uid, function(self)
-            local uid = spawn_entity(ENT_TYPE.ITEM_BOMB, 28, 2, 1, 0, 0)
+            local uid = spawn_entity(ENT_TYPE.ITEM_BOMB, 30.0, 119.0, 0, 0, 0)
         end)
     end, SPAWN_TYPE.ANY, 0, ENT_TYPE.MONS_LAVAMANDER)
+
+    define_tile_code("cape")
+    level_state.callbacks[#level_state.callbacks+1] = set_pre_tile_code_callback(function(x, y, layer)
+        local gloves = spawn_entity(ENT_TYPE.ITEM_CAPE, x, y, layer, 0, 0)
+        gloves = get_entity(gloves)
+        return true
+    end, "cape")
+
+    define_tile_code("location_block")
+    level_state.callbacks[#level_state.callbacks+1] = set_pre_tile_code_callback(function(x, y, layer)
+        local location = tostring(x) .. " | " .. tostring(y)
+        print(location)
+        return true
+    end, "location_block")
 
     toast(volcana6.title)
 end

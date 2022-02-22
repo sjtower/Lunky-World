@@ -3,7 +3,7 @@ local key_blocks = require("Modules.GetimOliver.key_blocks")
 
 local volcana3 = {
     identifier = "volcana3",
-    title = "Volcana 3: Mines of Moria",
+    title = "Volcana 3: Fire Walker",
     theme = THEME.VOLCANA,
     width = 4,
     height = 4,
