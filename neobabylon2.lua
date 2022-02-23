@@ -1,5 +1,5 @@
 local checkpoints = require("Checkpoints/checkpoints")
--- local nocrap = require("Modules.Dregu.no_crap")
+local nocrap = require("Modules.Dregu.no_crap")
 local timed_doors = require("Modules.GetimOliver.timed_door")
 
 local neobabylon2 = {
@@ -15,12 +15,6 @@ local level_state = {
     loaded = false,
     callbacks = {},
 }
-
-local saved_checkpoint
-
-local function save_checkpoint(checkpoint)
-    saved_checkpoint = checkpoint
-end
 
 neobabylon2.load_level = function()
     if level_state.loaded then return end
@@ -43,26 +37,6 @@ neobabylon2.load_level = function()
     end, "horizontal_ufo")
 
     checkpoints.activate()
-
-    checkpoints.checkpoint_activate_callback(function(x, y, layer, time)
-        save_checkpoint({
-            position = {
-                x = x,
-                y = y,
-                layer = layer,
-            },
-            time = time,
-        })
-    end)
-
-    if saved_checkpoint then
-        checkpoints.activate_checkpoint_at(
-            saved_checkpoint.position.x,
-            saved_checkpoint.position.y,
-            saved_checkpoint.position.layer,
-            saved_checkpoint.time
-        )
-    end
 
 	toast(neobabylon2.title)
 end

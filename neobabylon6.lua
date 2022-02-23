@@ -1,14 +1,10 @@
-local sound = require('play_sound')
-local clear_embeds = require('clear_embeds')
-local checkpoints = require("Checkpoints/checkpoints")
 local nocrap = require("Modules.Dregu.no_crap")
 local death_blocks = require("Modules.JawnGC.death_blocks")
-local death_elevators = require("Modules.GetimOliver.death_elevators")
 local monster_generators = require("Modules.JayTheBusinessGoose.monster_generator")
 
 local neobabylon6 = {
     identifier = "neobabylon 6",
-    title = "Neo Babylon 6: Lamassu",
+    title = "Neo Babylon 6: Independence Day",
     theme = THEME.NEO_BABYLON,
     width = 3,
     height = 3,
@@ -20,12 +16,6 @@ local level_state = {
     callbacks = {},
 }
 
-local saved_checkpoint
-
-local function save_checkpoint(checkpoint)
-    saved_checkpoint = checkpoint
-end
-
 neobabylon6.load_level = function()
     if level_state.loaded then return end
     level_state.loaded = true
@@ -36,30 +26,8 @@ neobabylon6.load_level = function()
         return true
     end, "parachute")
 
-    checkpoints.activate()
     death_blocks.activate(level_state)
-    death_elevators.activate(level_state)
     monster_generators.activate(level_state, ENT_TYPE.MONS_UFO)
-
-    checkpoints.checkpoint_activate_callback(function(x, y, layer, time)
-        save_checkpoint({
-            position = {
-                x = x,
-                y = y,
-                layer = layer,
-            },
-            time = time,
-        })
-    end)
-
-    if saved_checkpoint then
-        checkpoints.activate_checkpoint_at(
-            saved_checkpoint.position.x,
-            saved_checkpoint.position.y,
-            saved_checkpoint.position.layer,
-            saved_checkpoint.time
-        )
-    end
 
     level_state.callbacks[#level_state.callbacks+1] = set_post_entity_spawn(function (ent)
         ent.health = 60
@@ -72,8 +40,6 @@ end
 
 neobabylon6.unload_level = function()
     if not level_state.loaded then return end
-
-    checkpoints.deactivate()
 
     local callbacks_to_clear = level_state.callbacks
     level_state.loaded = false

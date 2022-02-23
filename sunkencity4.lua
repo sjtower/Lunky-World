@@ -1,9 +1,6 @@
-local sound = require('play_sound')
-local clear_embeds = require('clear_embeds')
 local checkpoints = require("Checkpoints/checkpoints")
 local nocrap = require("Modules.Dregu.no_crap")
 local death_blocks = require("Modules.JawnGC.death_blocks")
-local key_blocks = require("Modules.GetimOliver.key_blocks")
 local inverse_timed_doors = require("Modules.GetimOliver.inverse_timed_door")
 local timed_doors = require("Modules.GetimOliver.timed_door")
 
@@ -21,12 +18,6 @@ local level_state = {
     callbacks = {},
 }
 
-local saved_checkpoint
-
-local function save_checkpoint(checkpoint)
-    saved_checkpoint = checkpoint
-end
-
 sunkencity4.load_level = function()
     if level_state.loaded then return end
     level_state.loaded = true
@@ -37,13 +28,6 @@ sunkencity4.load_level = function()
         ent = get_entity(ent)
         return true
     end, "firefrog")
-
-    define_tile_code("giantfly")
-    level_state.callbacks[#level_state.callbacks+1] = set_pre_tile_code_callback(function(x, y, layer)
-        local ent = spawn_entity(ENT_TYPE.MONS_GIANTFLY, x, y, layer, 0, 0)
-        ent = get_entity(ent)
-        return true
-    end, "giantfly")
 
     define_tile_code("sunken_arrow_trap")
     level_state.callbacks[#level_state.callbacks+1] = set_pre_tile_code_callback(function(x, y, layer)

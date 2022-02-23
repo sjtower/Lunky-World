@@ -1,15 +1,8 @@
-local sound = require('play_sound')
-local clear_embeds = require('clear_embeds')
-local checkpoints = require("Checkpoints/checkpoints")
 local nocrap = require("Modules.Dregu.no_crap")
-local death_blocks = require("Modules.JawnGC.death_blocks")
 local key_blocks = require("Modules.GetimOliver.key_blocks")
-local inverse_timed_doors = require("Modules.GetimOliver.inverse_timed_door")
-local timed_doors = require("Modules.GetimOliver.timed_door")
-
 local sunkencity3 = {
     identifier = "sunkencity 3",
-    title = "Sunken City 3: Ministers",
+    title = "Sunken City 3: Diplomatic Relationships",
     theme = THEME.SUNKEN_CITY,
     width = 3,
     height = 3,
@@ -20,12 +13,6 @@ local level_state = {
     loaded = false,
     callbacks = {},
 }
-
-local saved_checkpoint
-
-local function save_checkpoint(checkpoint)
-    saved_checkpoint = checkpoint
-end
 
 sunkencity3.load_level = function()
     if level_state.loaded then return end
@@ -38,31 +25,7 @@ sunkencity3.load_level = function()
         return true
     end, "jetpack")
 
-    death_blocks.activate(level_state)
-    inverse_timed_doors.activate(level_state, 100)
-    timed_doors.activate(level_state, 100)
     key_blocks.activate(level_state)
-
-    checkpoints.activate()
-    checkpoints.checkpoint_activate_callback(function(x, y, layer, time)
-        save_checkpoint({
-            position = {
-                x = x,
-                y = y,
-                layer = layer,
-            },
-            time = time,
-        })
-    end)
-
-    if saved_checkpoint then
-        checkpoints.activate_checkpoint_at(
-            saved_checkpoint.position.x,
-            saved_checkpoint.position.y,
-            saved_checkpoint.position.layer,
-            saved_checkpoint.time
-        )
-    end
 
 	toast(sunkencity3.title)
 end

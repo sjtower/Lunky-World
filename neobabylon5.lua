@@ -1,5 +1,3 @@
-local sound = require('play_sound')
-local clear_embeds = require('clear_embeds')
 local checkpoints = require("Checkpoints/checkpoints")
 local nocrap = require("Modules.Dregu.no_crap")
 local death_blocks = require("Modules.JawnGC.death_blocks")
@@ -20,22 +18,9 @@ local level_state = {
     callbacks = {},
 }
 
-local saved_checkpoint
-
-local function save_checkpoint(checkpoint)
-    saved_checkpoint = checkpoint
-end
-
 neobabylon5.load_level = function()
     if level_state.loaded then return end
     level_state.loaded = true
-
-    define_tile_code("metal_shield")
-    level_state.callbacks[#level_state.callbacks+1] = set_pre_tile_code_callback(function(x, y, layer)
-        local ent = spawn_entity(ENT_TYPE.ITEM_METAL_SHIELD, x, y, layer, 0, 0)
-        ent = get_entity(ent)
-        return true
-    end, "metal_shield")
 
     define_tile_code("wooden_shield")
     level_state.callbacks[#level_state.callbacks+1] = set_pre_tile_code_callback(function(x, y, layer)
@@ -84,26 +69,6 @@ neobabylon5.load_level = function()
     key_blocks.activate(level_state)
     inverse_timed_doors.activate(level_state, 1500)
 
-    checkpoints.checkpoint_activate_callback(function(x, y, layer, time)
-        save_checkpoint({
-            position = {
-                x = x,
-                y = y,
-                layer = layer,
-            },
-            time = time,
-        })
-    end)
-
-    if saved_checkpoint then
-        checkpoints.activate_checkpoint_at(
-            saved_checkpoint.position.x,
-            saved_checkpoint.position.y,
-            saved_checkpoint.position.layer,
-            saved_checkpoint.time
-        )
-    end
-
 	toast(neobabylon5.title)
 end
 
@@ -112,6 +77,7 @@ neobabylon5.unload_level = function()
 
     checkpoints.deactivate()
     inverse_timed_doors.deactivate()
+    key_blocks.deactivate()
 
     local callbacks_to_clear = level_state.callbacks
     level_state.loaded = false

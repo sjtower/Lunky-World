@@ -135,22 +135,23 @@ X00X000X00 XXXXXXXXXX
 XSSX000XSS XXXXXXXXXX
 I0SJPR2IS0 XXXXXXXXXX
 X0SXXXXXS0 XXXXXXXXXX
-I0S00000S0 XXXXXXXXXX
-X0S00000S0 XXXXXXXXXX
-X0000!00Q0 XXXXXXXX=X
+I0S00000S0 XXXXXX$$$$
+X0S00000S0 XXXXX*$000
+X0000!00Q0 XXX$$$$0=0
 
 ////////////////////////////////////////////////////////////////////////////////
 \.setroom1_2   // babylon
 ////////////////////////////////////////////////////////////////////////////////
 
-XXXX$$$$$$
-X00X$$$$$$
-X00X$$$$$$
-J00X$$$$$$
-XXXXX$$$$$
-J000X$$$$$
-X000X$$$$$
-XP00X$$$$$
+\!dual
+XXXX$$$$$$ XXXXXXXXXX
+X00X$$$$$$ XXXXXXXXXX
+X00X$$$$$$ XXXXXXXXXX
+J00X$$$$$$ XXXXXXXXXX
+XXXXX$$$$$ XXXXXXXXXX
+J000X$$$$$ $XXXXXXXXX
+X000X$$$$$ $XXXXXXXXX
+XP00X$$$$$ $XXXXXXXXX
 
 ////////////////////////////////////////////////////////////////////////////////
 \.setroom2_0   // babylon
@@ -170,11 +171,11 @@ $0$$$$$$$$
 ////////////////////////////////////////////////////////////////////////////////
 
 \!dual
-XXXXXXXXXX XXXXXXXX0X
-$$$$$$$$$$ XXXXX000&X
-$$$$$$$$$$ XXXXX&XXXX
-$$$$0=0$$$ XXXXX=XXXX
-$$$0&0&0$$ XXXXXXXXXX
+XXXXXXXXXX XXX$000000
+$$$$$$$$$$ XXX$0000&0
+$$$$$$$$$$ XXX$0&0$$$
+$$$$0=0$$$ XXX$0=0$*X
+$$$0&0&0$$ XXX$$$$$XX
 $$$00#00$$ XXXXXXXXXX
 $$$0$$$0$$ XXXXXXXXXX
 $$$$$$$$$$ XXXXXXXXXX
@@ -183,11 +184,12 @@ $$$$$$$$$$ XXXXXXXXXX
 \.setroom2_2   // babylon
 ////////////////////////////////////////////////////////////////////////////////
 
-XXXXX$$$$$
-$$$$$$$$$$
-$$$$$$$$$$
-$$$$$$$$$$
-$$$$$$$$$$
-$$$$$$$$$$
-$$$$$$$$$$
-$$$$$$$$$$
+\!dual
+XXXXX$$$$$ $XXXXXXXXX
+$$$$$$$$$$ $XXXXXXXXX
+$$$$$$$$$$ $XXXXXXXXX
+$$$$$$$$$$ XXXXXXXXXX
+$$$$$$$$$$ XXXXXXXXXX
+$$$$$$$$$$ XXXXXXXXXX
+$$$$$$$$$$ XXXXXXXXXX
+$$$$$$$$$$ XXXXXXXXXX

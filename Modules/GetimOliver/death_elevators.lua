@@ -1,7 +1,7 @@
+local death_elevators = {}
 local function activate(level_state)
 
     define_tile_code("death_elevator")
-    local death_elevators = {}
     level_state.callbacks[#level_state.callbacks+1] = set_pre_tile_code_callback(function(x, y, layer)
         local elevator_id = spawn(ENT_TYPE.ACTIVEFLOOR_ELEVATOR, x, y, layer, 0, 0)
         death_elevators[#death_elevators + 1] = get_entity(elevator_id)
@@ -23,6 +23,11 @@ local function activate(level_state)
     end, ON.FRAME)
 end
 
+local function deactivate()
+    death_elevators = {}
+end
+
 return {
     activate = activate,
+    deactivate = deactivate
 }
