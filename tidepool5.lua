@@ -1,5 +1,4 @@
-local sound = require('play_sound')
-local clear_embeds = require('clear_embeds')
+local key_blocks = require("Modules.GetimOliver.key_blocks")
 
 local tidepool5 = {
     identifier = "tidepool5",
@@ -19,6 +18,8 @@ tidepool5.load_level = function()
     if level_state.loaded then return end
     level_state.loaded = true
 
+    key_blocks.activate()
+
     level_state.callbacks[#level_state.callbacks+1] = set_post_entity_spawn(function(entity, spawn_flags)
 		entity:destroy()
 	end, SPAWN_TYPE.SYSTEMIC, 0, ENT_TYPE.MONS_SKELETON)
@@ -27,22 +28,6 @@ tidepool5.load_level = function()
         --Tame Axolotl
         entity:tame(true)
     end, SPAWN_TYPE.ANY, 0, ENT_TYPE.MOUNT_AXOLOTL)
-
-    define_tile_code("spike_shoes")
-    level_state.callbacks[#level_state.callbacks+1] = set_pre_tile_code_callback(function(x, y, layer)
-        local shoes = spawn_entity(ENT_TYPE.ITEM_PICKUP_SPIKESHOES, x, y, layer, 0, 0)
-        shoes = get_entity(shoes)
-        return true
-    end, "spike_shoes")
-
-    level_state.callbacks[#level_state.callbacks+1] = set_post_entity_spawn(function (fish)
-        fish.color = Color:red()
-        fish.type.max_speed = 0.01
-        fish.flags = clr_flag(fish.flags, ENT_FLAG.STUNNABLE)
-        fish.flags = set_flag(fish.flags, ENT_FLAG.TAKE_NO_DAMAGE)
-		-- fish.flags = clr_flag(fish.flags, 13)
-        
-    end, SPAWN_TYPE.ANY, 0, ENT_TYPE.MONS_FISH)
 
     level_state.callbacks[#level_state.callbacks+1] = set_post_entity_spawn(function (thorn)
         thorn.color = Color:red()
@@ -58,38 +43,7 @@ tidepool5.load_level = function()
         end)
     end, SPAWN_TYPE.ANY, 0, ENT_TYPE.FLOOR_THORN_VINE)
 
-    local key_blocks = {}
-    define_tile_code("key_block")
-    level_state.callbacks[#level_state.callbacks+1] = set_pre_tile_code_callback(function(x, y, layer)
-        local floor_uid = spawn_entity(ENT_TYPE.ACTIVEFLOOR_PUSHBLOCK, x, y, layer, 0, 0)
-        local floor = get_entity(floor_uid)
-        floor.color = Color:yellow()
-        floor.flags = set_flag(floor.flags, ENT_FLAG.NO_GRAVITY)
-        key_blocks[#key_blocks + 1] = get_entity(floor_uid)
-        return true
-    end, "key_block")
-
-    local block_keys = {}
-    define_tile_code("block_key")
-    level_state.callbacks[#level_state.callbacks+1] = set_pre_tile_code_callback(function(x, y, layer)
-        local uid = spawn_entity(ENT_TYPE.ITEM_KEY, x, y, layer, 0, 0)
-        local key = get_entity(uid)
-        key.color = Color:yellow()
-        block_keys[#block_keys + 1] = get_entity(uid)
-        set_pre_collision2(key.uid, function(self, collision_entity)
-            for _, block in ipairs(key_blocks) do
-                if collision_entity.uid == block.uid then
-                    -- kill_entity(door_uid)
-                    kill_entity(block.uid)
-                    kill_entity(key.uid)
-                    sound.play_sound(VANILLA_SOUND.SHARED_DOOR_UNLOCK)
-                end
-            end
-        end)
-        return true
-    end, "block_key")
-
-    --Oscillating Platforms
+    --Oscillating Blocks
 	local osc_blocks = {}
 	local y_pos
 	define_tile_code("osc_block")
@@ -98,7 +52,7 @@ tidepool5.load_level = function()
 		y_pos = y
 	end, "osc_block")
 	
-	--Set Velocities of Oscillating Platforms
+	--Set Velocities of Oscillating Blocks
 	local frames = 0
 	level_state.callbacks[#level_state.callbacks+1] = set_callback(function ()
 		if frames == 0 then	
@@ -121,6 +75,8 @@ end
 
 tidepool5.unload_level = function()
     if not level_state.loaded then return end
+
+    key_blocks.deactivate()
 
     local callbacks_to_clear = level_state.callbacks
     level_state.loaded = false

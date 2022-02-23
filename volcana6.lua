@@ -20,7 +20,7 @@ volcana6.load_level = function()
     level_state.callbacks[#level_state.callbacks+1] = set_post_entity_spawn(function (ent)
         lavamanders[#lavamanders + 1] = get_entity(ent.uid)
         set_on_kill(ent.uid, function(self)
-            local uid = spawn_entity(ENT_TYPE.ITEM_BOMB, 30.0, 119.0, 0, 0, 0)
+            local uid = spawn_entity(ENT_TYPE.ITEM_BOMB, 30.0, 121.0, 0, 0, 0)
         end)
     end, SPAWN_TYPE.ANY, 0, ENT_TYPE.MONS_LAVAMANDER)
 

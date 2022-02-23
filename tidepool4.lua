@@ -1,9 +1,8 @@
-local sound = require('play_sound')
-local clear_embeds = require('clear_embeds')
+local checkpoints = require("Checkpoints/checkpoints")
 
 local tidepool4 = {
     identifier = "tidepool4",
-    title = "Tidepool 4: Fish",
+    title = "Tidepool 4: Free Willy",
     theme = THEME.TIDE_POOL,
     width = 8,
     height = 2,
@@ -19,16 +18,11 @@ tidepool4.load_level = function()
     if level_state.loaded then return end
     level_state.loaded = true
 
+    checkpoints.activate()
+
     level_state.callbacks[#level_state.callbacks+1] = set_post_entity_spawn(function(entity, spawn_flags)
 		entity:destroy()
 	end, SPAWN_TYPE.SYSTEMIC, 0, ENT_TYPE.MONS_SKELETON)
-
-    define_tile_code("spike_shoes")
-    level_state.callbacks[#level_state.callbacks+1] = set_pre_tile_code_callback(function(x, y, layer)
-        local shoes = spawn_entity(ENT_TYPE.ITEM_PICKUP_SPIKESHOES, x, y, layer, 0, 0)
-        shoes = get_entity(shoes)
-        return true
-    end, "spike_shoes")
 
     level_state.callbacks[#level_state.callbacks+1] = set_post_entity_spawn(function (fish)
         fish.color = Color:red()
@@ -44,6 +38,8 @@ end
 
 tidepool4.unload_level = function()
     if not level_state.loaded then return end
+
+    checkpoints.deactivate()
 
     local callbacks_to_clear = level_state.callbacks
     level_state.loaded = false

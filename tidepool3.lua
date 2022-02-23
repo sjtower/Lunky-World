@@ -1,9 +1,8 @@
 local sound = require('play_sound')
-local clear_embeds = require('clear_embeds')
 
 local tidepool3 = {
     identifier = "tidepool3",
-    title = "Tidepool 3: Fish",
+    title = "Tidepool 3: Fishmonger",
     theme = THEME.TIDE_POOL,
     width = 4,
     height = 4,
@@ -14,6 +13,9 @@ local level_state = {
     loaded = false,
     callbacks = {},
 }
+
+local key_blocks = {}
+local block_keys = {}
 
 tidepool3.load_level = function()
     if level_state.loaded then return end
@@ -61,7 +63,6 @@ tidepool3.load_level = function()
         return true
     end, "fastest_fish")
 
-    local key_blocks = {}
     define_tile_code("key_block")
     level_state.callbacks[#level_state.callbacks+1] = set_pre_tile_code_callback(function(x, y, layer)
         local floor_uid = spawn_entity(ENT_TYPE.ACTIVEFLOOR_PUSHBLOCK, x, y, layer, 0, 0)
@@ -72,7 +73,6 @@ tidepool3.load_level = function()
         return true
     end, "key_block")
 
-    local block_keys = {}
     define_tile_code("block_key")
     level_state.callbacks[#level_state.callbacks+1] = set_pre_tile_code_callback(function(x, y, layer)
         local uid = spawn_entity(ENT_TYPE.ITEM_KEY, x, y, layer, 0, 0)
@@ -97,6 +97,9 @@ end
 
 tidepool3.unload_level = function()
     if not level_state.loaded then return end
+
+    key_blocks = {}
+    block_keys = {}
 
     local callbacks_to_clear = level_state.callbacks
     level_state.loaded = false
