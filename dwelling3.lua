@@ -4,7 +4,7 @@ define_tile_code("sleeping_bat")
 
 local dwelling3 = {
     identifier = "dwelling3",
-    title = "Dwelling 3: Meatball Train",
+    title = "Dwelling 3: Lizard Ladder",
     theme = THEME.DWELLING,
     width = 8,
     height = 4,

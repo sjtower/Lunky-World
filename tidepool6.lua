@@ -1,5 +1,3 @@
-local key_blocks = require("Modules.GetimOliver.key_blocks")
-
 local tidepool6 = {
     identifier = "tidepool6",
     title = "Tidepool 6: Thorny Tiny Box",
@@ -22,15 +20,18 @@ tidepool6.load_level = function()
 		entity:destroy()
 	end, SPAWN_TYPE.SYSTEMIC, 0, ENT_TYPE.ITEM_SKULL)
 
-    key_blocks.activate()
+    define_tile_code("cape")
+    level_state.callbacks[#level_state.callbacks+1] = set_pre_tile_code_callback(function(x, y, layer)
+        local gloves = spawn_entity(ENT_TYPE.ITEM_CAPE, x, y, layer, 0, 0)
+        gloves = get_entity(gloves)
+        return true
+    end, "cape")
 
     level_state.callbacks[#level_state.callbacks+1] = set_post_entity_spawn(function (boss_bones)
         boss_bones.color = Color:red()
         boss_bones.health = 25
         boss_bones.flags = clr_flag(boss_bones.flags, ENT_FLAG.STUNNABLE)
-        boss_bones:give_powerup(ENT_TYPE.ITEM_POWERUP_SPIKE_SHOES)
-
-        
+        boss_bones:give_powerup(ENT_TYPE.ITEM_POWERUP_SPIKE_SHOES)        
     end, SPAWN_TYPE.ANY, 0, ENT_TYPE.MONS_FEMALE_JIANGSHI)
 
     level_state.callbacks[#level_state.callbacks+1] = set_post_entity_spawn(function (minion_bones)
@@ -61,8 +62,6 @@ end
 
 tidepool6.unload_level = function()
     if not level_state.loaded then return end
-
-    key_blocks.deactivate()
 
     local callbacks_to_clear = level_state.callbacks
     level_state.loaded = false

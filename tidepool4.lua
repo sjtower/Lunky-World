@@ -1,5 +1,4 @@
 local checkpoints = require("Checkpoints/checkpoints")
-
 local tidepool4 = {
     identifier = "tidepool4",
     title = "Tidepool 4: Free Willy",

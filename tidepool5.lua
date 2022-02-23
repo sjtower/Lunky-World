@@ -18,7 +18,7 @@ tidepool5.load_level = function()
     if level_state.loaded then return end
     level_state.loaded = true
 
-    key_blocks.activate()
+    key_blocks.activate(level_state)
 
     level_state.callbacks[#level_state.callbacks+1] = set_post_entity_spawn(function(entity, spawn_flags)
 		entity:destroy()
@@ -26,6 +26,7 @@ tidepool5.load_level = function()
 
     level_state.callbacks[#level_state.callbacks+1] = set_post_entity_spawn(function (entity)
         --Tame Axolotl
+        --TODO: this is not working
         entity:tame(true)
     end, SPAWN_TYPE.ANY, 0, ENT_TYPE.MOUNT_AXOLOTL)
 
