@@ -6,7 +6,6 @@ define_tile_code("skull")
 define_tile_code("torch")
 define_tile_code("arrow")
 
-
 local dwelling2 = {
     identifier = "dwelling2",
     title = "Dwelling 2: Crush & Burn",

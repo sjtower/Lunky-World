@@ -3,7 +3,7 @@ local tidepool6 = {
     title = "Tidepool 6: Thorny Tiny Box",
     theme = THEME.TIDE_POOL,
     width = 4,
-    height = 4,
+    height = 5,
     file_name = "tide-6.lvl",
 }
 
@@ -29,14 +29,14 @@ tidepool6.load_level = function()
 
     level_state.callbacks[#level_state.callbacks+1] = set_post_entity_spawn(function (boss_bones)
         boss_bones.color = Color:red()
-        boss_bones.health = 25
+        boss_bones.health = 20
         boss_bones.flags = clr_flag(boss_bones.flags, ENT_FLAG.STUNNABLE)
         boss_bones:give_powerup(ENT_TYPE.ITEM_POWERUP_SPIKE_SHOES)        
     end, SPAWN_TYPE.ANY, 0, ENT_TYPE.MONS_FEMALE_JIANGSHI)
 
     level_state.callbacks[#level_state.callbacks+1] = set_post_entity_spawn(function (minion_bones)
         minion_bones.color = Color:blue()
-        minion_bones.health = 6
+        minion_bones.health = 4
         minion_bones.flags = clr_flag(minion_bones.flags, ENT_FLAG.STUNNABLE)
         minion_bones:give_powerup(ENT_TYPE.ITEM_POWERUP_SPIKE_SHOES)
     end, SPAWN_TYPE.ANY, 0, ENT_TYPE.MONS_JIANGSHI)
@@ -54,8 +54,6 @@ tidepool6.load_level = function()
             end
         end)
     end, SPAWN_TYPE.ANY, 0, ENT_TYPE.FLOOR_THORN_VINE)
-
-    
 
 	toast(tidepool6.title)
 end
