@@ -76,6 +76,8 @@
 \?quicksand                        Z
 \?boomerang                        [
 \?rock                             ]
+\?necromancer                      ^
+\?critter_locust                   _
 
 
 
@@ -215,9 +217,9 @@ V111111111
 
 00]0000V11
 YVV0000V11
-0000000V11
-0WWWWWWV11
-PVVVVVVV11
+^000000V11
+PWWWWWWV11
+0VVVVVVV11
 0111111111
 @111111111
 0111111111

@@ -1,4 +1,3 @@
-local nocrap = require("Modules.Dregu.no_crap")
 local neobabylon1 = {
     identifier = "neobabylon 1",
     title = "Neo Babylon1 1: I Want To Believe",

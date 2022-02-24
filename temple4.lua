@@ -1,5 +1,6 @@
 local key_blocks = require("Modules.GetimOliver.key_blocks")
 local death_blocks = require("Modules.JawnGC.death_blocks")
+local sound = require('play_sound')
 
 local temple4 = {
     identifier = "temple4",
@@ -14,6 +15,10 @@ local level_state = {
     loaded = false,
     callbacks = {},
 }
+
+local poor_money_gates = {}
+local middle_class_money_gates = {}
+local wealthy_money_gates = {}
 
 temple4.load_level = function()
     if level_state.loaded then return end
@@ -82,7 +87,6 @@ temple4.load_level = function()
         return true
     end, "catmummy")
 
-    local poor_money_gates = {}
     define_tile_code("poor_money_gate")
     level_state.callbacks[#level_state.callbacks+1] = set_pre_tile_code_callback(function(x, y, layer)
         local floor_uid = spawn_entity(ENT_TYPE.ACTIVEFLOOR_PUSHBLOCK, x, y, layer, 0, 0)
@@ -93,7 +97,6 @@ temple4.load_level = function()
         return true
     end, "poor_money_gate")
 
-    local middle_class_money_gates = {}
     define_tile_code("middle_class_money_gate")
     level_state.callbacks[#level_state.callbacks+1] = set_pre_tile_code_callback(function(x, y, layer)
         local floor_uid = spawn_entity(ENT_TYPE.ACTIVEFLOOR_PUSHBLOCK, x, y, layer, 0, 0)
@@ -104,7 +107,6 @@ temple4.load_level = function()
         return true
     end, "middle_class_money_gate")
 
-    local wealthy_money_gates = {}
     define_tile_code("wealthy_money_gate")
     level_state.callbacks[#level_state.callbacks+1] = set_pre_tile_code_callback(function(x, y, layer)
         local floor_uid = spawn_entity(ENT_TYPE.ACTIVEFLOOR_PUSHBLOCK, x, y, layer, 0, 0)
@@ -120,11 +122,11 @@ temple4.load_level = function()
     local is_middle_class = false
     local is_wealthy = false
 	level_state.callbacks[#level_state.callbacks+1] = set_callback(function ()
-
+		if #players == 0 then return end
         if (players[1].inventory.money > 1000000) and is_wealthy then
             for i = 1,#wealthy_money_gates do
                 kill_entity(wealthy_money_gates[i].uid)
-                sound.play_sound(VANILLA_SOUND.ENEMIES_YETI_KING_ROAR)
+                sound.play_sound(VANILLA_SOUND.TRAPS_KALI_ANGERED)
                 is_wealthy = false
             end
         elseif (players[1].inventory.money > 100000) and is_middle_class then
@@ -153,6 +155,10 @@ temple4.unload_level = function()
     if not level_state.loaded then return end
 
     key_blocks.deactivate()
+
+    poor_money_gates = {}
+    middle_class_money_gates = {}
+    wealthy_money_gates = {}
 
     local callbacks_to_clear = level_state.callbacks
     level_state.loaded = false

@@ -20,6 +20,7 @@
 - bone drop trap - ammo for pitchers mitt challenge
 - timed firefrog throws
 - timed frog jumps
+- ride big CB up, jump out and over as another big CB comes down on you like a hydralic press
 
 - Run from Quillback into Olmec. Use Olmec to kill Quillback. Olmec glows red and can't be stepped on
 - Escape from Sunken City

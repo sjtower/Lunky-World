@@ -16,6 +16,8 @@ local level_state = {
     callbacks = {},
 }
 
+local quilliams = {}
+
 sunkencity6.load_level = function()
     if level_state.loaded then return end
     level_state.loaded = true
@@ -43,7 +45,6 @@ sunkencity6.load_level = function()
 
     -- Creates an invincible Quilliam that always rolls
     define_tile_code("infinite_quillback")
-    local quilliams = {}
     level_state.callbacks[#level_state.callbacks+1] = set_pre_tile_code_callback(function(x, y, layer)
         local ent = spawn_entity(ENT_TYPE.MONS_CAVEMAN_BOSS, x, y, layer, 0, 0)
         ent = get_entity(ent)
@@ -80,8 +81,6 @@ sunkencity6.load_level = function()
     death_blocks.set_ent_type(ENT_TYPE.FLOORSTYLED_SUNKEN)
     death_blocks.activate(level_state)
 
-
-
 	toast(sunkencity6.title)
 end
 
@@ -89,6 +88,7 @@ sunkencity6.unload_level = function()
     if not level_state.loaded then return end
 
     checkpoints.deactivate()
+    quilliams = {}
 
     local callbacks_to_clear = level_state.callbacks
     level_state.loaded = false

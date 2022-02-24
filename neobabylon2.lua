@@ -4,7 +4,7 @@ local timed_doors = require("Modules.GetimOliver.timed_door")
 
 local neobabylon2 = {
     identifier = "neobabylon 2",
-    title = "Neo Babylon1 2: Time",
+    title = "Neo Babylon1 2: Emergency Access Doors",
     theme = THEME.NEO_BABYLON,
     width = 8,
     height = 2,

@@ -1,4 +1,3 @@
-local key_blocks = require("Modules.GetimOliver.key_blocks")
 local death_blocks = require("Modules.JawnGC.death_blocks")
 local checkpoints = require("Checkpoints/checkpoints")
 local temple2 = {
@@ -15,11 +14,13 @@ local level_state = {
     callbacks = {},
 }
 
+local key_blocks = {}
+local block_keys = {}
+
 temple2.load_level = function()
     if level_state.loaded then return end
     level_state.loaded = true
 
-    key_blocks.activate(level_state)
     death_blocks.activate(level_state)
     checkpoints.activate()
 
@@ -52,19 +53,63 @@ temple2.load_level = function()
         return true
     end, "shotgun")
 
-    level_state.callbacks[#level_state.callbacks+1] = set_post_entity_spawn(function (thorn)
-        thorn.color = Color:red()
-        set_pre_collision2(thorn.uid, function(self, collision_entity)
-            if collision_entity.uid == players[1].uid and players[1].invincibility_frames_timer <= 0 then
-                -- todo: get directional damage working
-                if players[1].FACING_LEFT then
-                    players[1]:damage(thorn.uid, 1, 30, 0, .1, 100)
-                else
-                    players[1]:damage(thorn.uid, 1, 30, 0, .1, 100)
+    define_tile_code("key_block")
+    level_state.callbacks[#level_state.callbacks+1] = set_pre_tile_code_callback(function(x, y, layer)
+        local floor_uid = spawn_entity(ENT_TYPE.ACTIVEFLOOR_PUSHBLOCK, x, y, layer, 0, 0)
+        local floor = get_entity(floor_uid)
+        floor.color = Color:yellow()
+        floor.flags = set_flag(floor.flags, ENT_FLAG.NO_GRAVITY)
+        key_blocks[#key_blocks + 1] = get_entity(floor_uid)
+        return true
+    end, "key_block")
+
+    --Only spawn this key_block if the plaer has not reached a checkpoint
+    if not checkpoints.get_saved_checkpoint() then
+        define_tile_code("no_checkpoint_key_block")
+        level_state.callbacks[#level_state.callbacks+1] = set_pre_tile_code_callback(function(x, y, layer)
+            local floor_uid = spawn_entity(ENT_TYPE.ACTIVEFLOOR_PUSHBLOCK, x, y, layer, 0, 0)
+            local floor = get_entity(floor_uid)
+            floor.color = Color:yellow()
+            floor.flags = set_flag(floor.flags, ENT_FLAG.NO_GRAVITY)
+            key_blocks[#key_blocks + 1] = get_entity(floor_uid)
+            return true
+        end, "no_checkpoint_key_block")
+    end
+
+    define_tile_code("block_key")
+    level_state.callbacks[#level_state.callbacks+1] = set_pre_tile_code_callback(function(x, y, layer)
+        local uid = spawn_entity(ENT_TYPE.ITEM_KEY, x, y, layer, 0, 0)
+        local key = get_entity(uid)
+        key.color = Color:yellow()
+        block_keys[#block_keys + 1] = get_entity(uid)
+        set_pre_collision2(key.uid, function(self, collision_entity)
+            for _, block in ipairs(key_blocks) do
+                if collision_entity.uid == block.uid then
+                    -- kill_entity(door_uid)
+                    kill_entity(block.uid)
+                    kill_entity(key.uid)
+                    local sound = get_sound(VANILLA_SOUND.SHARED_DOOR_UNLOCK)
+                    sound:play()
                 end
             end
         end)
-    end, SPAWN_TYPE.ANY, 0, ENT_TYPE.FLOOR_THORN_VINE)
+        return true
+    end, "block_key")
+
+    --Only spawn these if the player has reached a checkpoint
+    if checkpoints.get_saved_checkpoint() then
+        define_tile_code("checkpoint_crushtraplarge")
+        level_state.callbacks[#level_state.callbacks+1] = set_pre_tile_code_callback(function(x, y, layer)
+            spawn_entity(ENT_TYPE.ACTIVEFLOOR_CRUSH_TRAP_LARGE, x + 0.5, y - 0.5, layer, 0, 0)
+            return true
+        end, "checkpoint_crushtraplarge")
+        define_tile_code("checkpoint_door")
+        level_state.callbacks[#level_state.callbacks+1] = set_pre_tile_code_callback(function(x, y, layer)
+            spawn_entity(ENT_TYPE.FLOOR_DOOR_LAYER, x, y, layer, 0, 0)
+            spawn_entity(ENT_TYPE.BG_DOOR, x, y, layer, 0, 0)
+            return true
+        end, "checkpoint_door")
+    end
 
 	toast(temple2.title)
 end
@@ -72,7 +117,8 @@ end
 temple2.unload_level = function()
     if not level_state.loaded then return end
 
-    key_blocks.deactivate()
+    block_keys = {}
+    key_blocks = {}
     checkpoints.deactivate()
 
     local callbacks_to_clear = level_state.callbacks
