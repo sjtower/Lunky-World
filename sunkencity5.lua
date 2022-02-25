@@ -1,6 +1,6 @@
 local nocrap = require("Modules.Dregu.no_crap")
 local death_blocks = require("Modules.JawnGC.death_blocks")
-
+local checkpoints = require("Checkpoints.checkpoints")
 local sunkencity5 = {
     identifier = "sunkencity 5",
     title = "Sunken City 5: LightoriArrow Glue Glue Bow",
@@ -39,6 +39,17 @@ sunkencity5.load_level = function()
         ent = get_entity(ent)
         return true
     end, "bomb_bag")
+
+    checkpoints.activate()
+    --Only spawn these if the player has reached a checkpoint
+    if checkpoints.get_saved_checkpoint() then
+        define_tile_code("checkpoint_door")
+        level_state.callbacks[#level_state.callbacks+1] = set_pre_tile_code_callback(function(x, y, layer)
+            spawn_entity(ENT_TYPE.FLOOR_DOOR_LAYER, x, y, layer, 0, 0)
+            spawn_entity(ENT_TYPE.BG_DOOR, x, y, layer, 0, 0)
+            return true
+        end, "checkpoint_door")
+    end
 
     replace_drop(DROP.POISONEDARROWTRAP_WOODENARROW, ENT_TYPE.ITEM_METAL_ARROW)
 

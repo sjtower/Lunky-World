@@ -54,7 +54,7 @@ local function activate(level_state, ent_type)
             monster_generator.on_off = true
             has_activated_monsters = true
             
-            get_sound(VANILLA_SOUND.UI_SECRET):play()
+            -- get_sound(VANILLA_SOUND.UI_SECRET):play()
             
         end
     end, ON.FRAME)

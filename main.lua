@@ -3,7 +3,7 @@ meta.version = '0'
 meta.description = 'Romping Kaizo fun!'
 meta.author = 'GetimOliver'
 
-register_option_int("level_selected", "Level number for shortcut door (1 to 36)", 1, 1, 36)
+register_option_int("level_selected", "Level number for shortcut door (1 to 42)", 1, 1, 42)
 register_option_bool("speedrun_mode", "Speedrun Mode (Instant Restart on death)", false)
 
 local level_sequence = require("LevelSequence/level_sequence")
@@ -66,6 +66,27 @@ local levels = {
 	sunkencity1, sunkencity2, sunkencity3, sunkencity4, sunkencity5, sunkencity6
 }
 level_sequence.set_levels(levels)
+
+-- clear 'carry through exit' flag from all spawned items
+set_post_entity_spawn(function(ent)
+    if state.screen == SCREEN.LEVEL then
+        ent.flags = clr_flag(ent.flags, 22)
+    end
+end, SPAWN_TYPE.ANY, MASK.ITEM, nil)
+
+-- remove all powerups when exiting
+set_callback(function()
+    if state.loading == 1 and state.screen_next == SCREEN.TRANSITION then
+        -- remove all companions before transition
+        state.items.player_inventory[1].companion_count = 0
+        for _,p in ipairs(players) do
+            for _,v in ipairs(p:get_powerups()) do
+                p:remove_powerup(v)
+                unequip_backitem(p.uid)
+            end
+        end
+    end
+end, ON.LOADING)
 
 --------------------------------------
 ---- DO NOT SPAWN GHOST 

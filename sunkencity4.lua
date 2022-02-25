@@ -53,28 +53,8 @@ sunkencity4.load_level = function()
     death_blocks.activate(level_state)
     inverse_timed_doors.activate(level_state, 50)
     timed_doors.activate(level_state, 100)
-    key_blocks.activate(level_state)
 
     checkpoints.activate()
-    checkpoints.checkpoint_activate_callback(function(x, y, layer, time)
-        save_checkpoint({
-            position = {
-                x = x,
-                y = y,
-                layer = layer,
-            },
-            time = time,
-        })
-    end)
-
-    if saved_checkpoint then
-        checkpoints.activate_checkpoint_at(
-            saved_checkpoint.position.x,
-            saved_checkpoint.position.y,
-            saved_checkpoint.position.layer,
-            saved_checkpoint.time
-        )
-    end
 
 	toast(sunkencity4.title)
 end
@@ -85,7 +65,6 @@ sunkencity4.unload_level = function()
     checkpoints.deactivate()
     inverse_timed_doors.deactivate()
     timed_doors.deactivate()
-    key_blocks.deactivate()
 
     local callbacks_to_clear = level_state.callbacks
     level_state.loaded = false

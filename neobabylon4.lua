@@ -26,6 +26,7 @@ neobabylon4.load_level = function()
     death_elevators.activate(level_state)
 
     level_state.callbacks[#level_state.callbacks+1] = set_post_entity_spawn(function (ent)
+        ent.type.max_speed = 0.02
         ent.flags = clr_flag(ent.flags, ENT_FLAG.FACING_LEFT)
     end, SPAWN_TYPE.ANY, 0, ENT_TYPE.MONS_UFO)
 

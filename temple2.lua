@@ -63,7 +63,7 @@ temple2.load_level = function()
         return true
     end, "key_block")
 
-    --Only spawn this key_block if the plaer has not reached a checkpoint
+    --Only spawn this key_block if the player has not reached a checkpoint
     if not checkpoints.get_saved_checkpoint() then
         define_tile_code("no_checkpoint_key_block")
         level_state.callbacks[#level_state.callbacks+1] = set_pre_tile_code_callback(function(x, y, layer)

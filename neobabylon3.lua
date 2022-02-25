@@ -5,10 +5,10 @@ local death_elevators = require("Modules.GetimOliver.death_elevators")
 
 local neobabylon3 = {
     identifier = "neobabylon 3",
-    title = "Neo Babylon 3: Lava Jumps",
+    title = "Neo Babylon 3: Lava Lamp",
     theme = THEME.NEO_BABYLON,
     width = 6,
-    height = 4,
+    height = 5,
     file_name = "neob-3.lvl",
 }
 

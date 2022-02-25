@@ -26,6 +26,13 @@ sunkencity2.load_level = function()
         return true
     end, "spike_shoes")
 
+    define_tile_code("spring_shoes")
+    level_state.callbacks[#level_state.callbacks+1] = set_pre_tile_code_callback(function(x, y, layer)
+        local gloves = spawn_entity(ENT_TYPE.ITEM_PICKUP_SPRINGSHOES, x, y, layer, 0, 0)
+        gloves = get_entity(gloves)
+        return true
+    end, "spring_shoes")
+
     define_tile_code("vlads_cape")
     level_state.callbacks[#level_state.callbacks+1] = set_pre_tile_code_callback(function(x, y, layer)
         local gloves = spawn_entity(ENT_TYPE.ITEM_VLADS_CAPE, x, y, layer, 0, 0)

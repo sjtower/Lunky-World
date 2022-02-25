@@ -24,18 +24,6 @@ neobabylon2.load_level = function()
 
     modify_sparktraps(0.1, 1.1)
 
-    define_tile_code("horizontal_ufo")
-    local ufos = {}
-    level_state.callbacks[#level_state.callbacks+1] = set_pre_tile_code_callback(function(x, y, layer)
-        local ent_uid = spawn_entity(ENT_TYPE.MONS_UFO, x, y, layer, 0, 0)
-        local ent = get_entity(ent_uid)
-        ent.velocityy = 0
-        ent.color:set_rgba(104, 37, 71, 255) --deep red
-        ent.flags = set_flag(ent.flags, ENT_FLAG.TAKE_NO_DAMAGE)
-        ent.flags = clr_flag(ent.flags, ENT_FLAG.FACING_LEFT)
-        ufos[#ufos + 1] = ent
-    end, "horizontal_ufo")
-
     checkpoints.activate()
 
 	toast(neobabylon2.title)

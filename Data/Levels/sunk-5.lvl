@@ -90,6 +90,7 @@
 \?bomb_bag                         i
 \?sleeping_hiredhand               j
 \?hundun                           k
+\?checkpoint_door                  l
 
 
 
@@ -276,10 +277,10 @@ XXXXXXXXXX XXXXXXXXXX
 ////////////////////////////////////////////////////////////////////////////////
 
 \!dual
-EEEEEEEXXX X0XXXXXXXX
-XXXXXXXX%0 XXXXXXXXXX
-0G0G0G0XX0 XXXXXXXXXX
-0000000XX0 XXXXXX@XXX
+EEEEEEEXXX X0XXXXXXX&
+XXXXXXXX%0 XXXXXXXXX&
+0G0G0G0XX0 XXXXXXXXX&
+0000000XX0 XXXXXX@XX&
 XX)))))XX0 XXXXXXX0XX
 XX00000XX0 XXXXXX@XXX
 XX00000000 XXXXXXXXXX
@@ -290,14 +291,14 @@ XX)))))XXX @XXXXXXXXX
 ////////////////////////////////////////////////////////////////////////////////
 
 \!dual
-XXXX000000 XXXXXXXXXX
-0000000000 XXXXXXXXXX
-00f000000. 0XXXXXXXXX
-0X&X.00000 XXXXXXXXXX
+XXXX000000 &&&&&&&&XX
+0000000000 0&&g&&0&XX
+0<fl00000. .i0>0h.&XX
+0X&X.00000 &&&&&&&&XX
 0XXX000000 XXXXXXXXXX
 .XXXEEEEEE XXXXXXXXXX
 0*0XXXXXXX XXXXXXXXXX
-XXX1111111 XXXXXXXXXX
+XXXXXXXXXX XXXXXXXXXX
 
 ////////////////////////////////////////////////////////////////////////////////
 \.setroom2_3   // sunken
@@ -308,9 +309,9 @@ XXX1111111 XXXXXXXXXX
 .00XX0XXXX
 000000XXXX
 000000XXXX
-EEEEEEXXXX
+EEEEEEX00X
+XXXXXXXjf'
 XXXXXXXXXX
-11111111XX
 
 ////////////////////////////////////////////////////////////////////////////////
 \.setroom2_4   // sunken
@@ -323,7 +324,7 @@ XXXX0XXXX1 XXXXXXXXXX
 XXXX)XXXX2 XXXXXXXXXX
 XXX000C111 XXXXXXXXXX
 00X00FFXXX XXXXXXXXXX
-j0'0000000 XXXXXXXXXX
+j0'00FF000 XXXXXXXXXX
 XXXX)XXXEE XXXXXXXXXX
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -360,7 +361,7 @@ E000000001 XXXXXXXXXX
 XX00000XXX
 XXEEE00XX1
 XXXXXEEXX1
-11111XXXX1
+1111XXXXX1
 1111111111
 1111'11111
 0000000000
@@ -383,7 +384,7 @@ XXX1111111
 \.setroom3_3   // sunken
 ////////////////////////////////////////////////////////////////////////////////
 
-11111111XX
+111111XXXX
 1111111111
 1111111111
 11111111'1

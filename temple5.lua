@@ -3,7 +3,7 @@ local death_blocks = require("Modules.JawnGC.death_blocks")
 
 local temple5 = {
     identifier = "temple5",
-    title = "Temple 5: Super Twiggle World",
+    title = "Temple 5: Coven Interrupted",
     theme = THEME.TEMPLE,
     width = 4,
     height = 4,
