@@ -1,6 +1,6 @@
 meta.name = 'Lunky World'
-meta.version = '0'
-meta.description = 'Romping Kaizo fun!'
+meta.version = '1.0'
+meta.description = 'The wild world of Lunky awaits!'
 meta.author = 'GetimOliver'
 
 register_option_int("level_selected", "Level number for shortcut door (1 to 42)", 1, 1, 42)
