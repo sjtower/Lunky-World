@@ -14,7 +14,7 @@ Let me know if you stream this mod - [I would love to watch!](https://twitch.tv/
 Links:
 
 * Ask questions, report bugs or hang out in [Discord](https://discord.gg/dRnr5fm387)
-<!-- TODO -->
-* Stuck? Check the [Clear Video](https://www.youtube.com/watch?)
 * Open source [Github Repository](https://github.com/sjtower/lunky-world)
 * Read about installing mods over at [Spelunky.fyi](https://spelunky.fyi/mods/overview/)
+* <!-- TODO -->
+* Stuck? Check the [Clear Video](https://www.youtube.com/watch?)
