@@ -26,12 +26,19 @@ dwelling2.load_level = function()
 
     checkpoints.activate()
 
-    local skull;
+    level_state.callbacks[#level_state.callbacks+1] = set_post_entity_spawn(function(entity, spawn_flags)
+		entity:destroy()
+	end, SPAWN_TYPE.SYSTEMIC, 0, ENT_TYPE.ITEM_SKULL)
+
+    level_state.callbacks[#level_state.callbacks+1] = set_post_entity_spawn(function(entity, spawn_flags)
+		entity:destroy()
+	end, SPAWN_TYPE.SYSTEMIC, 0, ENT_TYPE.MONS_SKELETON)
+
     level_state.callbacks[#level_state.callbacks+1] = set_pre_tile_code_callback(function(x, y, layer)
-        local skull_id = spawn_entity(ENT_TYPE.ITEM_SKULL, x, y, layer, 0, 0)
-        skull = get_entity(skull_id)
+        local ent = spawn_entity(ENT_TYPE.ITEM_PICKUP_PITCHERSMITT, x, y, layer, 0, 0)
+        ent = get_entity(ent)
         return true
-    end, "skull")
+    end, "pitchers_mitt")
 
     local torch;
     level_state.callbacks[#level_state.callbacks+1] = set_pre_tile_code_callback(function(x, y, layer)

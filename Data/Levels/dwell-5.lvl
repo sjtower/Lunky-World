@@ -11,6 +11,7 @@
 \-idol_room_chance                       0          // 1/N chance of an idol room (default = 10)
 \-floor_side_spread_chance               0          // 1/N chance of a spreadable floor spreading to its side (default = 10)
 \-floor_bottom_spread_chance             0          // 1/N chance of a spreadable floor spreading to its bottom (default = 5)
+\-size                                   8 3
 
 \?empty                            0
 \?floor                            1
@@ -96,7 +97,7 @@ XX11111111
 ]011111111
 0000111111
 1110011111
-$211110E00
+$211100E00
 1111111111
 XXX1111111
 XXX1111111
@@ -280,7 +281,7 @@ XCXXXXXX,,
 000XXXXXXX
 00000000++
 0*000000++
-00000+0055
+0```0+0055
 ,,,,,11055
 11111XXXXX
 

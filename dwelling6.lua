@@ -1,4 +1,4 @@
-local sound = require('play_sound')
+local death_blocks = require("Modules.JawnGC.death_blocks")
 local clear_embeds = require('clear_embeds')
 
 define_tile_code("quillback_jump_switch")
@@ -24,6 +24,9 @@ local qb_jump_switches = {};
 dwelling6.load_level = function()
     if level_state.loaded then return end
     level_state.loaded = true
+
+    death_blocks.set_ent_type(ENT_TYPE.FLOOR_BORDERTILE)
+    death_blocks.activate(level_state)
 
     -- Creates a Quilliam that will stun or jump when with a "quillback switch".
     level_state.callbacks[#level_state.callbacks+1] = set_pre_tile_code_callback(function(x, y, layer)

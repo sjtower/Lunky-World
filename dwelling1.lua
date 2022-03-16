@@ -1,5 +1,4 @@
-local sound = require('play_sound')
-local clear_embeds = require('clear_embeds')
+local nocrap = require("Modules.Dregu.no_crap")
 local moving_totems = require("Modules.JayTheBusinessGoose.moving_totems")
 local checkpoints = require("Checkpoints/checkpoints")
 
@@ -23,8 +22,6 @@ local level_state = {
 dwelling1.load_level = function()
     if level_state.loaded then return end
     level_state.loaded = true
-
-    players[1].health = 2
 
     level_state.callbacks[#level_state.callbacks+1] = set_post_entity_spawn(function (snake)
 

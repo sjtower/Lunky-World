@@ -1,6 +1,6 @@
 local nocrap = require("Modules.Dregu.no_crap")
 local death_blocks = require("Modules.JawnGC.death_blocks")
-local checkpoints = require("Checkpoints.checkpoints")
+local checkpoints = require("Checkpoints/checkpoints")
 local sunkencity5 = {
     identifier = "sunkencity 5",
     title = "Sunken City 5: LightoriArrow Glue Glue Bow",

@@ -21,9 +21,19 @@ local level_state = {
 local quilliams = {}
 local qb_jump_switches = {};
 
+local function quilliam_jump(height) 
+    for _, q in ipairs(quilliams) do
+        q:damage(q.uid, 0, 0, 0, height, 0)
+    end
+end
+
 dwelling5.load_level = function()
     if level_state.loaded then return end
     level_state.loaded = true
+
+    level_state.callbacks[#level_state.callbacks+1] = set_post_entity_spawn(function(entity, spawn_flags)
+		entity:destroy()
+	end, SPAWN_TYPE.SYSTEMIC, 0, ENT_TYPE.ITEM_SKULL)
 
     -- Creates a Quilliam that will stun or jump when with a "quillback switch".
     level_state.callbacks[#level_state.callbacks+1] = set_pre_tile_code_callback(function(x, y, layer)
@@ -39,30 +49,29 @@ dwelling5.load_level = function()
         return true
     end, "switchable_quillback")
 
+    define_tile_code("quillback_jump_switch")
+    local has_quilliam_jumped = false
     level_state.callbacks[#level_state.callbacks+1] = set_pre_tile_code_callback(function(x, y, layer)
         local switch_id = spawn_entity(ENT_TYPE.ITEM_SLIDINGWALL_SWITCH, x, y, layer, 0, 0)
         local switch = get_entity(switch_id)
-        switch.color = Color:white()
+        switch.color = Color:green()
         qb_jump_switches[#qb_jump_switches + 1] = switch
-        return true
-    end, "quillback_jump_switch")
-
-    local has_quilliam_jumped = false
-    level_state.callbacks[#level_state.callbacks+1] = set_callback(function()
-        for _, qb_jump_switch in ipairs(qb_jump_switches) do
-            if not qb_jump_switch then return end
-            if qb_jump_switch.timer > 10 and has_quilliam_jumped then
-                has_quilliam_jumped = false
-                qb_jump_switch.timer = 0
-            end
-            if qb_jump_switch.timer > 0 and not has_quilliam_jumped then
-                has_quilliam_jumped = true
-                for _, quilliam in ipairs(quilliams) do
-                    quilliam:damage(qb_jump_switch.uid, 0, 0, 0, .2, 0)
+        local timer = 1
+        local sound = get_sound(VANILLA_SOUND.ENEMIES_CAVEMAN_TRIGGER)
+        set_on_damage(switch_id, function(self)
+            if self.timer > 0 then return end
+                if not has_quilliam_jumped then
+                    self.timer = timer
+                    self.animation_frame = self.animation_frame == 86 and 96 or 86
+                    has_quilliam_jumped = true
+                    quilliam_jump(.2)
+                    sound:play()
                 end
-            end
-        end
-    end, ON.FRAME)
+            self.animation_frame = self.animation_frame == 86 and 96 or 86
+            has_quilliam_jumped = false
+            self.timer = 0
+        end)
+    end, "quillback_jump_switch")
        
     level_state.callbacks[#level_state.callbacks+1] = set_callback(function()
         for _, quilliam in ipairs(quilliams) do
