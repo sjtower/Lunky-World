@@ -26,7 +26,9 @@ neobabylon2.load_level = function()
 
     checkpoints.activate()
 
-	toast(neobabylon2.title)
+    if not checkpoints.get_saved_checkpoint() then
+        toast(neobabylon2.title)
+    end
 end
 
 neobabylon2.unload_level = function()

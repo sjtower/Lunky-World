@@ -69,7 +69,9 @@ neobabylon5.load_level = function()
     key_blocks.activate(level_state)
     inverse_timed_doors.activate(level_state, 1500)
 
-	toast(neobabylon5.title)
+    if not checkpoints.get_saved_checkpoint() then
+        toast(neobabylon5.title)
+    end
 end
 
 neobabylon5.unload_level = function()

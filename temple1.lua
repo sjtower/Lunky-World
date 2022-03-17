@@ -30,7 +30,9 @@ temple1.load_level = function()
 		entity:destroy()
 	end, SPAWN_TYPE.SYSTEMIC, 0, ENT_TYPE.MONS_SKELETON)
 
-	toast(temple1.title)
+	if not checkpoints.get_saved_checkpoint() then
+        toast(temple1.title)
+    end
 end
 
 temple1.unload_level = function()

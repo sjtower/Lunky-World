@@ -35,7 +35,9 @@ jungle3.load_level = function()
         mantrap.color = Color:red()
     end, SPAWN_TYPE.ANY, 0, ENT_TYPE.MONS_MANTRAP)
 
-    toast(jungle3.title)
+    if not checkpoints.get_saved_checkpoint() then
+        toast(jungle3.title)
+    end
 end
 
 define_tile_code("slow_falling_platform")

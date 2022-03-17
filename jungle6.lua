@@ -36,7 +36,9 @@ jungle6.load_level = function()
         return true
     end, "mattock")
 
-    toast(jungle6.title)
+    if not checkpoints.get_saved_checkpoint() then
+        toast(jungle6.title)
+    end
 end
 
 define_tile_code("slow_falling_platform")

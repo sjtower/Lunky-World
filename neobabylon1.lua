@@ -23,7 +23,7 @@ neobabylon1.load_level = function()
         ent.flags = clr_flag(ent.flags, ENT_FLAG.FACING_LEFT)
     end, SPAWN_TYPE.ANY, 0, ENT_TYPE.MONS_UFO)
 
-	toast(neobabylon1.title)
+    toast(neobabylon1.title)
 end
 
 neobabylon1.unload_level = function()

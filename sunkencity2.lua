@@ -49,7 +49,9 @@ sunkencity2.load_level = function()
 
     checkpoints.activate()
 
-	toast(sunkencity2.title)
+	if not checkpoints.get_saved_checkpoint() then
+        toast(sunkencity2.title)
+    end
 end
 
 sunkencity2.unload_level = function()

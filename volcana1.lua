@@ -20,7 +20,9 @@ volcana1.load_level = function()
 
     checkpoints.activate()
 
-    toast(volcana1.title)
+    if not checkpoints.get_saved_checkpoint() then
+        toast(volcana1.title)
+    end
 end
 
 volcana1.unload_level = function()

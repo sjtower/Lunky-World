@@ -111,7 +111,9 @@ temple2.load_level = function()
         end, "checkpoint_door")
     end
 
-	toast(temple2.title)
+	if not checkpoints.get_saved_checkpoint() then
+        toast(temple2.title)
+    end
 end
 
 temple2.unload_level = function()

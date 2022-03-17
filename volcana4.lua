@@ -37,7 +37,9 @@ volcana4.load_level = function()
         return true
     end, "right_facing_robot")
 
-    toast(volcana4.title)
+    if not checkpoints.get_saved_checkpoint() then
+        toast(volcana4.title)
+    end
 end
 
 volcana4.unload_level = function()

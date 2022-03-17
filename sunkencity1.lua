@@ -26,8 +26,10 @@ sunkencity1.load_level = function()
     end, "sunken_arrow_trap")
 
     checkpoints.activate()
-    
-	toast(sunkencity1.title)
+
+	if not checkpoints.get_saved_checkpoint() then
+        toast(sunkencity1.title)
+    end
 end
 
 sunkencity1.unload_level = function()

@@ -22,7 +22,9 @@ volcana3.load_level = function()
     checkpoints.activate()
     key_blocks.activate(level_state)
 
-    toast(volcana3.title)
+    if not checkpoints.get_saved_checkpoint() then
+        toast(volcana3.title)
+    end
 end
 
 volcana3.unload_level = function()

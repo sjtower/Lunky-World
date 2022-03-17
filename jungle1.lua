@@ -20,7 +20,7 @@ jungle1.load_level = function()
     level_state.loaded = true
 
     checkpoints.activate()
-    signs.activate(level_state, {"whip-jump required", "Going through doors gives you temporary invincibility"})
+    signs.activate(level_state, {"Pro Tip: whip-jump - while hanging, press jump and whip at the exact same time without any movement left or right", "Pro Tip: Going through doors gives you temporary invincibility"})
 
     level_state.callbacks[#level_state.callbacks+1] = set_post_entity_spawn(function (mantrap)
         mantrap.flags = clr_flag(mantrap.flags, ENT_FLAG.STUNNABLE)
@@ -30,7 +30,9 @@ jungle1.load_level = function()
 
     end, SPAWN_TYPE.ANY, 0, ENT_TYPE.MONS_MANTRAP)
 
-    toast(jungle1.title)
+    if not checkpoints.get_saved_checkpoint() then
+        toast(jungle1.title)
+    end
 end
 
 jungle1.unload_level = function()

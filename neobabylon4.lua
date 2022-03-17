@@ -30,7 +30,9 @@ neobabylon4.load_level = function()
         ent.flags = clr_flag(ent.flags, ENT_FLAG.FACING_LEFT)
     end, SPAWN_TYPE.ANY, 0, ENT_TYPE.MONS_UFO)
 
-	toast(neobabylon4.title)
+    if not checkpoints.get_saved_checkpoint() then
+        toast(neobabylon4.title)
+    end
 end
 
 neobabylon4.unload_level = function()

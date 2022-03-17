@@ -46,7 +46,9 @@ dwelling3.load_level = function()
         return true
     end, "sleeping_bat")
 
-    toast(dwelling3.title)
+    if not checkpoints.get_saved_checkpoint() then
+        toast(dwelling3.title)
+    end
 end
 
 dwelling3.unload_level = function()

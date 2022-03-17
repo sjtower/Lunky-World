@@ -96,7 +96,9 @@ sunkencity6.load_level = function()
         )
     end
 
-	toast(sunkencity6.title)
+	if not checkpoints.get_saved_checkpoint() then
+toast(sunkencity6.title)
+end
 end
 
 sunkencity6.unload_level = function()

@@ -56,7 +56,9 @@ sunkencity5.load_level = function()
     death_blocks.set_ent_type(ENT_TYPE.FLOOR_BORDERTILE)
     death_blocks.activate(level_state)
 
-	toast(sunkencity5.title)
+	if not checkpoints.get_saved_checkpoint() then
+        toast(sunkencity5.title)
+    end
 end
 
 sunkencity5.unload_level = function()

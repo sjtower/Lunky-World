@@ -81,7 +81,9 @@ dwelling2.load_level = function()
         pick_up(entity.uid, torch_uid)
     end, SPAWN_TYPE.ANY, 0, ENT_TYPE.MONS_CAVEMAN)
 
-    toast(dwelling2.title)
+    if not checkpoints.get_saved_checkpoint() then
+        toast(dwelling2.title)
+    end
 end
 
 dwelling2.unload_level = function()

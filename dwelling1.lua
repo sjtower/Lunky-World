@@ -51,7 +51,10 @@ dwelling1.load_level = function()
     moving_totems.activate(level_state)
     checkpoints.activate()
 
-    toast(dwelling1.title)
+    if not checkpoints.get_saved_checkpoint() then
+        toast(dwelling1.title)
+    end
+
 end
 
 dwelling1.unload_level = function()

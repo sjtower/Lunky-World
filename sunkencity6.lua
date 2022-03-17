@@ -81,7 +81,9 @@ sunkencity6.load_level = function()
     death_blocks.set_ent_type(ENT_TYPE.FLOORSTYLED_SUNKEN)
     death_blocks.activate(level_state)
 
-	toast(sunkencity6.title)
+	if not checkpoints.get_saved_checkpoint() then
+        toast(sunkencity6.title)
+    end
 end
 
 sunkencity6.unload_level = function()

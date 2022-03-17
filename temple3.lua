@@ -50,7 +50,9 @@ temple3.load_level = function()
         end)
     end, SPAWN_TYPE.ANY, 0, ENT_TYPE.FLOOR_THORN_VINE)
 
-	toast(temple3.title)
+	if not checkpoints.get_saved_checkpoint() then
+        toast(temple3.title)
+    end
 end
 
 temple3.unload_level = function()

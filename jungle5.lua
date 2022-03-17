@@ -35,7 +35,9 @@ jungle5.load_level = function()
         return true
     end, "climbing_gloves")
 
-    toast(jungle5.title)
+    if not checkpoints.get_saved_checkpoint() then
+        toast(jungle5.title)
+    end
 end
 
 define_tile_code("slow_falling_platform")

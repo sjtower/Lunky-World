@@ -32,7 +32,9 @@ tidepool4.load_level = function()
         
     end, SPAWN_TYPE.ANY, 0, ENT_TYPE.MONS_FISH)
 
-	toast(tidepool4.title)
+	if not checkpoints.get_saved_checkpoint() then
+toast(tidepool4.title)
+end
 end
 
 tidepool4.unload_level = function()

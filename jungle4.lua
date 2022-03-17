@@ -50,7 +50,9 @@ jungle4.load_level = function()
         end)
     end, SPAWN_TYPE.ANY, 0, ENT_TYPE.FLOOR_THORN_VINE)
 
-    toast(jungle4.title)
+    if not checkpoints.get_saved_checkpoint() then
+        toast(jungle4.title)
+    end
 end
 
 define_tile_code("slow_falling_platform")

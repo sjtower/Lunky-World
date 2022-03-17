@@ -25,7 +25,9 @@ neobabylon3.load_level = function()
     death_blocks.activate(level_state)
     death_elevators.activate(level_state)
 
-	toast(neobabylon3.title)
+    if not checkpoints.get_saved_checkpoint() then
+        toast(neobabylon3.title)
+    end
 end
 
 neobabylon3.unload_level = function()

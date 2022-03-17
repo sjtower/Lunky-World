@@ -27,7 +27,9 @@ tidepool1.load_level = function()
         return true
     end, "spike_shoes")
 
-    toast(tidepool1.title)
+    if not checkpoints.get_saved_checkpoint() then
+        toast(tidepool1.title)
+    end
 end
 
 tidepool1.unload_level = function()
