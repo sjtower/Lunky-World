@@ -2,7 +2,7 @@ local key_blocks = require("Modules.GetimOliver.key_blocks")
 
 local tidepool5 = {
     identifier = "tidepool5",
-    title = "Tidepool 5: Thorny Channel",
+    title = "Tidepool 5: Thaxe-el-ottl Damage!",
     theme = THEME.TIDE_POOL,
     width = 4,
     height = 4,
