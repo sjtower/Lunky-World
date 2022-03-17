@@ -1,14 +1,12 @@
 meta.name = 'Lunky World'
 meta.version = '1.0'
-meta.description = 'The wild world of Lunky awaits!'
+meta.description = '42 custom levels filled with new enemies and unique block mechanics'
 meta.author = 'GetimOliver'
 
 register_option_int("level_selected", "Level number for shortcut door (1 to 42)", 1, 1, 42)
 register_option_bool("speedrun_mode", "Speedrun Mode (Instant Restart on death)", false)
 
 local level_sequence = require("LevelSequence/level_sequence")
-local sound = require('play_sound')
-local clear_embeds = require('clear_embeds')
 local SIGN_TYPE = level_sequence.SIGN_TYPE
 local save_state = require('save_state')
 

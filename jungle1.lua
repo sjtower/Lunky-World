@@ -1,4 +1,6 @@
 local checkpoints = require("Checkpoints/checkpoints")
+local signs = require("Modules.JayTheBusinessGoose.signs")
+
 local jungle1 = {
     identifier = "jungle1",
     title = "Jungle 1: Deadly Canopy",
@@ -18,6 +20,7 @@ jungle1.load_level = function()
     level_state.loaded = true
 
     checkpoints.activate()
+    signs.activate(level_state, {"whip-jump required", "Going through doors gives you temporary invincibility"})
 
     level_state.callbacks[#level_state.callbacks+1] = set_post_entity_spawn(function (mantrap)
         mantrap.flags = clr_flag(mantrap.flags, ENT_FLAG.STUNNABLE)
@@ -34,6 +37,7 @@ jungle1.unload_level = function()
     if not level_state.loaded then return end
 
     checkpoints.deactivate()
+    signs.deactivate()
 
     local callbacks_to_clear = level_state.callbacks
     level_state.loaded = false

@@ -50,11 +50,11 @@ local function activate(level_state, ent_type)
             monster_generator.on_off = true
             spawned_monster = nil
         end
-        if monster_switch.timer > 0 and not has_activated_monsters then
+        if monster_switch and monster_switch.timer > 0 and not has_activated_monsters then
             monster_generator.on_off = true
             has_activated_monsters = true
             
-            -- get_sound(VANILLA_SOUND.UI_SECRET):play()
+            get_sound(VANILLA_SOUND.UI_SECRET):play()
             
         end
     end, ON.FRAME)

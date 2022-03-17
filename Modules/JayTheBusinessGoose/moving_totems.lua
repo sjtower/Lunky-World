@@ -1,5 +1,4 @@
 local moving_totems = {}
-
 local function activate(level_state)
 
     -- Creates walls that will be destroyed when the totem_switch is switched. Don't ask why these are called totems, they're just walls.
