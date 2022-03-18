@@ -7,6 +7,7 @@ local volcana5 = {
     width = 4,
     height = 6,
     file_name = "volc-5.lvl",
+    world = 3,
 }
 
 local level_state = {

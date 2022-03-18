@@ -11,6 +11,7 @@ local dwelling5 = {
     width = 8,
     height = 3,
     file_name = "dwell-5.lvl",
+    world = 1,
 }
 
 local level_state = {

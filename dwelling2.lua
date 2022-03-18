@@ -1,6 +1,5 @@
-local sound = require('play_sound')
-local clear_embeds = require('clear_embeds')
 local checkpoints = require("Checkpoints/checkpoints")
+local signs = require("Modules.JayTheBusinessGoose.signs")
 
 define_tile_code("skull")
 define_tile_code("torch")
@@ -13,6 +12,7 @@ local dwelling2 = {
     width = 6,
     height = 6,
     file_name = "dwell-2.lvl",
+    world = 1,
 }
 
 local level_state = {
@@ -25,6 +25,7 @@ dwelling2.load_level = function()
     level_state.loaded = true
 
     checkpoints.activate()
+    signs.activate(level_state, {"↑"})
 
     level_state.callbacks[#level_state.callbacks+1] = set_post_entity_spawn(function(entity, spawn_flags)
 		entity:destroy()
@@ -90,6 +91,7 @@ dwelling2.unload_level = function()
     if not level_state.loaded then return end
 
     checkpoints.deactivate()
+    signs.deactivate()
 
     local callbacks_to_clear = level_state.callbacks
     level_state.loaded = false

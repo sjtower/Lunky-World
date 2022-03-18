@@ -5,6 +5,7 @@ local neobabylon1 = {
     width = 2,
     height = 6,
     file_name = "neob-1.lvl",
+    world = 6,
 }
 
 local level_state = {
@@ -15,6 +16,13 @@ local level_state = {
 neobabylon1.load_level = function()
     if level_state.loaded then return end
     level_state.loaded = true
+
+    define_tile_code("shield_wooden")
+    level_state.callbacks[#level_state.callbacks+1] = set_pre_tile_code_callback(function(x, y, layer)
+        local ent = spawn_entity(ENT_TYPE.ITEM_WOODEN_SHIELD, x, y, layer, 0, 0)
+        ent = get_entity(ent)
+        return true
+    end, "shield_wooden")
 
     level_state.callbacks[#level_state.callbacks+1] = set_post_entity_spawn(function (ent)
         ent.type.max_speed = 0.05

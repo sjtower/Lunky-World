@@ -1,11 +1,12 @@
 local checkpoints = require("Checkpoints/checkpoints")
 local tidepool4 = {
     identifier = "tidepool4",
-    title = "Tidepool 4: Free Willy",
+    title = "Tidepool 4: Torpedoes",
     theme = THEME.TIDE_POOL,
     width = 8,
     height = 2,
     file_name = "tide-4.lvl",
+    world = 4,
 }
 
 local level_state = {

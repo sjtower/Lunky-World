@@ -8,6 +8,7 @@ local sunkencity2 = {
     width = 4,
     height = 4,
     file_name = "sunk-2.lvl",
+    world = 7,
 }
 
 local level_state = {

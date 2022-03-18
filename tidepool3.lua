@@ -7,6 +7,7 @@ local tidepool3 = {
     width = 4,
     height = 4,
     file_name = "tide-3.lvl",
+    world = 4,
 }
 
 local level_state = {

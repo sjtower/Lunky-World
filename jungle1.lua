@@ -8,7 +8,7 @@ local jungle1 = {
     width = 4,
     height = 4,
     file_name = "jung-1.lvl",
-    world = 2
+    world = 2,
 }
 
 local level_state = {
@@ -21,7 +21,7 @@ jungle1.load_level = function()
     level_state.loaded = true
 
     checkpoints.activate()
-    signs.activate(level_state, {"Pro Tip: whip-jump - while hanging, press jump and whip at the exact same time without any movement left or right", "Pro Tip: Going through doors gives you temporary invincibility"})
+    signs.activate(level_state, {"Pro Tip: Whip-Jump - while hanging, press jump and whip at the exact same time without any movement left or right", "Pro Tip: Going through doors gives you temporary invincibility"})
 
     level_state.callbacks[#level_state.callbacks+1] = set_post_entity_spawn(function (mantrap)
         mantrap.flags = clr_flag(mantrap.flags, ENT_FLAG.STUNNABLE)

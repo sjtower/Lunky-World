@@ -2,11 +2,12 @@ local death_blocks = require("Modules.JawnGC.death_blocks")
 
 local temple6 = {
     identifier = "temple6",
-    title = "Temple 6: Ghostbuster",
+    title = "Temple 6: Ghostbusters",
     theme = THEME.TEMPLE,
     width = 4,
     height = 4,
     file_name = "temp-6.lvl",
+    world = 5,
 }
 
 local level_state = {
