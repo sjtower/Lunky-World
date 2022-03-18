@@ -15,8 +15,7 @@ local function handle_sign_toasts(sign_texts)
                 -- print(distance(player.uid, sign.sign.uid))
                 if distance(player.uid, sign.uid) <= 0.5
                 then
-                    if not checkpoints.get_saved_checkpoint() then
-toast(sign_texts[i])
+                    toast(sign_texts[i])
                 end
             end
         end
