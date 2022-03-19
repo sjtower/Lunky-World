@@ -84,6 +84,7 @@
 \?inverse_timed_door               c
 \?inverse_timed_door_switch        d
 \?door2_secret                     e
+\?eggplant_child                   f
 
 
 
@@ -271,8 +272,8 @@ b111111111
 '1''111'1' XXXXXXXXXX
 111'111115 XXXXXXXXXX
 111'111111 X&&&XXXXXX
-111'111'1b X&S&XXXXXX
-111'''''b0 &&'&&&XXXX
+111'111'bb X&S&XXXXXX
+111'''''00 &&'&&&XXXX
 111'111100 00000&XXXX
 '11''1b000 0.0.0&XXXX
 11e'1b0000 00>00&XXXX
@@ -310,11 +311,11 @@ E11111_..b
 \!dual
 1111111111 @@XXXXXXXX
 1111111111 XX@XXXXXXX
-1111111111 XXXXX0XXXX
-1111111111 XXXX@XX0XX
-&&&&111111 XXXX@XXXXX
-&Y0&&&&&&& XXXXXXXXXX
-&$U0000000 XXXX0XXXXX
+1111111111 XXXXXXXXXX
+&&&1111111 XXX00000XX
+&Y&&111111 XXX0.0f0XX
+&>0&&&&&&& X>000&&&XX
+&$U0000000 XXXXXXXXXX
 &&&&&&&&&0 XXXXXXX@XX
 
 ////////////////////////////////////////////////////////////////////////////////

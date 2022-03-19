@@ -1,6 +1,8 @@
 local nocrap = require("Modules.Dregu.no_crap")
 local death_blocks = require("Modules.JawnGC.death_blocks")
 local checkpoints = require("Checkpoints/checkpoints")
+local signs = require("Modules.JayTheBusinessGoose.signs")
+
 local sunkencity5 = {
     identifier = "sunkencity 5",
     title = "Sunken City 5: LightoriArrow Glue Glue Bow",
@@ -56,6 +58,7 @@ sunkencity5.load_level = function()
 
     death_blocks.set_ent_type(ENT_TYPE.FLOOR_BORDERTILE)
     death_blocks.activate(level_state)
+    signs.activate(level_state, {"Pro Tip: You can attach sticky bombs to arrows and shoot them", "Pro Tip: Bow-Jump - while holding a bow, press jump and shoot at the exact same time"})
 
 	if not checkpoints.get_saved_checkpoint() then
         toast(sunkencity5.title)
