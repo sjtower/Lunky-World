@@ -35,7 +35,7 @@ dwelling3.load_level = function()
         ent.color = Color:red()
         set_pre_collision2(ent.uid, function(self, collision_entity)
             if collision_entity.uid == players[1].uid and players[1].invincibility_frames_timer <= 0 then
-                players[1]:damage(ent.uid, 1, 0, 0, 0, 0)
+                players[1]:damage(ent.uid, 1, 0, 0, 0, 600)
             end
         end)
     end, SPAWN_TYPE.ANY, 0, ENT_TYPE.FLOOR_SPRING_TRAP)

@@ -28,8 +28,11 @@ jungle1.load_level = function()
         mantrap.flags = clr_flag(mantrap.flags, ENT_FLAG.FACING_LEFT)
         mantrap.flags = set_flag(mantrap.flags, ENT_FLAG.TAKE_NO_DAMAGE)
         mantrap.color = Color:red()
-
     end, SPAWN_TYPE.ANY, 0, ENT_TYPE.MONS_MANTRAP)
+
+    level_state.callbacks[#level_state.callbacks+1] = set_post_entity_spawn(function(entity, spawn_flags)
+		entity:destroy()
+	end, SPAWN_TYPE.SYSTEMIC, 0, ENT_TYPE.ITEM_SKULL)
 
     if not checkpoints.get_saved_checkpoint() then
         toast(jungle1.title)
