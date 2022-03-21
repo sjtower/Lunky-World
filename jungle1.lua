@@ -9,6 +9,7 @@ local jungle1 = {
     height = 4,
     file_name = "jung-1.lvl",
     world = 2,
+    level = 1,
 }
 
 local level_state = {
@@ -33,6 +34,15 @@ jungle1.load_level = function()
     level_state.callbacks[#level_state.callbacks+1] = set_post_entity_spawn(function(entity, spawn_flags)
 		entity:destroy()
 	end, SPAWN_TYPE.SYSTEMIC, 0, ENT_TYPE.ITEM_SKULL)
+
+    if checkpoints.saved_checkpoint then
+        define_tile_code("checkpoint_key")
+        level_state.callbacks[#level_state.callbacks+1] = set_pre_tile_code_callback(function(x, y, layer)
+            local ent = spawn_entity(ENT_TYPE.ITEM_KEY, x, y, layer, 0, 0)
+            ent = get_entity(ent)
+            return true
+        end, "checkpoint_key")
+    end
 
     if not checkpoints.get_saved_checkpoint() then
         toast(jungle1.title)

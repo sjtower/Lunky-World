@@ -9,6 +9,7 @@ local temple5 = {
     height = 4,
     file_name = "temp-5.lvl",
     world = 5,
+    level = 5,
 }
 
 local level_state = {

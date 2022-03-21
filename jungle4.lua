@@ -8,6 +8,7 @@ local jungle4 = {
     height = 10,
     file_name = "jung-4.lvl",
     world = 2,
+    level = 3,
 }
 
 local level_state = {

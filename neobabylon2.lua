@@ -10,6 +10,7 @@ local neobabylon2 = {
     height = 2,
     file_name = "neob-2.lvl",
     world = 6,
+    level = 2,
 }
 
 local level_state = {

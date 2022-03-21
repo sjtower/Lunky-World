@@ -1,4 +1,6 @@
 local checkpoints = require("Checkpoints/checkpoints")
+local death_blocks = require("Modules.JawnGC.death_blocks")
+
 local jungle3 = {
     identifier = "jungle3",
     title = "Jungle 3: Slow Burn",
@@ -7,6 +9,7 @@ local jungle3 = {
     height = 5,
     file_name = "jung-3.lvl",
     world = 2,
+    level = 2,
 }
 
 local level_state = {
@@ -19,6 +22,7 @@ jungle3.load_level = function()
     level_state.loaded = true
 
     checkpoints.activate()
+    death_blocks.activate()
 
     if checkpoints.saved_checkpoint then
         define_tile_code("checkpoint_key")

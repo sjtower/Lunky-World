@@ -6,6 +6,7 @@ local tidepool6 = {
     height = 5,
     file_name = "tide-6.lvl",
     world = 4,
+    level = 6,
 }
 
 local level_state = {
@@ -28,33 +29,19 @@ tidepool6.load_level = function()
         return true
     end, "cape")
 
-    level_state.callbacks[#level_state.callbacks+1] = set_post_entity_spawn(function (boss_bones)
-        boss_bones.color = Color:red()
-        boss_bones.health = 20
-        boss_bones.flags = clr_flag(boss_bones.flags, ENT_FLAG.STUNNABLE)
-        boss_bones:give_powerup(ENT_TYPE.ITEM_POWERUP_SPIKE_SHOES)        
+    level_state.callbacks[#level_state.callbacks+1] = set_post_entity_spawn(function (ent)
+        ent.color:set_rgba(235, 61, 96, 255) --hot pink
+        ent.health = 20
+        ent.flags = clr_flag(ent.flags, ENT_FLAG.STUNNABLE)
+        ent:give_powerup(ENT_TYPE.ITEM_POWERUP_SPIKE_SHOES)        
     end, SPAWN_TYPE.ANY, 0, ENT_TYPE.MONS_FEMALE_JIANGSHI)
 
-    level_state.callbacks[#level_state.callbacks+1] = set_post_entity_spawn(function (minion_bones)
-        minion_bones.color = Color:blue()
-        minion_bones.health = 4
-        minion_bones.flags = clr_flag(minion_bones.flags, ENT_FLAG.STUNNABLE)
-        minion_bones:give_powerup(ENT_TYPE.ITEM_POWERUP_SPIKE_SHOES)
+    level_state.callbacks[#level_state.callbacks+1] = set_post_entity_spawn(function (ent)
+        ent.color:set_rgba(108, 220, 235, 255) --light blue
+        ent.health = 4
+        ent.flags = clr_flag(ent.flags, ENT_FLAG.STUNNABLE)
+        ent:give_powerup(ENT_TYPE.ITEM_POWERUP_SPIKE_SHOES)
     end, SPAWN_TYPE.ANY, 0, ENT_TYPE.MONS_JIANGSHI)
-
-    level_state.callbacks[#level_state.callbacks+1] = set_post_entity_spawn(function (thorn)
-        thorn.color = Color:red()
-        set_pre_collision2(thorn.uid, function(self, collision_entity)
-            if collision_entity.uid == players[1].uid and players[1].invincibility_frames_timer <= 0 then
-                -- todo: get directional damage working
-                if players[1].FACING_LEFT then
-                    players[1]:damage(thorn.uid, 1, 30, 0, .1, 600)
-                else
-                    players[1]:damage(thorn.uid, 1, 30, 0, .1, 600)
-                end
-            end
-        end)
-    end, SPAWN_TYPE.ANY, 0, ENT_TYPE.FLOOR_THORN_VINE)
 
 	toast(tidepool6.title)
 end

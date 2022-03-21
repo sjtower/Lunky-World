@@ -1,4 +1,5 @@
 local key_blocks = require("Modules.GetimOliver.key_blocks")
+local death_blocks = require("Modules.JawnGC.death_blocks")
 
 local tidepool3 = {
     identifier = "tidepool3",
@@ -8,6 +9,7 @@ local tidepool3 = {
     height = 4,
     file_name = "tide-3.lvl",
     world = 4,
+    level = 3,
 }
 
 local level_state = {
@@ -20,6 +22,7 @@ tidepool3.load_level = function()
     level_state.loaded = true
 
     key_blocks.activate(level_state)
+    death_blocks.activate()
 
     level_state.callbacks[#level_state.callbacks+1] = set_post_entity_spawn(function(entity, spawn_flags)
 		entity:destroy()
@@ -36,8 +39,6 @@ tidepool3.load_level = function()
     level_state.callbacks[#level_state.callbacks+1] = set_post_entity_spawn(function (fish)
         fish.color = Color:red()
         fish.type.max_speed = 0.01
-        fish.flags = clr_flag(fish.flags, ENT_FLAG.STUNNABLE)
-        fish.flags = set_flag(fish.flags, ENT_FLAG.TAKE_NO_DAMAGE)
 		-- fish.flags = clr_flag(fish.flags, 13)
     end, SPAWN_TYPE.ANY, 0, ENT_TYPE.MONS_FISH)
 
@@ -47,8 +48,6 @@ tidepool3.load_level = function()
         fish = get_entity(fish)
         fish.color = Color:yellow()
         fish.type.max_speed = 0.05
-        fish.flags = clr_flag(fish.flags, ENT_FLAG.STUNNABLE)
-        fish.flags = set_flag(fish.flags, ENT_FLAG.TAKE_NO_DAMAGE)
         return true
     end, "fast_fish")
 
@@ -58,8 +57,6 @@ tidepool3.load_level = function()
         fish = get_entity(fish)
         fish.color = Color:green()
         fish.type.max_speed = 0.1
-        fish.flags = clr_flag(fish.flags, ENT_FLAG.STUNNABLE)
-        fish.flags = set_flag(fish.flags, ENT_FLAG.TAKE_NO_DAMAGE)
         return true
     end, "fastest_fish")
 

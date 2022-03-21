@@ -13,6 +13,7 @@ local dwelling2 = {
     height = 6,
     file_name = "dwell-2.lvl",
     world = 1,
+    level = 2,
 }
 
 local level_state = {
