@@ -4,7 +4,7 @@ meta.description = '42 custom levels filled with new enemies and unique block me
 meta.author = 'GetimOliver'
 
 register_option_int("level_selected", "Level number for shortcut door (1 to 42)", 1, 1, 42)
-register_option_bool("speedrun_mode", "Speedrun Mode (Instant Restart on death)", false)
+register_option_bool("speedrun_mode", "Speedrun Mode (Instant Restart on death)", true)
 
 local level_sequence = require("LevelSequence/level_sequence")
 local SIGN_TYPE = level_sequence.SIGN_TYPE

@@ -1,5 +1,6 @@
 
 local ent_type
+local death_blocks = {}
 
 local function activate(level_state)
 
@@ -9,7 +10,6 @@ local function activate(level_state)
 
     --Death Blocks - from JawnGC
     define_tile_code("death_block")
-    local death_blocks = {}
     level_state.callbacks[#level_state.callbacks+1] = set_pre_tile_code_callback(function(x, y, layer)
         local block_id = spawn(ent_type, x, y, layer, 0, 0)
         death_blocks[#death_blocks + 1] = get_entity(block_id)
@@ -37,7 +37,12 @@ local function set_ent_type(new_ent_type)
     ent_type = new_ent_type
 end
 
+local function deactivate()
+    death_blocks = {}
+end
+
 return {
     activate = activate,
+    deactivate = deactivate,
     set_ent_type = set_ent_type
 }

@@ -157,6 +157,7 @@ temple4.unload_level = function()
     if not level_state.loaded then return end
 
     key_blocks.deactivate()
+    death_blocks.deactivate()
 
     poor_money_gates = {}
     middle_class_money_gates = {}

@@ -84,6 +84,8 @@ neobabylon5.unload_level = function()
     checkpoints.deactivate()
     inverse_timed_doors.deactivate()
     key_blocks.deactivate()
+    death_blocks.deactivate()
+    signs.deactivate()
 
     local callbacks_to_clear = level_state.callbacks
     level_state.loaded = false

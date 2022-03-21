@@ -124,6 +124,7 @@ temple2.unload_level = function()
     block_keys = {}
     key_blocks = {}
     checkpoints.deactivate()
+    death_blocks.deactivate()
 
     local callbacks_to_clear = level_state.callbacks
     level_state.loaded = false

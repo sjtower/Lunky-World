@@ -1,15 +1,13 @@
-local checkpoints = require("Checkpoints/checkpoints")
-local key_blocks = require("Modules.GetimOliver.key_blocks")
-
+local signs = require("Modules.JayTheBusinessGoose.signs")
 local jungle6 = {
     identifier = "jungle6",
-    title = "Jungle 6: The Fast & The Thorny",
+    title = "Jungle 6: Chief Ooga",
     theme = THEME.JUNGLE,
-    width = 8,
-    height = 3,
+    width = 3,
+    height = 2,
     file_name = "jung-6.lvl",
     world = 2,
-    level = 5,
+    level = 6,
 }
 
 local level_state = {
@@ -21,38 +19,27 @@ jungle6.load_level = function()
     if level_state.loaded then return end
     level_state.loaded = true
 
-    key_blocks.activate(level_state)
-    checkpoints.activate()
+    signs.activate(level_state, {"Kill Chief Ooga!"})
 
-    level_state.callbacks[#level_state.callbacks+1] = set_post_entity_spawn(function (mantrap)
-        mantrap.flags = clr_flag(mantrap.flags, ENT_FLAG.STUNNABLE)
-        mantrap.flags = clr_flag(mantrap.flags, ENT_FLAG.FACING_LEFT)
-        mantrap.flags = set_flag(mantrap.flags, ENT_FLAG.TAKE_NO_DAMAGE)
-        mantrap.color = Color:red()
-
-    end, SPAWN_TYPE.ANY, 0, ENT_TYPE.MONS_MANTRAP)
-
+    define_tile_code("witch_doctor_chief")
     level_state.callbacks[#level_state.callbacks+1] = set_pre_tile_code_callback(function(x, y, layer)
-        local mattock = spawn_entity(ENT_TYPE.ITEM_MATTOCK, x, y, layer, 0, 0)
-        mattock = get_entity(mattock)
+        local uid = spawn_entity(ENT_TYPE.MONS_WITCHDOCTOR, x, y, layer, 0, 0)
+        local witch_doctor = get_entity(uid)
+        witch_doctor.health = 8
+        witch_doctor.color = Color:red()
+        witch_doctor.flags = clr_flag(witch_doctor.flags, ENT_FLAG.STUNNABLE)
+        witch_doctor:give_powerup(ENT_TYPE.ITEM_POWERUP_SPIKE_SHOES)
+        witch_doctor.flags = clr_flag(witch_doctor.flags, ENT_FLAG.FACING_LEFT)
+
+        set_on_kill(uid, function(self)
+            local uid = spawn_entity(ENT_TYPE.ITEM_KEY, x, y, layer, 0, 0)
+        end)
+
         return true
-    end, "mattock")
+    end, "witch_doctor_chief")
 
-    if not checkpoints.get_saved_checkpoint() then
-        toast(jungle6.title)
-    end
+    toast(jungle6.title)
 end
-
-define_tile_code("slow_falling_platform")
-set_pre_tile_code_callback(function(x, y, layer)
-    local uid = spawn_critical(ENT_TYPE.ACTIVEFLOOR_FALLING_PLATFORM, x, y, layer, 0, 0)
-    local falling_platform = get_entity(uid)
-    falling_platform.color = Color:green()
-    set_post_statemachine(uid, function(ent)
-        if ent.velocityy < 0.001 then ent.velocityy = -.02 end
-    end)
-    return true
-end, "slow_falling_platform")
 
 define_tile_code("fast_right_falling_platform")
 set_pre_tile_code_callback(function(x, y, layer)
@@ -62,8 +49,8 @@ set_pre_tile_code_callback(function(x, y, layer)
     set_post_statemachine(uid, function(ent)
         if ent.velocityy < 0.001 then
             ent.velocityy = 0.015 --keeps platform from falling
-            -- ent.velocityx = 0.026
-            ent.velocityx = 0.1
+            -- ent.velocityx = 0.027
+            ent.velocityx = 0.075
         end
     end)
     return true
@@ -77,8 +64,8 @@ set_pre_tile_code_callback(function(x, y, layer)
     set_post_statemachine(uid, function(ent)
         if ent.velocityy < 0.001 then
             ent.velocityy = 0.015 --keeps platform from falling
-            -- ent.velocityx = 0.026
-            ent.velocityx = -0.1
+            -- ent.velocityx = 0.027
+            ent.velocityx = -0.075
         end
     end)
     return true
@@ -87,8 +74,7 @@ end, "fast_left_falling_platform")
 jungle6.unload_level = function()
     if not level_state.loaded then return end
 
-    key_blocks.deactivate()
-    checkpoints.deactivate()
+    signs.deactivate()
 
     local callbacks_to_clear = level_state.callbacks
     level_state.loaded = false

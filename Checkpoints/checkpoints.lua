@@ -211,6 +211,10 @@ local function get_saved_checkpoint()
     return saved_checkpoint
 end
 
+local function get_saved_checkpoints()
+    return checkpoint_state.checkpoints
+end
+
 local function activate()
     checkpoint_state.active = true
 
@@ -248,6 +252,7 @@ end
 return {
     save_checkpoint = save_checkpoint,
     get_saved_checkpoint = get_saved_checkpoint,
+    get_saved_checkpoints = get_saved_checkpoints,
     spawn_checkpoint = spawn_checkpoint,
     spawn_checkpoint_flag = spawn_checkpoint_flag,
     activate_checkpoint_at = activate_checkpoint_at,

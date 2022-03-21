@@ -96,6 +96,8 @@
 \?checkpoint                       r
 \?checkpoint_key                   s
 \?sign                             u
+\?key_block                        v
+\?block_key                        w
 
 
 
@@ -108,9 +110,9 @@
 1l00kkk000 XXXXXXXXXX
 1lk71000k1 XXXXXXXXXX
 1lk0k01k11 X000000000
-1lk00*0111 X*0*000XXX
-10k1kk0000 X00000XXXX
-10000k1kk0 X%20'XXXXX
+1lk00*0111 X*e*000XXX
+10k1kk0000 X0p000XXXX
+10000k1kk0 X%200XXXXX
 1kkk*01100 XXXXXXXXXX
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -132,12 +134,12 @@ k000q00010 XXXXXXXXXX
 ////////////////////////////////////////////////////////////////////////////////
 
 \!dual
-0+s0001111 lXXXXXXXXX
-0+r0n0010n lXXXXXXXX0
-0a111k011k lXXXXXXXX0
-*01T00*1T0 lk0T0n0nT*
+0+00000aa1 lXXXXXXXXX
+0+r0n00Ia1 lXXXXXXXX0
+0a111k0aak lXXXXXXXX0
+*01T0v*1T0 lk0T0n0nT*
 001a1111a1 lXXXXk*kXX
-00kI0T100T lXXXXT0n0T
+00kw0T100T lXXXXT0n0T
 n01a0*00kk lXXXXXXXXX
 5011111111 lXXXXX0kkk
 
@@ -146,8 +148,8 @@ n01a0*00kk lXXXXXXXXX
 ////////////////////////////////////////////////////////////////////////////////
 
 \!dual
-1111111111 0*0XX000XX
-0n0010n0T1 0n00X0knTX
+1111111111 0n0XX00nXX
+111110n0T1 0*00X0k*TX
 11k110k1a1 kXk0X0XXXX
 n50T0n1n0T 0XXT0*000T
 111a11k11a XXXkkk0kkk
@@ -235,7 +237,7 @@ k^^^000000 XXXXXXXXXk
 1111111111 XXXXXXXkkk
 1111111111 XXXXXXXkl0
 1111111111 XXXXXXXkl0
-1111111111 XXkkkkkk0t
+1111111111 XXXXXXXk0t
 
 ////////////////////////////////////////////////////////////////////////////////
 \.setroom2_2   // jungle
@@ -249,7 +251,7 @@ k^^^000000 XXXXXXXXXk
 1111111111 kkkk000kXX
 1111111111 0lX0pkkXXX
 1111111111 0lk*p00kkk
-1111111k00 t0kkkk0k00
+1111111k00 t0kkkk0400
 
 ////////////////////////////////////////////////////////////////////////////////
 \.setroom2_3   // jungle
@@ -287,7 +289,7 @@ k^^^000000 XXXXXXXXXk
 1111111111 Xk0kkkkkkX
 1111111111 Xk0k0000kk
 1111111111 Xk*00q0*00
-1111111111 XXkkkXXkkk
+1111111111 XXkkkXXXXX
 1111111111 XXXXXXXXXX
 1111111111 XXXXXXXXXX
 1111111111 XXXXXXXXXX
@@ -298,10 +300,10 @@ k^^^000000 XXXXXXXXXk
 
 \!dual
 1111q0*0+0 0*0000*k0k
-1111q00epk Xkkkkkkk00
+1111q00epk XXXXXXXk00
 111111^^^1 kkkkkkkkkk
 1111111+11 0000000000
-1111111111 kkkkkkkkkk
+1111111111 XXXXXXXXXk
 1111111111 XXXXXXXXXX
 1111111111 XXXXXXXXXX
 1111111111 XXXXXXXXXX
@@ -313,9 +315,9 @@ k^^^000000 XXXXXXXXXk
 \!dual
 00k1111111 kkXXXXXXXX
 k111111111 00XXXXXXXX
-1111111111 0kkXXXXXXX
+1111111111 0kXXXXXXXX
 1111111111 *00qXXXXXX
-1111111111 kkkXXXXXXX
+1111111111 kkXXXXXXXX
 1111111111 XXXXXXXXXX
 1111111111 XXXXXXXXXX
 1111111111 XXXXXXXXXX

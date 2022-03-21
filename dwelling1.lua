@@ -1,6 +1,7 @@
 local nocrap = require("Modules.Dregu.no_crap")
 local moving_totems = require("Modules.JayTheBusinessGoose.moving_totems")
 local checkpoints = require("Checkpoints/checkpoints")
+local signs = require("Modules.JayTheBusinessGoose.signs")
 
 define_tile_code("moving_totem")
 define_tile_code("totem_switch")
@@ -51,6 +52,7 @@ dwelling1.load_level = function()
     end, SPAWN_TYPE.ANY, 0, ENT_TYPE.MONS_MOLE)
 
     moving_totems.activate(level_state)
+    signs.activate(level_state, {"Pro Tip: Hit the snake at the bottom of his bounce and hold right"})
     checkpoints.activate()
 
     if not checkpoints.get_saved_checkpoint() then

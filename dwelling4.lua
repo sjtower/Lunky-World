@@ -136,6 +136,7 @@ dwelling4.unload_level = function()
     qb_jump_switches = {};
     invincible_quilliams = {}
     quilliams = {}
+    death_blocks.deactivate()
 
     local callbacks_to_clear = level_state.callbacks
     level_state.loaded = false

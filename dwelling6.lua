@@ -89,6 +89,7 @@ dwelling6.unload_level = function()
     qb_jump_switches = {};
     quilliams = {}
     signs.deactivate()
+    death_blocks.deactivate()
 
     local callbacks_to_clear = level_state.callbacks
     level_state.loaded = false

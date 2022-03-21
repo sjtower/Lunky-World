@@ -69,6 +69,7 @@ sunkencity4.unload_level = function()
     checkpoints.deactivate()
     inverse_timed_doors.deactivate()
     timed_doors.deactivate()
+    death_blocks.deactivate()
 
     local callbacks_to_clear = level_state.callbacks
     level_state.loaded = false

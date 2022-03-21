@@ -50,6 +50,8 @@ end
 volcana6.unload_level = function()
     if not level_state.loaded then return end
 
+    signs.deactivate()
+
     local callbacks_to_clear = level_state.callbacks
     level_state.loaded = false
     level_state.callbacks = {}

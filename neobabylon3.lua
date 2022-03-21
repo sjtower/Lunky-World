@@ -37,6 +37,7 @@ neobabylon3.unload_level = function()
 
     checkpoints.deactivate()
     death_elevators.deactivate()
+    death_blocks.deactivate()
 
     local callbacks_to_clear = level_state.callbacks
     level_state.loaded = false

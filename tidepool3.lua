@@ -22,7 +22,7 @@ tidepool3.load_level = function()
     level_state.loaded = true
 
     key_blocks.activate(level_state)
-    death_blocks.activate()
+    death_blocks.activate(level_state)
 
     level_state.callbacks[#level_state.callbacks+1] = set_post_entity_spawn(function(entity, spawn_flags)
 		entity:destroy()
@@ -72,6 +72,7 @@ tidepool3.unload_level = function()
     if not level_state.loaded then return end
 
     key_blocks.deactivate()
+    death_blocks.deactivate()
 
     local callbacks_to_clear = level_state.callbacks
     level_state.loaded = false
