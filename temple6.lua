@@ -1,5 +1,5 @@
 local death_blocks = require("Modules.JawnGC.death_blocks")
-
+local signs = require("Modules.JayTheBusinessGoose.signs")
 local temple6 = {
     identifier = "temple6",
     title = "Temple 6: Ghostbusters",
@@ -21,6 +21,7 @@ temple6.load_level = function()
     level_state.loaded = true
 
     death_blocks.activate(level_state)
+    signs.activate(level_state, {"Kill the Ghost Mummy!"})
 
     level_state.callbacks[#level_state.callbacks+1] = set_post_entity_spawn(function(entity, spawn_flags)
 		entity:destroy()
@@ -72,6 +73,8 @@ end
 
 temple6.unload_level = function()
     if not level_state.loaded then return end
+
+    signs.deactivate()
 
     local callbacks_to_clear = level_state.callbacks
     level_state.loaded = false

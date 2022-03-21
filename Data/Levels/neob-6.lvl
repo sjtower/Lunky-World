@@ -70,6 +70,7 @@
 \?ladder                           S
 \?monster_generator                T
 \?monster_switch                   U
+\?sign                             V
 
 
 
@@ -93,7 +94,7 @@ $$$$$$XP00
 $$$$$$$$$$
 $$$$$$$$$$
 $$$$$$$$$$
-XT0000000T
+X00000000T
 X000000000
 X0&00000&0
 X000000000
@@ -137,7 +138,7 @@ I0SJPR2IS0 XXXXXXXXXX
 X0SXXXXXS0 XXXXXXXXXX
 I0S00000S0 XXXXXX$$$$
 X0S00000S0 XXXXX*$000
-X0000!00Q0 XXX$$$$0=0
+X000V!00Q0 XXX$$$$0=0
 
 ////////////////////////////////////////////////////////////////////////////////
 \.setroom1_2   // babylon

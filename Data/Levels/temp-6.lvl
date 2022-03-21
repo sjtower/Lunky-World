@@ -79,6 +79,7 @@
 \?mummy                            ^
 \?anubis                           _
 \?lava                             `
+\?sign                             a
 
 
 
@@ -220,7 +221,7 @@ VVVVVVVVV0
 @0@0000000
 0000000000
 0000000>00
-V0V0VVVWWW
+VaV0VVVWWW
 VVVVVVVVVV
 000VVVVVVV
 VVVVVVVVVV

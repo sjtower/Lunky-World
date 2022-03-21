@@ -1,3 +1,5 @@
+local signs = require("Modules.JayTheBusinessGoose.signs")
+
 local volcana6 = {
     identifier = "volcana6",
     title = "Volcana 6: Hot Foot",
@@ -18,6 +20,8 @@ local lavamanders = {}
 volcana6.load_level = function()
     if level_state.loaded then return end
     level_state.loaded = true
+
+    signs.activate(level_state, {"Kill the Lavamanders!"})
 
     level_state.callbacks[#level_state.callbacks+1] = set_post_entity_spawn(function (ent)
         lavamanders[#lavamanders + 1] = get_entity(ent.uid)

@@ -1,6 +1,7 @@
 local nocrap = require("Modules.Dregu.no_crap")
 local death_blocks = require("Modules.JawnGC.death_blocks")
 local monster_generators = require("Modules.JayTheBusinessGoose.monster_generator")
+local signs = require("Modules.JayTheBusinessGoose.signs")
 
 local neobabylon6 = {
     identifier = "neobabylon 6",
@@ -22,12 +23,7 @@ neobabylon6.load_level = function()
     if level_state.loaded then return end
     level_state.loaded = true
 
-    level_state.callbacks[#level_state.callbacks+1] = set_pre_tile_code_callback(function(x, y, layer)
-        local ent = spawn_entity(ENT_TYPE.ITEM_PICKUP_PARACHUTE, x, y, layer, 0, 0)
-        ent = get_entity(ent)
-        return true
-    end, "parachute")
-
+    signs.activate(level_state, {"Kill the Alien Queen!"})
     death_blocks.activate(level_state)
     monster_generators.activate(level_state, ENT_TYPE.MONS_UFO)
 
@@ -43,6 +39,8 @@ end
 neobabylon6.unload_level = function()
     if not level_state.loaded then return end
 
+    signs.deactivate()
+    
     local callbacks_to_clear = level_state.callbacks
     level_state.loaded = false
     level_state.callbacks = {}

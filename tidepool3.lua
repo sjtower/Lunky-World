@@ -35,11 +35,11 @@ tidepool3.load_level = function()
         return true
     end, "spike_shoes")
 
-    -- todo: fish with different speeds
     level_state.callbacks[#level_state.callbacks+1] = set_post_entity_spawn(function (fish)
         fish.color = Color:red()
         fish.type.max_speed = 0.01
-		-- fish.flags = clr_flag(fish.flags, 13)
+		fish.health = 5
+        fish.flags = clr_flag(fish.flags, ENT_FLAG.STUNNABLE)
     end, SPAWN_TYPE.ANY, 0, ENT_TYPE.MONS_FISH)
 
     define_tile_code("fast_fish")
@@ -47,7 +47,10 @@ tidepool3.load_level = function()
         local fish = spawn_entity(ENT_TYPE.MONS_FISH, x, y, layer, 0, 0)
         fish = get_entity(fish)
         fish.color = Color:yellow()
-        fish.type.max_speed = 0.05
+        fish.type.max_speed = 0.1
+        fish.health = 5
+        fish.flags = clr_flag(fish.flags, ENT_FLAG.STUNNABLE)
+        -- fish.flags = set_flag(fish.flags, ENT_FLAG.TAKE_NO_DAMAGE)
         return true
     end, "fast_fish")
 
@@ -56,7 +59,9 @@ tidepool3.load_level = function()
         local fish = spawn_entity(ENT_TYPE.MONS_FISH, x, y, layer, 0, 0)
         fish = get_entity(fish)
         fish.color = Color:green()
-        fish.type.max_speed = 0.1
+        fish.type.max_speed = 0.2
+        fish.health = 5
+        fish.flags = clr_flag(fish.flags, ENT_FLAG.STUNNABLE)
         return true
     end, "fastest_fish")
 

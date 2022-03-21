@@ -1,3 +1,5 @@
+local signs = require("Modules.JayTheBusinessGoose.signs")
+
 local tidepool6 = {
     identifier = "tidepool6",
     title = "Tidepool 6: Thorny Tiny Box",
@@ -17,6 +19,8 @@ local level_state = {
 tidepool6.load_level = function()
     if level_state.loaded then return end
     level_state.loaded = true
+
+    signs.activate(level_state, {"Survive!"})
 
 	level_state.callbacks[#level_state.callbacks+1] = set_post_entity_spawn(function(entity, spawn_flags)
 		entity:destroy()
@@ -48,6 +52,8 @@ end
 
 tidepool6.unload_level = function()
     if not level_state.loaded then return end
+
+    signs.deactivate()
 
     local callbacks_to_clear = level_state.callbacks
     level_state.loaded = false

@@ -30,6 +30,12 @@ dwelling3.load_level = function()
         ent.flags = set_flag(ent.flags, ENT_FLAG.TAKE_NO_DAMAGE)
         ent.color = Color:red()
         ent.type.max_speed = 0.00
+
+        set_pre_collision2(ent.uid, function(self, collision_entity)
+            if collision_entity.uid == players[1].uid and players[1].invincibility_frames_timer <= 0 then
+                players[1]:damage(ent.uid, 0, 0, 0, 0, 0)
+            end
+        end)
     end, SPAWN_TYPE.ANY, 0, ENT_TYPE.MONS_HORNEDLIZARD)
 
     level_state.callbacks[#level_state.callbacks+1] = set_post_entity_spawn(function (ent)

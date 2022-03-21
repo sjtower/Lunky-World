@@ -3,6 +3,7 @@ local nocrap = require("Modules.Dregu.no_crap")
 local death_blocks = require("Modules.JawnGC.death_blocks")
 local key_blocks = require("Modules.GetimOliver.key_blocks")
 local inverse_timed_doors = require("Modules.GetimOliver.inverse_timed_door")
+local signs = require("Modules.JayTheBusinessGoose.signs")
 
 local neobabylon5 = {
     identifier = "neobabylon 5",
@@ -70,6 +71,7 @@ neobabylon5.load_level = function()
     death_blocks.activate(level_state)
     key_blocks.activate(level_state)
     inverse_timed_doors.activate(level_state, 1500)
+    signs.activate(level_state, {"Survive!"})
 
     if not checkpoints.get_saved_checkpoint() then
         toast(neobabylon5.title)

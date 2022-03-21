@@ -1,3 +1,4 @@
+local signs = require("Modules.JayTheBusinessGoose.signs")
 local jungle7 = {
     identifier = "jungle7",
     title = "Jungle 7: Chief Ooga",
@@ -17,6 +18,8 @@ local level_state = {
 jungle7.load_level = function()
     if level_state.loaded then return end
     level_state.loaded = true
+
+    signs.activate(level_state, {"Kill Chief Ooga!"})
 
     define_tile_code("witch_doctor_chief")
     level_state.callbacks[#level_state.callbacks+1] = set_pre_tile_code_callback(function(x, y, layer)
@@ -70,6 +73,8 @@ end, "fast_left_falling_platform")
 
 jungle7.unload_level = function()
     if not level_state.loaded then return end
+
+    signs.deactivate()
 
     local callbacks_to_clear = level_state.callbacks
     level_state.loaded = false

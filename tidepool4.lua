@@ -26,17 +26,16 @@ tidepool4.load_level = function()
 	end, SPAWN_TYPE.SYSTEMIC, 0, ENT_TYPE.MONS_SKELETON)
 
     level_state.callbacks[#level_state.callbacks+1] = set_post_entity_spawn(function (fish)
-        fish.color = Color:red()
+        fish.color:set_rgba(104, 37, 71, 255) --deep red
         fish.type.max_speed = 0.01
         fish.flags = clr_flag(fish.flags, ENT_FLAG.STUNNABLE)
         fish.flags = set_flag(fish.flags, ENT_FLAG.TAKE_NO_DAMAGE)
-		-- fish.flags = clr_flag(fish.flags, 13)
-        
+    
     end, SPAWN_TYPE.ANY, 0, ENT_TYPE.MONS_FISH)
 
 	if not checkpoints.get_saved_checkpoint() then
-toast(tidepool4.title)
-end
+        toast(tidepool4.title)
+    end
 end
 
 tidepool4.unload_level = function()

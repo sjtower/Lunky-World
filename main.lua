@@ -17,12 +17,11 @@ local dwelling4 = require("dwelling4")
 local dwelling5 = require("dwelling5")
 local dwelling6 = require("dwelling6")
 local jungle1 = require("jungle1")
--- local jungle2 = require("jungle2")
+local jungle2 = require("jungle2")
 local jungle3 = require("jungle3")
 local jungle4 = require("jungle4")
 local jungle5 = require("jungle5")
 local jungle6 = require("jungle6")
-local jungle7 = require("jungle7")
 local volcana1 = require("volcana1")
 local volcana2 = require("volcana2")
 local volcana3 = require("volcana3")
@@ -56,7 +55,7 @@ local sunkencity6 = require("sunkencity6")
 
 local levels = {
 	dwelling1, dwelling2, dwelling3, dwelling4, dwelling5, dwelling6,
-	jungle1, jungle3, jungle4, jungle5, jungle6, jungle7,
+	jungle1, jungle2, jungle3, jungle4, jungle5, jungle6,
 	volcana1, volcana2, volcana3, volcana4, volcana5, volcana6,
 	tidepool1, tidepool2, tidepool3, tidepool4, tidepool5, tidepool6,
 	temple1, temple2, temple3, temple4, temple5, temple6,
