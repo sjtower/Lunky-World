@@ -66,6 +66,7 @@ dwelling1.unload_level = function()
 
     checkpoints.deactivate()
     moving_totems.deactivate()
+    signs.deactivate()
 
     local callbacks_to_clear = level_state.callbacks
     level_state.loaded = false
