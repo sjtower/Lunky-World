@@ -26,7 +26,11 @@ dwelling2.load_level = function()
     level_state.loaded = true
 
     checkpoints.activate()
-    signs.activate(level_state, {"^ Look up ^","Pro Tip: Don't forget to push the push blocks"})
+    signs.activate(level_state, {
+        "^ Look up ^",
+        "Pro Tip: Don't forget to push the push blocks",
+        "Pro Cheese Strat: Throw the arrow at the last bone stack and jump on"
+    })
 
     level_state.callbacks[#level_state.callbacks+1] = set_post_entity_spawn(function(entity, spawn_flags)
 		entity:destroy()

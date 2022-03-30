@@ -1,7 +1,5 @@
 local checkpoints = require("Checkpoints/checkpoints")
 
-define_tile_code("sleeping_bat")
-
 local dwelling3 = {
     identifier = "dwelling3",
     title = "Dwelling 3: Lizard Ladder",
@@ -48,6 +46,7 @@ dwelling3.load_level = function()
         end)
     end, SPAWN_TYPE.ANY, 0, ENT_TYPE.FLOOR_SPRING_TRAP)
 
+    define_tile_code("sleeping_bat")
     local sleeping_bat;
     level_state.callbacks[#level_state.callbacks+1] = set_pre_tile_code_callback(function(x, y, layer)
         local bat_id = spawn_entity(ENT_TYPE.MONS_BAT, x, y, layer, 0, 0)

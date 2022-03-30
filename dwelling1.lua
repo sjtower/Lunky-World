@@ -22,37 +22,51 @@ local level_state = {
     callbacks = {},
 }
 
+local snakes = {}
+local bats = {}
+local moles = {}
+
 dwelling1.load_level = function()
     if level_state.loaded then return end
     level_state.loaded = true
 
-    level_state.callbacks[#level_state.callbacks+1] = set_post_entity_spawn(function (snake)
+    define_tile_code("red_snake")
+    level_state.callbacks[#level_state.callbacks+1] = set_pre_tile_code_callback(function(x, y, layer)
+        local ent_id = spawn_entity(ENT_TYPE.MONS_SNAKE, x, y, layer, 0, 0)
+        local ent = get_entity(ent_id)
+        ent.health = 100
+        ent.color = Color:red()
+        ent.type.max_speed = 0.05
+        ent.flags = set_flag(ent.flags, ENT_FLAG.TAKE_NO_DAMAGE)
+        snakes[#snakes + 1] = ent
+        return true
+    end, "red_snake")
 
-        snake.health = 100
-        snake.color = Color:red()
-        snake.type.max_speed = 0.05
-        snake.flags = set_flag(snake.flags, ENT_FLAG.TAKE_NO_DAMAGE)
+    define_tile_code("red_mole")
+    level_state.callbacks[#level_state.callbacks+1] = set_pre_tile_code_callback(function(x, y, layer)
+        local ent_id = spawn_entity(ENT_TYPE.MONS_MOLE, x, y, layer, 0, 0)
+        local ent = get_entity(ent_id)
+        ent.health = 100
+        ent.color = Color:red()
+        ent.flags = clr_flag(ent.flags, ENT_FLAG.STUNNABLE)
+        ent:give_powerup(ENT_TYPE.ITEM_POWERUP_SPIKE_SHOES)
+        moles[#moles + 1] = ent
+        return true
+    end, "red_mole")
 
-    end, SPAWN_TYPE.ANY, 0, ENT_TYPE.MONS_SNAKE)
-
-    level_state.callbacks[#level_state.callbacks+1] = set_post_entity_spawn(function (bat)
-
-        bat.health = 10
-        bat.type.max_speed = 0.07
-        bat.color = Color:red()
-    end, SPAWN_TYPE.ANY, 0, ENT_TYPE.MONS_BAT)
-
-    level_state.callbacks[#level_state.callbacks+1] = set_post_entity_spawn(function (mole)
-        --Set moles - no stun, walk on thorns
-        mole.health = 100
-        mole.color = Color:red()
-        mole.flags = clr_flag(mole.flags, ENT_FLAG.STUNNABLE)
-
-        mole:give_powerup(ENT_TYPE.ITEM_POWERUP_SPIKE_SHOES)
-    end, SPAWN_TYPE.ANY, 0, ENT_TYPE.MONS_MOLE)
+    define_tile_code("red_bat")
+    level_state.callbacks[#level_state.callbacks+1] = set_pre_tile_code_callback(function(x, y, layer)
+        local ent_id = spawn_entity(ENT_TYPE.MONS_BAT, x, y, layer, 0, 0)
+        local ent = get_entity(ent_id)
+        ent.health = 10
+        ent.type.max_speed = 0.07
+        ent.color = Color:red()
+        bats[#bats + 1] = ent
+        return true
+    end, "red_bat")
 
     moving_totems.activate(level_state)
-    signs.activate(level_state, {"Pro Tip: Hit the snake at the bottom of his bounce and hold right"})
+    signs.activate(level_state, {"Pro Tip: Hit the snake at the bottom of its bounce and hold right"})
     checkpoints.activate()
 
     if not checkpoints.get_saved_checkpoint() then
@@ -67,6 +81,10 @@ dwelling1.unload_level = function()
     checkpoints.deactivate()
     moving_totems.deactivate()
     signs.deactivate()
+
+    snakes = {}
+    moles = {}
+    bats = {}
 
     local callbacks_to_clear = level_state.callbacks
     level_state.loaded = false

@@ -2,6 +2,7 @@ local checkpoints = require("Checkpoints/checkpoints")
 local nocrap = require("Modules.Dregu.no_crap")
 local death_blocks = require("Modules.JawnGC.death_blocks")
 local death_elevators = require("Modules.GetimOliver.death_elevators")
+local signs = require("Modules.JayTheBusinessGoose.signs")
 
 local neobabylon3 = {
     identifier = "neobabylon 3",
@@ -26,6 +27,7 @@ neobabylon3.load_level = function()
     checkpoints.activate()
     death_blocks.activate(level_state)
     death_elevators.activate(level_state)
+    signs.activate(level_state, {"Pro Tip: You can hang from the elevator even with lots of lava on top"})
 
     if not checkpoints.get_saved_checkpoint() then
         toast(neobabylon3.title)
@@ -38,6 +40,7 @@ neobabylon3.unload_level = function()
     checkpoints.deactivate()
     death_elevators.deactivate()
     death_blocks.deactivate()
+    signs.deactivate()
 
     local callbacks_to_clear = level_state.callbacks
     level_state.loaded = false
