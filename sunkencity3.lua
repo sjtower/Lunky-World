@@ -29,6 +29,10 @@ sunkencity3.load_level = function()
 
     key_blocks.activate(level_state)
 
+    level_state.callbacks[#level_state.callbacks+1] = set_post_entity_spawn(function (ent)
+        ent.color:set_rgba(108, 220, 235, 255) --light blue
+    end, SPAWN_TYPE.ANY, 0, ENT_TYPE.FLOOR_THORN_VINE)
+
 	toast(sunkencity3.title)
 end
 

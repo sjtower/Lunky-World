@@ -80,6 +80,10 @@ sunkencity6.load_level = function()
         end, "infinite_checkpoint_quillback")
     end
 
+    level_state.callbacks[#level_state.callbacks+1] = set_post_entity_spawn(function (ent)
+        ent.color:set_rgba(108, 220, 235, 255) --light blue
+    end, SPAWN_TYPE.ANY, 0, ENT_TYPE.FLOOR_THORN_VINE)
+
     death_blocks.set_ent_type(ENT_TYPE.FLOORSTYLED_SUNKEN)
     death_blocks.activate(level_state)
 

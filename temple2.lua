@@ -116,6 +116,12 @@ temple2.load_level = function()
 	if not checkpoints.get_saved_checkpoint() then
         toast(temple2.title)
     end
+
+    set_callback(function(speaking_uid, text)
+        if text == "I'm Waddler. I can carry your items deeper into the caves for you." then
+           return "Oh hello. I'm hiding from Xanagear. Please don't tell him I'm here! <:("
+        end
+    end, ON.SPEECH_BUBBLE)
 end
 
 temple2.unload_level = function()

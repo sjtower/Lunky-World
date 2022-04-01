@@ -24,12 +24,12 @@ jungle6.load_level = function()
     define_tile_code("witch_doctor_chief")
     level_state.callbacks[#level_state.callbacks+1] = set_pre_tile_code_callback(function(x, y, layer)
         local uid = spawn_entity(ENT_TYPE.MONS_WITCHDOCTOR, x, y, layer, 0, 0)
-        local witch_doctor = get_entity(uid)
-        witch_doctor.health = 8
-        witch_doctor.color = Color:red()
-        witch_doctor.flags = clr_flag(witch_doctor.flags, ENT_FLAG.STUNNABLE)
-        witch_doctor:give_powerup(ENT_TYPE.ITEM_POWERUP_SPIKE_SHOES)
-        witch_doctor.flags = clr_flag(witch_doctor.flags, ENT_FLAG.FACING_LEFT)
+        local ent = get_entity(uid)
+        ent.health = 8
+        ent.color:set_rgba(108, 220, 235, 255) --light blue
+        ent.flags = clr_flag(ent.flags, ENT_FLAG.STUNNABLE)
+        ent:give_powerup(ENT_TYPE.ITEM_POWERUP_SPIKE_SHOES)
+        ent.flags = clr_flag(ent.flags, ENT_FLAG.FACING_LEFT)
 
         set_on_kill(uid, function(self)
             local uid = spawn_entity(ENT_TYPE.ITEM_KEY, x, y, layer, 0, 0)
