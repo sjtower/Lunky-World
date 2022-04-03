@@ -35,7 +35,7 @@ dwelling1.load_level = function()
         local ent_id = spawn_entity(ENT_TYPE.MONS_SNAKE, x, y, layer, 0, 0)
         local ent = get_entity(ent_id)
         ent.health = 100
-        ent.color = Color:red()
+        ent.color:set_rgba(209, 15, 18, 255)
         ent.type.max_speed = 0.05
         ent.flags = set_flag(ent.flags, ENT_FLAG.TAKE_NO_DAMAGE)
         snakes[#snakes + 1] = ent
@@ -47,7 +47,7 @@ dwelling1.load_level = function()
         local ent_id = spawn_entity(ENT_TYPE.MONS_MOLE, x, y, layer, 0, 0)
         local ent = get_entity(ent_id)
         ent.health = 100
-        ent.color = Color:red()
+        ent.color:set_rgba(209, 15, 18, 255)
         ent.flags = clr_flag(ent.flags, ENT_FLAG.STUNNABLE)
         ent:give_powerup(ENT_TYPE.ITEM_POWERUP_SPIKE_SHOES)
         moles[#moles + 1] = ent
@@ -60,7 +60,7 @@ dwelling1.load_level = function()
         local ent = get_entity(ent_id)
         ent.health = 10
         ent.type.max_speed = 0.07
-        ent.color = Color:red()
+        ent.color:set_rgba(209, 15, 18, 255)
         bats[#bats + 1] = ent
         return true
     end, "red_bat")

@@ -21,7 +21,7 @@ temple6.load_level = function()
     level_state.loaded = true
 
     death_blocks.activate(level_state)
-    signs.activate(level_state, {"Kill the Ghost Mummy!"})
+    signs.activate(level_state, {"Crush the Ghost Mummy!"})
 
     level_state.callbacks[#level_state.callbacks+1] = set_post_entity_spawn(function(entity, spawn_flags)
 		entity:destroy()

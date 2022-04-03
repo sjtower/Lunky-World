@@ -14,12 +14,20 @@ local function open_door()
         door.color:set_rgba(217, 224, 252, 100) --white blue, semi-opaque
         door.flags = clr_flag(door.flags, ENT_FLAG.SOLID)
     end
+    for _, switch in ipairs(timed_switches) do
+        switch.flags = set_flag(switch.flags, ENT_FLAG.TAKE_NO_DAMAGE)
+        switch.animation_frame = switch.animation_frame == 86 and 96 or 86
+    end
 end
 
 local function close_door() 
     for _, door in ipairs(timed_doors) do
         door.color:set_rgba(217, 224, 252, 255) --white blue
         door.flags = set_flag(door.flags, ENT_FLAG.SOLID)
+    end
+    for _, switch in ipairs(timed_switches) do
+        switch.flags = clr_flag(switch.flags, ENT_FLAG.TAKE_NO_DAMAGE)
+        switch.animation_frame = switch.animation_frame == 86 and 96 or 86
     end
 end
 
@@ -33,16 +41,19 @@ local function activate(level_state, time)
         timed_switches[#timed_switches + 1] = ent
         local door_timer = time
         local sound = get_sound(VANILLA_SOUND.SHARED_DOOR_UNLOCK)
-        set_on_damage(switch_id, function(self)
-            if self.timer > 0 then return end
+        local isActive = false
+        level_state.callbacks[#level_state.callbacks+1] = set_on_damage(switch_id, function(self)
+            if self.timer > 0 or isActive then return end
             self.timer = door_timer
             self.animation_frame = self.animation_frame == 86 and 96 or 86
             open_door()
             sound:play()
-            set_timeout(function()
+            isActive = true
+            level_state.callbacks[#level_state.callbacks+1] = set_timeout(function()
                 self.animation_frame = self.animation_frame == 86 and 96 or 86
                 close_door()
                 sound:play()
+                isActive = false
             end, door_timer)
         end)
     end, "timed_door_switch")
@@ -59,6 +70,7 @@ local function activate(level_state, time)
 end
 
 local function deactivate()
+    close_door()
     timed_doors = {}
     timed_switches = {}
 end

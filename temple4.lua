@@ -1,6 +1,7 @@
 local key_blocks = require("Modules.GetimOliver.key_blocks")
 local death_blocks = require("Modules.JawnGC.death_blocks")
 local sound = require('play_sound')
+local signs = require("Modules.JayTheBusinessGoose.signs")
 
 local temple4 = {
     identifier = "temple4",
@@ -28,6 +29,7 @@ temple4.load_level = function()
 
     key_blocks.activate(level_state)
     death_blocks.activate(level_state)
+    signs.activate(level_state, {"Collect money to advance through Super Twiggle World!"})
 
     level_state.callbacks[#level_state.callbacks+1] = set_pre_tile_code_callback(function(x, y, layer)
         local ent = spawn_entity(ENT_TYPE.ITEM_RUBY, x, y, layer, 0, 0)
@@ -93,7 +95,7 @@ temple4.load_level = function()
     level_state.callbacks[#level_state.callbacks+1] = set_pre_tile_code_callback(function(x, y, layer)
         local floor_uid = spawn_entity(ENT_TYPE.ACTIVEFLOOR_PUSHBLOCK, x, y, layer, 0, 0)
         local floor = get_entity(floor_uid)
-        floor.color = Color:yellow()
+        floor.color = Color:brown()
         floor.flags = set_flag(floor.flags, ENT_FLAG.NO_GRAVITY)
         poor_money_gates[#poor_money_gates + 1] = get_entity(floor_uid)
         return true
@@ -158,6 +160,7 @@ temple4.unload_level = function()
 
     key_blocks.deactivate()
     death_blocks.deactivate()
+    signs.deactivate()
 
     poor_money_gates = {}
     middle_class_money_gates = {}

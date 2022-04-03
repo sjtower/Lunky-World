@@ -5,11 +5,12 @@ local function activate(level_state)
     
     define_tile_code("key_block")
     level_state.callbacks[#level_state.callbacks+1] = set_pre_tile_code_callback(function(x, y, layer)
-        local floor_uid = spawn_entity(ENT_TYPE.ACTIVEFLOOR_PUSHBLOCK, x, y, layer, 0, 0)
-        local floor = get_entity(floor_uid)
-        floor.color = Color:yellow()
-        floor.flags = set_flag(floor.flags, ENT_FLAG.NO_GRAVITY)
-        key_blocks[#key_blocks + 1] = get_entity(floor_uid)
+        local ent_uid = spawn_entity(ENT_TYPE.ACTIVEFLOOR_PUSHBLOCK, x, y, layer, 0, 0)
+        local ent = get_entity(ent_uid)
+        ent.color = Color:yellow()
+        ent.flags = set_flag(ent.flags, ENT_FLAG.NO_GRAVITY)
+        ent.more_flags = set_flag(ent.more_flags, ENT_MORE_FLAG.DISABLE_INPUT)
+        key_blocks[#key_blocks + 1] = get_entity(ent_uid)
         return true
     end, "key_block")
 
